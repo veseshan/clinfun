@@ -1,6 +1,6 @@
 Package: clinfun
 Title: Clinical Trial Design and Data Analysis Functions
-Version: 1.0.15
+Version: 1.0.16
 Depends: R (>= 2.0.0), graphics, stats
 Imports: mvtnorm
 Suggests: survival
@@ -12,6 +12,3 @@ Description: Utilities to make your clinical collaborations easier if not
 Maintainer: Venkatraman E. Seshan <seshanv@mskcc.org>
 License: GPL (>= 2)
 NeedsCompilation: yes
-Packaged: 2018-04-13 13:50:35 UTC; seshanv
-Repository: CRAN
-Date/Publication: 2018-04-13 14:48:39 UTC
