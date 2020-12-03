@@ -1,0 +1,31 @@
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
+||        The chores may not be fun but these utilities may help          ||
+\\++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++//
+
+aucVardiTest            Two-Sample tests for growth curves
+calogrank               Covariate adjusted logrank test
+coxphCPE                Gonen & Heller Concordance Probability Estimate
+coxphERR                Heller Explained Relative Risk
+coxphQuantile           Survival time quantile as a function of covariate
+fedesign                Trial Designs Based On Fisher's Exact Test
+   fe.mdor                 minimum detectable odds ratio given sample size
+   fe.ssize                sample size required for given proportions
+   mdrr                    minimum detectable response rate given overall RR
+gsdesign                Group Sequential Designs
+   gsdesign.binomial       binary outcomes
+   gsdesign.normal         normal outcomes
+   gsdesign.survival       survival outcomes
+jonckheere.test         Exact/permutation version of Jonckheere-Terpstra test
+permlogrank             Survival comparisons with permutation reference
+ph2simon                Simon's 2-stage Phase II design
+   oc.twostage.bdry        Two-stage boundary operating characteristics
+   twostage.inference      Inference following a two-stage design for response
+ph2single               Exact single stage Phase II design
+power.ladesign          Power of k-sample rank test under Lehmann alternative
+pselect                 Probability of selection under pick the winner rule
+ROCanalysis             Functions to plot and compare ROC curves.
+   roc.area.test           Nonparametric area under the ROC curve
+   roc.curve               Empirical ROC curve
+   roc.perm.test           Permutation test to compare ROC curve
+toxbdry                 Stopping rule for toxicity monitoring
+   bdrycross.prob          Operating characteristics of a specific boundary
