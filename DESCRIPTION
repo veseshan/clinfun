@@ -1,0 +1,17 @@
+Package: clinfun
+Title: Clinical Trial Design and Data Analysis Functions
+Version: 1.0.15
+Depends: R (>= 2.0.0), graphics, stats
+Imports: mvtnorm
+Suggests: survival
+Author: Venkatraman E. Seshan
+Description: Utilities to make your clinical collaborations easier if not
+          fun. It contains functions for designing studies such as Simon
+          2-stage and group sequential designs and for data analysis such
+          as Jonckheere-Terpstra test and estimating survival quantiles.
+Maintainer: Venkatraman E. Seshan <seshanv@mskcc.org>
+License: GPL (>= 2)
+NeedsCompilation: yes
+Packaged: 2018-04-13 13:50:35 UTC; seshanv
+Repository: CRAN
+Date/Publication: 2018-04-13 14:48:39 UTC
