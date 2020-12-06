@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # clinfun
 
 <!-- badges: start -->
+[![R build status](https://github.com/karissawhiting/clinfun/workflows/R-CMD-check/badge.svg)](https://github.com/karissawhiting/clinfun/actions)
 <!-- badges: end -->
 
 Utilities to make your clinical collaborations easier if not fun. It contains functions for designing studies such as Simon 2-stage and group sequential designs and for data analysis such as Jonckheere-Terpstra test and estimating survival quantiles.
