@@ -231,21 +231,31 @@ gsd.drift <- function(ifrac, sig.level = 0.05, pow = 0.8, delta.eb = 0.5, delta.
 # normal:   n (per arm) = theta^2 * 2*sigma^2/(muC-muE)^2
 # survival: d (total) = theta^2 * 4/(log(haz-ratio))^2
 #           Convert number of events d to sample size n
+#-----12/07/2020----- above for 1:1 randomization; for 1:r it should be -----
+# rho = r/(1+r) experimental treatment fraction (rho=0.5 if r=1)
+#   for total sample size n, variance at the end is proportional to
+#      1/{rho*n} + 1/{(1-rho)*n} = {(r+1)^2/r}/n
+# binomial: n (total) = {(r+1)^2/r} * theta^2 * pbar*(1-pbar)/(pC -pE)^2  (pooled)
+#                {(r+1)^2/r} * theta^2 * {{(r*pC*(1-pC)+pE*(1-pE))}/{r+1}}/(pC -pE)^2 (unpooled)
+# normal:   n (total) = {(r+1)^2/r} * theta^2 * sigma^2/(muC-muE)^2
+# survival: d (total) = {(r+1)^2/r} * theta^2 * (log(haz-ratio))^2
 
-gsdesign.binomial <- function(ifrac, pC, pE, sig.level=0.05, power=0.8,
+gsdesign.binomial <- function(ifrac, pC, pE, r=1, sig.level=0.05, power=0.8,
                               delta.eb = 0.5, delta.fb = NULL, alternative =
                               c("two.sided", "one.sided"), pooled.variance =
                               FALSE, CPS = TRUE, tol = 0.00001, ...) {
   drift.out <- gsd.drift(ifrac, sig.level, power, delta.eb, delta.fb, alternative, tol)
   if (pooled.variance) {
-    pbar <- (pC + pE)/2
-    n <- 2 * pbar * (1 - pbar) * (drift.out$drift/(pC - pE))^2
+    pbar <- (pC + r*pE)/{r+1}
+    n <-  {(r+1)^2/r} * pbar * (1 - pbar) * (drift.out$drift/(pC - pE))^2
   } else {
-    n <- (pC * (1 - pC) + pE * (1 - pE)) * (drift.out$drift/(pC - pE))^2
+    n <- {(r+1)^2/r} * {(r * pC * (1 - pC) + pE * (1 - pE))/(r+1)} * (drift.out$drift/(pC - pE))^2
   }
   if (CPS) {
-    A <- n * (pC-pE)^2
-    n <- n * {{1+sqrt(1+4*abs(pC-pE)/A)}/2}^2
+    # correction is done using sample size of control arm
+    n0 = n/(r+1)
+    A <- n0 * r*(pC-pE)^2
+    n <- n * {{1+sqrt(1+2*(r+1)*abs(pC-pE)/A)}/2}^2
   }
   out <- drift.out
   out$drift <- NULL
@@ -253,35 +263,38 @@ gsdesign.binomial <- function(ifrac, pC, pE, sig.level=0.05, power=0.8,
   out$pE <- pE
   out$outcome <- "binary"
   out$sample.size <- n
+  out$r <- r
   class(out) <- "gsdesign"
   out
 }
 
-gsdesign.normal <- function(ifrac, delta, sd=1, sig.level=0.05, power=0.8,
+gsdesign.normal <- function(ifrac, delta, sd=1, r=1, sig.level=0.05, power=0.8,
                             delta.eb = 0.5, delta.fb = NULL, alternative =
                             c("two.sided", "one.sided"), tol=0.00001, ...) {
   drift.out <- gsd.drift(ifrac, sig.level, power, delta.eb, delta.fb, alternative, tol)
-  n <- 2*(drift.out$drift*sd/delta)^2
+  n <- {(r+1)^2/r} * (drift.out$drift*sd/delta)^2
   out <- drift.out
   out$drift <- NULL
   out$delta <- delta
   out$sd <- sd
   out$outcome <- "normal"
   out$sample.size <- n
+  out$r <- r 
   class(out) <- "gsdesign"
   out
 }
 
-gsdesign.survival <- function(ifrac, haz.ratio, sig.level = 0.05, power = 0.8,
+gsdesign.survival <- function(ifrac, haz.ratio, r=1, sig.level = 0.05, power = 0.8,
                               delta.eb = 0.5, delta.fb = NULL, alternative = 
                               c("two.sided", "one.sided"), tol=0.00001, ...) {
   drift.out <- gsd.drift(ifrac, sig.level, power, delta.eb, delta.fb, alternative, tol)
-  d <- 4*(drift.out$drift/log(haz.ratio))^2
+  d <- {(r+1)^2/r} * (drift.out$drift/log(haz.ratio))^2
   out <- drift.out
   out$drift <- NULL
   out$haz.ratio <- haz.ratio
   out$outcome <- "survival"
   out$num.events <- d
+  out$r <- r
   class(out) <- "gsdesign"
   out
 }
@@ -293,12 +306,13 @@ print.gsdesign <- function(x, ...) {
          cat("rates  pC =", x$pC,", pE =", x$pE, "\n"),
          cat("delta =", x$delta, ", sd =", x$sd, "\n"),
          cat("hazard ratio =", x$haz.ratio, "\n"))
+  cat("   Treatment allocated at 1:", x$r," (C:E) ratio \n", sep="")
   cat("   power family of boundary; 0 (Pocock) to 0.5 (O'Brien-Fleming) \n\n")
 
   switch(match(x$outcome, c("binary", "normal", "survival")),
-         cat("  sample size (per arm) =", x$sample.size, "\n"),
-         cat("  sample size (per arm) =", x$sample.size, "\n"),
-         cat(" total number of events =", x$num.events, "\n"))
+         cat("  sample sizes (by arm) =", round(c(1,x$r)/(x$r+1) * x$sample.size, 2), "\n"),
+         cat("  sample sizes (by arm) =", round(c(1,x$r)/(x$r+1) * x$sample.size, 2), "\n"),
+         cat(" total number of events =", round(x$num.events, 2), "\n"))
   cat("   information fraction =", format(round(x$ifrac, 3), digits=3), "\n")
   cat("      efficacy boundary =", round(x$effbdry, 3), paste("(power = ", x$delta.eb, ")", sep=""), "\n")
   if (!is.null(x$futbdry)) {

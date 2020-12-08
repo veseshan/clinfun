@@ -9,13 +9,13 @@
   Functions to calculate sample size for group sequential designs
 }
 \usage{
-gsdesign.binomial(ifrac, pC, pE, sig.level = 0.05, power = 0.8,
+gsdesign.binomial(ifrac, pC, pE, r = 1, sig.level = 0.05, power = 0.8,
   delta.eb=0.5, delta.fb = NULL, alternative = c("two.sided",
   "one.sided"), pooled.variance = FALSE, CPS = TRUE, tol=0.00001, ...) 
-gsdesign.normal(ifrac, delta, sd = 1, sig.level = 0.05,
+gsdesign.normal(ifrac, delta, sd = 1, r = 1, sig.level = 0.05,
   power = 0.8, delta.eb = 0.5, delta.fb = NULL, alternative = 
   c("two.sided", "one.sided"), tol=0.00001, ...)
-gsdesign.survival(ifrac, haz.ratio, sig.level = 0.05, 
+gsdesign.survival(ifrac, haz.ratio, r = 1, sig.level = 0.05, 
   power = 0.8, delta.eb = 0.5, delta.fb = NULL, alternative = 
   c("two.sided", "one.sided"), tol=0.00001, ...)
 }
@@ -29,6 +29,7 @@ gsdesign.survival(ifrac, haz.ratio, sig.level = 0.05,
   \item{delta}{true difference in means (for normal data)}
   \item{sd}{standard deviation (for normal data)}
   \item{haz.ratio}{hazard ratio (for survival comparison)}
+  \item{r}{treatment allocation of r (default=1) experimental per 1 control.}
   \item{sig.level}{significance level (type I error probability)}
   \item{power}{power of test (1 minus type II error probability)}
   \item{delta.eb}{power for efficacy boundary in the Pocock (=0) to

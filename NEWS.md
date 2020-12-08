@@ -3,6 +3,7 @@
 * Added a `NEWS.md` file to track changes to the package.
 * deposited development version on GitHub
 * created {pkgdown} website
+* added 1:r sample allocation in gsdesign functions
 
 # clinfun 1.0.15 (04/13/2018)
 
