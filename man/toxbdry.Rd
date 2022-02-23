@@ -1,8 +1,10 @@
 \name{toxbdry}
-\title{Stopping rule for toxicity monitoring}
+\title{Stopping rule for toxicity/futility monitoring}
 \alias{toxbdry}
+\alias{futilbdry}
 \alias{bdrycross.prob}
 \alias{print.toxbdry}
+\alias{print.futilbdry}
 \keyword{design}
 \description{
   Computes a stopping rule and its operating characteristics for
@@ -11,22 +13,29 @@
 \usage{
 toxbdry(pLo, pHi, n, cP0=0.1, cP1=0.9, ngrid=6, niter=10, delta=0,
           priority=c("null","alt"))
+futilbdry(rLo, rHi, n, size=0.1, power=0.9, ngrid=3, niter=10, delta=0.5)
 bdrycross.prob(n, r, ptox)
 \method{print}{toxbdry}(x, \dots)
+\method{print}{futilbdry}(x, \dots)
 }
 \arguments{
   \item{pLo}{the toxicity rate that is acceptable.}
+  \item{rLo}{baseline (null) response rate.}
   \item{pHi}{the toxicity rate that is too high and hence unacceptable.}
-  \item{n}{vector of times (sample size) when toxicty is moniroted.}
-  \item{r}{vector of maximum acceptable toxicities corresponding to n.}
+  \item{rHi}{desirable response rate. Stop when it is too unlikely.}
+  \item{n}{vector of times (sample size) when toxicty/response is monitored.}
+  \item{r}{vector of maximum acceptable toxicities (non-responders for
+    futility) corresponding to n.}
   \item{ptox}{the toxicity rates for which the operating characteristics
-    are calculated.}
+    are calculated. For futility this is the non-response rate.}
   \item{cP0}{boundary crossing probability under pLo i.e. type I error
     or the probability of declaring a treatment with toxicity rate pLo
     unacceptable.}
   \item{cP1}{boundary crossing probability under pHi i.e. power or the
     probability of declaring a treatment with toxicity rate pHi
     unacceptable.}
+  \item{size}{probability of calling drug effective if response rate is rLo.}
+  \item{power}{probability of calling drug effective if response rate is rHi.}
   \item{ngrid}{the number of toxicity rates from pLo to pHi for which
     the operating characteristics are computed.}
   \item{niter}{the number of iterations run to obtain the boundary.}

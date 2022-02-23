@@ -144,6 +144,7 @@ c     bwratio is the bandwidth ratio n^1/3 for cdf and n^1/5 for pdf
          xb(i) = xb(i)*bwratio
  102  continue
 c     calculation of variance for the CI under non-null deltaauc
+      esq = 0.0d0
       do 120 i = n0+1, n
          i1 = i-n0
          do 110 j = 1, n0
@@ -185,7 +186,7 @@ c     n, nn: #total #normal subjects; marker sorted by disease status
       integer n, nn
       double precision marker(n), area
 
-      integer i, j, j0, k, nties0, nties1, nties, nd
+      integer i, nties0, nties1, nties, nd
       double precision rnd, disgt
 
 c     storage for x, loc used to store ith marker and order

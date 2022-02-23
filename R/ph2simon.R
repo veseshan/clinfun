@@ -140,3 +140,35 @@ twostage.inference <- function(x, r1, n1, n, pu, alpha=0.05) {
   names(out) <- c("pumvue", "p.value", paste(100*alpha, "% LCL", sep=""), paste(100*(1-alpha), "% UCL", sep=""))
   out
 }
+
+# function to get all the admisssible 2 stage designs
+twostage.admissible  <- function(x) {
+  xout <- x$out
+  nmax <- x$nmax
+  nopt <- which(xout[,5]==min(xout[,5]))[1]
+  # admissible indicator for the rows
+  adm = rep(0, nopt)
+  adm[1] = 1 # minimax
+  adm[nopt] = 1 # optimal
+  mss = xout[1:nopt, 4] # max sample size
+  ess = xout[1:nopt, 5] # expected sample size
+  # search admissible points only if search space is not a singleton
+  istart = 1
+  while (nopt > istart) {
+    # slope of each point from the minimax
+    slopes = (ess[(istart+1):nopt] - ess[istart])/(mss[(istart+1):nopt]-mss[istart])
+    imin = which.min(slopes)[1]
+    adm[istart+imin] = 1
+    istart = istart+imin
+  }
+  xout = xout[1:nopt,][adm==1,]
+  # find weight probability at which each rule is admissible
+  dmss = diff(xout[,4])
+  dess = diff(xout[,5])
+  qwt = round(dess/(dess - dmss),3)
+  # admissible designs
+  xout = cbind(xout, c(qwt, 0), c(1, qwt))
+  colnames(xout)[7:8] = c("qLo", "qHi")
+  rownames(xout) = c("Minimax", rep("Admissible", nrow(xout)-2), "Optimal")
+  xout
+}

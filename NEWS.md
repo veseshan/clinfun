@@ -1,9 +1,15 @@
+# clinfun 1.1.0 (02/22/2022)
+
+* Added added admissible two stage design function
+* Added added futilbdry function for sequential futility stopping
+
 # clinfun (development version)
 
 * Added a `NEWS.md` file to track changes to the package.
 * deposited development version on GitHub
 * created {pkgdown} website
 * added 1:r sample allocation in gsdesign functions
+* Fixed the warnings messages from deltaAUC.f
 
 # clinfun 1.0.15 (04/13/2018)
 
