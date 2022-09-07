@@ -1,0 +1,19 @@
+---
+title: "compare-trial-functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{compare-trial-functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(clinfun)
+```

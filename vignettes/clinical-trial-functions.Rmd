@@ -1,0 +1,84 @@
+---
+title: "Functions For Clinical Trial Design"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{clinical-trial-functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(clinfun)
+```
+
+
+
+fe.mdor()
+Toxbdry
+
+# Single Stage Example
+
+```{r}
+#ph2single()
+```
+
+# Simon 2 Stage Example
+
+```{r }
+oo = ph2simon(0.5, 0.7, 0.05, 0.1)
+twostage.admissible(oo)
+plot(oo)
+
+```
+
+
+
+# Sample Size and Effect Size Functions
+
+```{r}
+#fe.ssize() 
+CPS.ssize(0.2,0.22)
+
+# fe.mdor() 
+# mdrr() 
+# fe.power() 
+# or2pcase()
+# gsdesign.binomial() 
+# gsdesign.normal() 
+# gsdesign.survival()
+
+
+# pselect()
+# power.ladesign() 
+```
+
+
+<Example for Vignette showing power.prop.test is wrong due to normal approximation>
+
+```{r}
+
+fe.ssize(0.2,0.3)
+```
+
+this is base function to compare it to 
+
+```{r}
+
+power.prop.test(p1=0.2,p2=0.3,power=0.8)
+```
+
+NOTE: n is number in *each* group
+
+
+
+
+
+
+
