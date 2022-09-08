@@ -18,20 +18,31 @@ knitr::opts_chunk$set(
 library(clinfun)
 ```
 
+# Phase II Design Functions
 
+[general goal of phase II research]
 
-fe.mdor()
-Toxbdry
+## Single Stage
 
-# Single Stage Example
+### Parameters
+
+### Hypotheses
+
+### Example
 
 ```{r}
 #ph2single()
-
-#Test commit
 ```
 
-# Simon 2 Stage Example
+## Simon's Two-Stage
+
+[overview]
+
+### Parameters
+
+### Hypotheses
+
+### Example
 
 ```{r }
 oo = ph2simon(0.5, 0.7, 0.05, 0.1)
@@ -40,6 +51,11 @@ plot(oo)
 
 ```
 
+### References
+
+[Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. Controlled Clinical Trials 10, 1-10.](https://pubmed.ncbi.nlm.nih.gov/2702835/)
+
+[Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. Controlled Clinical Trials 22, 367-372.](https://pubmed.ncbi.nlm.nih.gov/11514038/)
 
 
 # Sample Size and Effect Size Functions
@@ -73,14 +89,15 @@ this is base function to compare it to
 
 ```{r}
 
-power.prop.test(p1=0.2,p2=0.3,power=0.8)
+power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
 ```
 
 NOTE: n is number in *each* group
 
+```{r}
+# Also include these somewhere? These were listed at the top of the .Rmd file originally
 
-
-
-
-
+# fe.mdor()
+# toxbdry()
+```
 
