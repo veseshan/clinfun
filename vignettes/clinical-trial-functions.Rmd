@@ -18,38 +18,89 @@ knitr::opts_chunk$set(
 library(clinfun)
 ```
 
-# Phase II Design Functions
+# Phase II Trial Design
 
-[general goal of phase II research]
-
-## Single Stage
-
-### Parameters
-
-### Hypotheses
-
-### Example
-
-```{r}
-#ph2single()
-```
+The overall purpose of Phase II research is to determine whether a treatment is promising enough to warrant more extensive development. While Phase I research assesses safety and clinical pharmacology in a less specific population (typically healthy participants or patients with severe disease), Phase II research begins assessing the efficacy of a treatment in a well-defined population. Phase II trials also continue to monitor the safety of the treatment. Phase II research typically does not aim to estimate the treatment effect; estimation is often better suited for Phase III research, at which point larger sample sizes are justified and allow for greater precision.
 
 ## Simon's Two-Stage
 
-[overview]
+The goal of Simon's two-stage design is to minimize the number of patients exposed to an ineffective treatment.
 
-### Parameters
+The trial begins by enrolling $n_1$ patients in stage 1. If $\leq r_1$ responses are observed, then early termination occurs, at which point the treatment is not recommended. Otherwise, $n_2$ patients are enrolled in stage 2 and the success of the treatment is based on all data accumulated in stage 1 and stage 2. At the end of stage 2, if $\leq r$ total responses have been observed, then the treatment is not recommended; if $>r$ total responses have been observed, then the treatment is recommended.
+
+### Design Parameters and Constraints
+
+The following parameters and constraints must be specified:
+
+$p_0:$ Treatment response rate considered unacceptable
+
+$p_1:$ Treatment response rate considered desirable
+
+$\alpha:$ Type I error threshold
+
+$\beta:$ Type II error threshold
 
 ### Hypotheses
 
+Below are the hypotheses used for testing:
+
+$H_0:$ The true treatment response is less than or equal to some unacceptable level ($p \leq p_0$)
+
+$H_1:$ The true treatment response is greater than or equal to some desirable level ($p \geq p_1$)
+
+### Optimal vs. Minimax vs. Admissible Designs
+
+If early termination occurs, the sample size for the trial is $n_1$. If early termination does not occur, the sample size for the trial is $n_1 + n_2$ (the maximum sample size for the trial).
+
+Thus, the expected sample size under the null hypothesis is given by
+
+$$ EN(p_0) = n_1 + (1 - P(ET)) \cdot n_2 $$
+
+where $P(ET)$ is the probability of early termination.
+
+The **optimal design** minimizes the expected sample size ($EN(p_0)$), whereas the **minimax design** minimizes the maximum sample size ($n_1 + n_2$). The **admissible design** can be thought of as a compromise between the optimal and minimax designs.
+
+The optimal design typically has a smaller stage 1 sample size but more subjects overall if the trial proceeds to stage 2. The optimal design also typically has a higher $P(ET)$ than the minimax design.
+
+The minimax design can be preferable in certain scenarios. For example, if $EN(p_0)$ is relatively close to that of the optimal design and the patient accrual rate is slow, or if the patient population is heterogeneous and a small stage 1 is not desirable.
+
 ### Example
 
-```{r }
-oo = ph2simon(0.5, 0.7, 0.05, 0.1)
-twostage.admissible(oo)
-plot(oo)
+For this example, the following parameters and constraints are specified:
 
+* $p_0:$ 50%
+
+* $p_1:$ 70%
+
+* $\alpha:$ 10%
+
+* $\beta:$ 10%
+
+Using the `ph2simon` function, specify the parameters and print the resulting object.
+
+```{r}
+# Specify the parameters and constraints
+trial = ph2simon(0.5, 0.7, 0.1, 0.1)
+
+# Print
+trial
 ```
+
+[explain what you get in the results]
+
+```{r}
+# Plot
+plot(trial)
+```
+
+[placeholder]
+
+```{r}
+# Admissible
+twostage.admissible(trial)
+```
+
+[placeholder]
 
 ### References
 
@@ -57,25 +108,81 @@ plot(oo)
 
 [Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. Controlled Clinical Trials 22, 367-372.](https://pubmed.ncbi.nlm.nih.gov/11514038/)
 
+[Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage designs for phase II cancer clinical trials. Statistics in medicine 23(4), 561-569.](https://pubmed.ncbi.nlm.nih.gov/14755389/)
 
-# Sample Size and Effect Size Functions
+## Single Stage
+
+[overview]
+
+[why use instead of two-stage]
+
+### Design Parameters and Constraints
+
+The following parameters and constraints must be specified:
+
+$p_0:$ Unacceptable response rate
+
+$p_1:$ Desirable response rate
+
+$\alpha:$ Type I error threshold
+
+$\beta:$ Type II error threshold
+
+### Hypotheses
+
+$H_0: p \leq p_0$
+
+$H_1: p \geq p_1$
+
+### Example
 
 ```{r}
-#fe.ssize() 
-CPS.ssize(0.2,0.22)
+#ph2single()
+```
+
+## Stopping Rule for Toxicity Monitoring
+
+```{r}
+# toxbdry()
+
+# Question - ok for this to this live in the Phase II section? Or should it go in a more general section (not specific to Phase II)?
+```
+
+# Calculating Sample Size, Effect Size, and Power
+
+## Fisher's Exact Test
+
+```{r}
+fe.ssize(0.3,0.22) 
+CPS.ssize(0.3,0.22)
 
 # fe.mdor() 
 # mdrr() 
 # fe.power() 
 # or2pcase()
+```
+
+## Group Sequential Designs
+
+```{r}
 # gsdesign.binomial() 
 # gsdesign.normal() 
 # gsdesign.survival()
+```
 
+## Pick-the-Winner Rule
 
+```{r}
 # pselect()
+```
+
+## Rank Tests for Animal Studies
+
+```{r}
 # power.ladesign() 
 ```
+
+
 
 
 <Example for Vignette showing power.prop.test is wrong due to normal approximation>
@@ -94,10 +201,4 @@ power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
 
 NOTE: n is number in *each* group
 
-```{r}
-# Also include these somewhere? These were listed at the top of the .Rmd file originally
-
-# fe.mdor()
-# toxbdry()
-```
 
