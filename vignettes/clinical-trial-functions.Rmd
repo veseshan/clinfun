@@ -76,7 +76,7 @@ For this example, the following parameters and constraints are specified:
 
 * $\beta:$ 10% type II error threshold
 
-Using the `ph2simon` function, specify the parameters and print the resulting object.
+Using `ph2simon()`, specify the parameters and print the resulting object.
 
 ```{r}
 # Specify the parameters and constraints
@@ -88,7 +88,7 @@ trial
 
 This output provides the key components ($r_1$, $r$, $n_1$, and $n$) as well as $EN(p_0)$ and $PET(p_0)$ for the selected optimal and minimax designs. As expected, the optimal design has a smaller expected sample size ($EN(p_0)$; about 29 vs. 31), whereas the minimax design has a smaller maximum sample size ($n$; 23 vs. 26).
 
-Using the base `plot` function, plot the trial object.
+Using the base `plot()`, plot the trial object.
 
 ```{r}
 # Plot
@@ -97,7 +97,7 @@ plot(trial)
 
 This output provides a visual representation of expected sample size ($EN(p_0)$) and maximum number of patients ($n$) under various scenarios. O represents the optimal design, and M represents the minimax design.
 
-The admissible design can be obtained by applying the `twostage.admissible` function to the trial object.
+The admissible design can be obtained by applying the `twostage.admissible()` function to the trial object.
 
 ```{r}
 # Obtain admissible design
@@ -152,7 +152,7 @@ For this example, the following parameters and constraints are specified:
 
 * $\beta:$ 10% type II error threshold
 
-Using the `ph2single` function, specify the parameters and print the resulting object.
+Using `ph2single()`, specify the parameters and print the resulting object.
 
 ```{r}
 # Specify the parameters and constraints & print
@@ -165,25 +165,48 @@ This output provides the key components ($n$ and $r$) for applicable designs as 
 
 ```{r}
 # toxbdry()
-
-# Question - ok for this to this live in the Phase II section? Or should it go in a more general section (not specific to Phase II)?
 ```
+
+*Question - ok for this to this live in the Phase II section? Or should it go in a more general section (not specific to Phase II)?*
 
 # Calculating Sample Size, Effect Size, and Power
 
 ## Fisher's Exact Test
 
-```{r}
-fe.ssize(0.3,0.22) 
-CPS.ssize(0.3,0.22)
+Below is a table summarizing the functions based on Fisher's exact test.
 
-# fe.mdor() 
-# mdrr() 
-# fe.power() 
-# or2pcase()
+|Function       | Details                                             |
+|---------------|-----------------------------------------------------|
+|`fe.ssize()`   |Returns a 2x3 matrix with Casagrande, Pike, Smith (CPS) and Fisher's exact sample sizes with power.|
+|`fe.mdor()`    |Returns a 3x2 matrix with Schlesselman, CPS and Fisher's exact minimum detectable odds ratios and the corresponding power.|
+|`fe.power()`   |Returns a Kx2 matrix with probabilities (p2) and exact power.|
+|`CPS.ssize()`  |Returns CPS sample size, which is a very close to the exact. Use this for small differences p2-p1 (hence large sample sizes) to get the result instantaneously.|
+|`mdrr()`       |Computes the minimum detectable P(resp given marker+) and P(resp given marker-) configurations when total sample size (n), P(response) (presp) and proportion of subjects who are marker positive (cprob) are specified.|
+|`or2pcase()`   |Gives the probability of disease among the cases for a given probability of disease in controls (pcontrol) and odds ratio (OR).|
+
+### Example
+
+```{r}
+fe.ssize(p1 = 0.2, p2 = 0.3, power = 0.8)
 ```
 
+*CAUTION:* As we can see below, when we use `power.prop.test()`, we obtain an incorrect results due to normal approximation.
+
+```{r}
+power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
+```
+
+### References
+
+[Casagrande JT, Pike MC, Smith PG. (1978). An improved approximate formula for calculating sample sizes for comparing two binomial distributions. Biometrics 34, 483-486.](https://pubmed.ncbi.nlm.nih.gov/719125/)
+
+Fleiss, JL. (1981). Statistical Methods for Rates and Proportions.
+
+[Schlesselman JJ. (1987) Re: Smallest detectable relative risk with multiple controls per case. Am J Epidemiol 125(2), 348.](https://pubmed.ncbi.nlm.nih.gov/3812441/)
+
 ## Group Sequential Designs
+
+Functions to calculate sample size for group sequential designs.
 
 ```{r}
 # gsdesign.binomial() 
@@ -205,21 +228,5 @@ CPS.ssize(0.3,0.22)
 
 
 
-
-<Example for Vignette showing power.prop.test is wrong due to normal approximation>
-
-```{r}
-
-fe.ssize(0.2,0.3)
-```
-
-this is base function to compare it to 
-
-```{r}
-
-power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
-```
-
-NOTE: n is number in *each* group
 
 
