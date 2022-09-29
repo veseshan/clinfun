@@ -28,7 +28,7 @@ The goal of Simon's two-stage design is to minimize the number of patients expos
 
 The trial begins by enrolling $n_1$ patients in stage 1. If $\leq r_1$ responses are observed, then early termination occurs, at which point the treatment is not recommended. Otherwise, $n_2$ patients are enrolled in stage 2 and the success of the treatment is based on all data accumulated. At the end of stage 2, if $\leq r$ total responses have been observed, then the treatment is not recommended; if $>r$ total responses have been observed, then the treatment is recommended.
 
-When designing a Simon's two-stage design, the key objective is to select appropriate values of $r_1$ (response threshold at the end of stage 1), $r$ (final response threshold), $n_1$ (stage 1 sample size), and $N$ (total sample size; $n_1 + n_2$). The response rate considered "unacceptable" (at which point a treatment would not be recommended) and the response rate considered "desired" must be specified, and the values of $r_1$, $r$, $n_1$, and $N$ must be selected such that the desired error rate constraints are satisfied.
+When designing a Simon's two-stage trial, the key objective is to select appropriate values of $r_1$ (response threshold at the end of stage 1), $r$ (final response threshold), $n_1$ (stage 1 sample size), and $n$ (total sample size; $n_1 + n_2$). The response rate considered "unacceptable" (at which point a treatment would not be recommended) and the response rate considered "desired" must be specified, and the values of $r_1$, $r$, $n_1$, and $n$ must be selected such that the desired error rate constraints are satisfied.
 
 ### Design Parameters and Constraints
 
@@ -52,7 +52,7 @@ $H_1:$ The true treatment response rate is greater than or equal to some desirab
 
 ### Optimal vs. Minimax vs. Admissible Designs
 
-If early termination occurs, the sample size for the trial is $n_1$. If early termination does not occur, the sample size for the trial is $n_1 + n_2$ (the maximum sample size for the trial).
+If early termination occurs, the sample size for the trial is $n_1$. If early termination does not occur, the sample size for the trial is $n$ (the maximum sample size for the trial).
 
 Thus, the expected sample size under the null hypothesis is given by
 
@@ -86,7 +86,7 @@ trial = ph2simon(0.5, 0.7, 0.1, 0.1)
 trial
 ```
 
-This output provides the key design components ($r_1$, $r$, $n_1$, and $N$) as well as $EN(p_0)$ and $PET(p_0)$ for the selected optimal and minimax designs. As expected, the optimal design has a smaller expected sample size ($EN(p_0)$; about 29 vs. 31), whereas the minimax design has a smaller maximum sample size ($r$; 23 vs. 26).
+This output provides the key components ($r_1$, $r$, $n_1$, and $n$) as well as $EN(p_0)$ and $PET(p_0)$ for the selected optimal and minimax designs. As expected, the optimal design has a smaller expected sample size ($EN(p_0)$; about 29 vs. 31), whereas the minimax design has a smaller maximum sample size ($n$; 23 vs. 26).
 
 Using the base `plot` function, plot the trial object.
 
@@ -95,7 +95,7 @@ Using the base `plot` function, plot the trial object.
 plot(trial)
 ```
 
-This output provides a visual representation of expected sample size ($EN(p_0)$) and maximum number of patients ($r$) under various scenarios. O represents the optimal design, and M represents the minimax design.
+This output provides a visual representation of expected sample size ($EN(p_0)$) and maximum number of patients ($n$) under various scenarios. O represents the optimal design, and M represents the minimax design.
 
 The admissible design can be obtained by applying the `twostage.admissible` function to the trial object.
 
@@ -114,11 +114,13 @@ This outpoint includes the admissible design as well as the optimal and minimax 
 
 [Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage designs for phase II cancer clinical trials. Statistics in medicine 23(4), 561-569.](https://pubmed.ncbi.nlm.nih.gov/14755389/)
 
-## Single Stage
+## Single-Stage
 
-[overview]
+A single-stage design may be used instead of a two-stage design when an endpoint requires too much time to evaluate or when early stopping is less of a priority.
 
-[why use instead of two-stage]
+The trial enrolls $n$ patients. After all patients have completed the study, if $\leq r$ total responses have been observed, then the treatment is not recommended; if $>r$ total responses have been observed, then the treatment is recommended.
+
+When designing a single-stage trial, the key objective is to select appropriate values of $n$ (sample size) and $r$ (response threshold at the end of the study). The response rate considered "unacceptable" (at which point a treatment would not be recommended) and the response rate considered "desired" must be specified, and the values of $r$ and $n$ must be selected such that the desired error rate constraints are satisfied.
 
 ### Design Parameters and Constraints
 
@@ -140,9 +142,24 @@ $H_1: p \geq p_1$
 
 ### Example
 
+For this example, the following parameters and constraints are specified:
+
+* $p_0:$ 15% response
+
+* $p_1:$ 35% response
+
+* $\alpha:$ 10% type I error threshold
+
+* $\beta:$ 10% type II error threshold
+
+Using the `ph2single` function, specify the parameters and print the resulting object.
+
 ```{r}
-#ph2single()
+# Specify the parameters and constraints & print
+ph2single(0.15, 0.35, 0.1, 0.1)
 ```
+
+This output provides the key components ($n$ and $r$) for applicable designs as well as the type I and type II error rates corresponding to each of these designs.
 
 ## Stopping Rule for Toxicity Monitoring
 
