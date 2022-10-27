@@ -20,13 +20,13 @@ library(clinfun)
 
 # Phase II Trial Design
 
-The overall purpose of Phase II research is to determine whether a treatment is promising enough to warrant more extensive development. While Phase I research assesses safety and clinical pharmacology, typically in either healthy participants or patients with severe disease, Phase II research begins assessing the efficacy of a treatment in a well-defined population. Phase II trials also continue to monitor the safety of the treatment. Phase II research typically does not aim to estimate the treatment effect; estimation is often better suited for Phase III research, at which point larger sample sizes are justified and allow for greater precision.
+The overall purpose of phase II research is to determine whether a treatment is promising enough to warrant more extensive development. While phase I research assesses safety and clinical pharmacology, typically in either healthy participants or patients with severe disease, phase II research begins assessing the efficacy of a treatment in a well-defined population. phase II trials also continue to monitor the safety of the treatment. Phase II research typically does not aim to estimate the treatment effect; estimation is often better suited for phase III research, at which point larger sample sizes are justified and allow for greater precision.
 
 ## Simon's Two-Stage
 
 The goal of Simon's two-stage design is to minimize the number of patients exposed to an ineffective treatment.
 
-The trial begins by enrolling $n_1$ patients in stage 1. If $\leq r_1$ responses are observed, then early termination occurs, at which point the treatment is not recommended. Otherwise, $n_2$ patients are enrolled in stage 2 and the success of the treatment is based on all data accumulated. At the end of stage 2, if $\leq r$ total responses have been observed, then the treatment is not recommended; if $>r$ total responses have been observed, then the treatment is recommended.
+The trial begins by enrolling $n_1$ patients in stage 1. If $\leq r_1$ responses are observed, then early termination occurs, at which point the treatment is not recommended. Otherwise, $n_2$ patients are enrolled in stage 2 and the success of the treatment is based on all data accumulated. At the end of stage 2, if $\leq r$ responses have been observed in total, then the treatment is not recommended; if $>r$ responses have been observed in total, then the treatment is recommended.
 
 When designing a Simon's two-stage trial, the key objective is to select appropriate values of $r_1$ (response threshold at the end of stage 1), $r$ (final response threshold), $n_1$ (stage 1 sample size), and $n$ (total sample size; $n_1 + n_2$). The response rate considered "unacceptable" (at which point a treatment would not be recommended) and the response rate considered "desired" must be specified, and the values of $r_1$, $r$, $n_1$, and $n$ must be selected such that the desired error rate constraints are satisfied.
 
@@ -66,29 +66,41 @@ The **admissible design** can be thought of as a compromise between the optimal 
 
 ### Example
 
-For this example, the following parameters and constraints are specified:
+For this example, we will be taking a look at a phase II trial that assessed the efficacy of lenvatinib in patients with progressive, recurrent or metastatic adenoid cystic carcinoma (Tchekmedyian et al., 2019). Patients received lenvatinib 24 mg/day until disease progression, death, unacceptable toxicity, withdrawal of consent, or a decision based on the treating physician's discretion. Treatment response was specifically defined as overall response: either partial or complete response, as defined by RECIST version 1.1.
 
-* $p_0:$ 50% response
+The trial employed a Simon's two-stage design. An overall response rate of 5% was considered unacceptable, and an overall response rate of 20% was considered desired. The  type I error threshold used was 10%. The target power used was 90%, equivalent to a 10% type II error threshold.
 
-* $p_1:$ 70% response
+Summarizing the design parameters and constraints from above, we have:
+
+* $p_0:$ 5% overall response rate
+
+* $p_1:$ 20% overall response rate
 
 * $\alpha:$ 10% type I error threshold
 
 * $\beta:$ 10% type II error threshold
 
-Using `ph2simon()`, specify the parameters and print the resulting object.
+Thus, the hypotheses used for testing are:
+
+* $H_0:$ The true overall response rate is less than or equal to 5% ($p \leq 0.05$)
+
+* $H_1:$ The true overall response rate is greater than or equal to 20% ($p \geq 0.2%$)
+
+Now, using `ph2simon()`, specify these parameters and print the resulting object.
 
 ```{r}
 # Specify the parameters and constraints
-trial = ph2simon(0.5, 0.7, 0.1, 0.1)
+trial = ph2simon(0.05, 0.2, 0.1, 0.1)
 
 # Print
 trial
 ```
 
-This output provides the key components ($r_1$, $r$, $n_1$, and $n$) as well as $EN(p_0)$ and $PET(p_0)$ for the selected optimal and minimax designs. As expected, the optimal design has a smaller expected sample size ($EN(p_0)$; about 29 vs. 31), whereas the minimax design has a smaller maximum sample size ($n$; 23 vs. 26).
+This output provides the key components ($r_1$, $r$, $n_1$, and $n$) as well as $EN(p_0)$ and $PET(p_0)$ for the selected optimal and minimax designs.
 
-Using the base `plot()`, plot the trial object.
+As expected, the optimal design has a smaller expected sample size ($EN(p_0)$; about 23 vs. 26), whereas the minimax design has a smaller maximum sample size ($n$; 32 vs. 37).
+
+We can also visualize these results. Using the base `plot()`, plot the trial object.
 
 ```{r}
 # Plot
@@ -106,6 +118,10 @@ twostage.admissible(trial)
 
 This outpoint includes the admissible design as well as the optimal and minimax designs. In addition to the design components seen earlier, columns `qLo` and `qHi` give the range of probability values for which the particular design is admissible.
 
+For this particular trial, Tchekmedyian et al. opted for the minimax design. Thus, 18 patients were enrolled in stage 1 ($n_1 = 18$). If no responses were observed ($r_1 \leq 0$ reduces to $r_1 = 0$ since the number of responses cannot be negative), then early termination would occur. Otherwise, if at least one response was observed ($r_1 > 0$), then 14 patients would be enrolled in stage 2 ($n_2 = n - n_1 = 32 - 18 = 14$). At the end of stage 2, if at least 4 responses had been observed in total ($r > 3$), then the treatment would be recommended; if 3 or fewer responses had been observed in total ($r \leq 3$), then the treatment would not be recommended.
+
+Ultimately, Tchekmedyian et al. observed four responses among the 18 patients enrolled in stage 1 and thus proceeded to stage 2, in which an additional 14 patients were enrolled. One response was observed among the stage 2 patients. Thus, at the end of the trial, 5 responses had been observed in total, and lenvatinib was recommended for further development.
+
 ### References
 
 [Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. Controlled Clinical Trials 10, 1-10.](https://pubmed.ncbi.nlm.nih.gov/2702835/)
@@ -114,11 +130,13 @@ This outpoint includes the admissible design as well as the optimal and minimax 
 
 [Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage designs for phase II cancer clinical trials. Statistics in medicine 23(4), 561-569.](https://pubmed.ncbi.nlm.nih.gov/14755389/)
 
+[Tchekmedyian V, Sherman EJ, Dunn L, et al. (2019) Phase II Study of Lenvatinib in Patients With Progressive, Recurrent or Metastatic Adenoid Cystic Carcinoma. J Clin Oncol. 37(18):1529-1537](https://pubmed.ncbi.nlm.nih.gov/30939095/)
+
 ## Single-Stage
 
 A single-stage design may be used instead of a two-stage design when an endpoint requires too much time to evaluate or when early stopping is less of a priority.
 
-The trial enrolls $n$ patients. After all patients have completed the study, if $\leq r$ total responses have been observed, then the treatment is not recommended; if $>r$ total responses have been observed, then the treatment is recommended.
+The trial enrolls $n$ patients. After all patients have completed the study, if $\leq r$ responses have been observed in total, then the treatment is not recommended; if $>r$ responses have been observed in total, then the treatment is recommended.
 
 When designing a single-stage trial, the key objective is to select appropriate values of $n$ (sample size) and $r$ (response threshold at the end of the study). The response rate considered "unacceptable" (at which point a treatment would not be recommended) and the response rate considered "desired" must be specified, and the values of $r$ and $n$ must be selected such that the desired error rate constraints are satisfied.
 
@@ -167,7 +185,7 @@ This output provides the key components ($n$ and $r$) for applicable designs as 
 # toxbdry()
 ```
 
-*Question - ok for this to this live in the Phase II section? Or should it go in a more general section (not specific to Phase II)?*
+*Question - ok for this to this live in the phase II section? Or should it go in a more general section (not specific to phase II)?*
 
 # Calculating Sample Size, Effect Size, and Power
 
