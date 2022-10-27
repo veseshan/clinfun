@@ -20,7 +20,7 @@ library(clinfun)
 
 # Phase II Trial Design
 
-The overall purpose of phase II research is to determine whether a treatment is promising enough to warrant more extensive development. While phase I research assesses safety and clinical pharmacology, typically in either healthy participants or patients with severe disease, phase II research begins assessing the efficacy of a treatment in a well-defined population. phase II trials also continue to monitor the safety of the treatment. Phase II research typically does not aim to estimate the treatment effect; estimation is often better suited for phase III research, at which point larger sample sizes are justified and allow for greater precision.
+The overall purpose of phase II research is to determine whether a treatment is promising enough to warrant more extensive development. While phase I research assesses safety and clinical pharmacology, typically in either healthy participants or patients with severe disease, phase II research begins assessing the efficacy of a treatment in a well-defined population. Phase II trials also continue to monitor the safety of the treatment. Phase II research typically does not aim to estimate the treatment effect; estimation is often better suited for phase III research, at which point larger sample sizes are justified and allow for greater precision.
 
 ## Simon's Two-Stage
 
@@ -66,7 +66,7 @@ The **admissible design** can be thought of as a compromise between the optimal 
 
 ### Example
 
-For this example, we will be taking a look at a phase II trial that assessed the efficacy of lenvatinib in patients with progressive, recurrent or metastatic adenoid cystic carcinoma (Tchekmedyian et al., 2019). Patients received lenvatinib 24 mg/day until disease progression, death, unacceptable toxicity, withdrawal of consent, or a decision based on the treating physician's discretion. Treatment response was specifically defined as overall response: either partial or complete response, as defined by RECIST version 1.1.
+For this example, we will be looking at a phase II trial that assessed the efficacy of lenvatinib in patients with progressive, recurrent or metastatic adenoid cystic carcinoma (Tchekmedyian et al., 2019). Patients received lenvatinib 24 mg/day. Treatment was continued until disease progression, death, unacceptable toxicity, withdrawal of consent, or a decision based on the treating physician's discretion. Treatment response was specifically defined as overall response: achievement of either partial response or complete response, as defined by Response Evaluation Criteria in Solid Tumors (RECIST) version 1.1.
 
 The trial employed a Simon's two-stage design. An overall response rate of 5% was considered unacceptable, and an overall response rate of 20% was considered desired. The  type I error threshold used was 10%. The target power used was 90%, equivalent to a 10% type II error threshold.
 
@@ -118,9 +118,9 @@ twostage.admissible(trial)
 
 This outpoint includes the admissible design as well as the optimal and minimax designs. In addition to the design components seen earlier, columns `qLo` and `qHi` give the range of probability values for which the particular design is admissible.
 
-For this particular trial, Tchekmedyian et al. opted for the minimax design. Thus, 18 patients were enrolled in stage 1 ($n_1 = 18$). If no responses were observed ($r_1 \leq 0$ reduces to $r_1 = 0$ since the number of responses cannot be negative), then early termination would occur. Otherwise, if at least one response was observed ($r_1 > 0$), then 14 patients would be enrolled in stage 2 ($n_2 = n - n_1 = 32 - 18 = 14$). At the end of stage 2, if at least 4 responses had been observed in total ($r > 3$), then the treatment would be recommended; if 3 or fewer responses had been observed in total ($r \leq 3$), then the treatment would not be recommended.
+For this particular trial, Tchekmedyian et al. opted for the minimax design. Thus, 18 patients were enrolled in stage 1 ($n_1 = 18$). If no responses were observed ($\leq 0$ reduces to $= 0$ since the number of responses cannot be negative), then early termination would occur. Otherwise, if at least one response was observed, then 14 patients would be enrolled in stage 2 ($n_2 = n - n_1 = 32 - 18 = 14$). At the end of stage 2, if at least 4 responses had been observed in total, then the treatment would be recommended; if 3 or fewer responses had been observed in total, then the treatment would not be recommended ($r = 3$).
 
-Ultimately, Tchekmedyian et al. observed four responses among the 18 patients enrolled in stage 1 and thus proceeded to stage 2, in which an additional 14 patients were enrolled. One response was observed among the stage 2 patients. Thus, at the end of the trial, 5 responses had been observed in total, and lenvatinib was recommended for further development.
+Ultimately, Tchekmedyian et al. observed four responses among the 18 patients enrolled in stage 1 and thus proceeded to stage 2, in which an additional 14 patients were enrolled. One response was observed among the stage 2 patients. Thus, at the end of the trial, 5 responses had been observed in total, and lenvatinib was recommended for further development in patients with progressive, recurrent or metastatic adenoid cystic carcinoma.
 
 ### References
 
@@ -130,7 +130,7 @@ Ultimately, Tchekmedyian et al. observed four responses among the 18 patients en
 
 [Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage designs for phase II cancer clinical trials. Statistics in medicine 23(4), 561-569.](https://pubmed.ncbi.nlm.nih.gov/14755389/)
 
-[Tchekmedyian V, Sherman EJ, Dunn L, et al. (2019) Phase II Study of Lenvatinib in Patients With Progressive, Recurrent or Metastatic Adenoid Cystic Carcinoma. J Clin Oncol. 37(18):1529-1537](https://pubmed.ncbi.nlm.nih.gov/30939095/)
+[Tchekmedyian V, Sherman EJ, Dunn L, et al. (2019) Phase II Study of Lenvatinib in Patients With Progressive, Recurrent or Metastatic Adenoid Cystic Carcinoma. J Clin Oncol. 37(18):1529-1537.](https://pubmed.ncbi.nlm.nih.gov/30939095/)
 
 ## Single-Stage
 
@@ -160,32 +160,54 @@ $H_1: p \geq p_1$
 
 ### Example
 
-For this example, the following parameters and constraints are specified:
+For this example, we will be looking at a phase II trial that assessed the efficacy of everolimus in patients with thymoma and thymic carcinoma previously treated with cisplatin-based chemotherapy (Zucali et al., 2018). Patients received everolimus 10 mg/day. Treatment was continued until disease progression, death, unacceptable toxicity, or study discontinuation for any other reason. Treatment response was specifically defined as disease control: achievement of either partial response, complete response, or stable disease, as defined by Response Evaluation Criteria in Solid Tumors (RECIST) version 1.1.
 
-* $p_0:$ 15% response
+The trial employed a single-stage design. A disease control rate of 40% was considered unacceptable, and a disease control rate of 60% was considered desired. The  type I error threshold used was 10%. The target power used was 90%, equivalent to a 10% type II error threshold.
 
-* $p_1:$ 35% response
+Summarizing the design parameters and constraints from above, we have:
+
+* $p_0:$ 40% disease control rate
+
+* $p_1:$ 60% disease control rate
 
 * $\alpha:$ 10% type I error threshold
 
 * $\beta:$ 10% type II error threshold
 
+Thus, the hypotheses used for testing are:
+
+* $H_0:$ The true disease control rate is less than or equal to 40% ($p \leq 0.4$)
+
+* $H_1:$ The true disease control rate is greater than or equal to 60% ($p \geq 0.6%$)
+
 Using `ph2single()`, specify the parameters and print the resulting object.
 
 ```{r}
 # Specify the parameters and constraints & print
-ph2single(0.15, 0.35, 0.1, 0.1)
+ph2single(0.4, 0.6, 0.1, 0.1)
 ```
 
 This output provides the key components ($n$ and $r$) for applicable designs as well as the type I and type II error rates corresponding to each of these designs.
 
-## Stopping Rule for Toxicity Monitoring
+Zucali et al. chose the first option listed, the design that enrolls the smallest number of patients ($n = 41$) that still satisfies the error rate constraints. The treatment would be recommended if at least 21 of the first 41 evaluable patients achieved disease control ($r = 20$). Ultimately, greater than 21 of these patients achieved disease control, and everolimus was recommended for further development in patients with thymoma and thymic carcinoma previously treated with cisplatin-based chemotherapy.
+
+### References
+
+[Zucali PA, De Pas T, Palmieri G, et al. (2018). Phase II Study of Everolimus in Patients With Thymoma and Thymic Carcinoma Previously Treated With Cisplatin-Based Chemotherapy. J Clin Oncol. 36(4):342-349.](https://pubmed.ncbi.nlm.nih.gov/29240542/)
+
+# Stopping Rules
+
+## Toxicity Monitoring
 
 ```{r}
 # toxbdry()
 ```
 
-*Question - ok for this to this live in the phase II section? Or should it go in a more general section (not specific to phase II)?*
+## Futility Monitoring
+
+```{r}
+# futilbdry()
+```
 
 # Calculating Sample Size, Effect Size, and Power
 
