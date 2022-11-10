@@ -1,3 +1,5 @@
+# clinfun (development version)
+
 # clinfun 1.1.0 (02/22/2022)
 
 * Added added admissible two stage design function
