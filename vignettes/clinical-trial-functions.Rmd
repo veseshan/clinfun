@@ -18,19 +18,37 @@ knitr::opts_chunk$set(
 library(clinfun)
 ```
 
+# Introduction 
+
+This vignette will walk through some functions in clinfun that are available to help with designing phase II clinical trials. 
+
+We will use data examples from (citations)
+
 # Phase II Trial Design
 
 The overall purpose of phase II research is to determine whether a treatment is promising enough to warrant more extensive development. While phase I research assesses safety and clinical pharmacology, typically in either healthy participants or patients with severe disease, phase II research begins assessing the efficacy of a treatment in a well-defined population. Phase II trials also continue to monitor the safety of the treatment. Phase II research typically does not aim to estimate the treatment effect; estimation is often better suited for phase III research, at which point larger sample sizes are justified and allow for greater precision.
 
+Clinfun can help determine necessary sample sizes and number of responses needed for treatments to be considered desirable in stage 2 designs. 
+
 ## Simon's Two-Stage
+
 
 The goal of Simon's two-stage design is to minimize the number of patients exposed to an ineffective treatment.
 
 The trial begins by enrolling $n_1$ patients in stage 1. If $\leq r_1$ responses are observed, then early termination occurs, at which point the treatment is not recommended. Otherwise, $n_2$ patients are enrolled in stage 2 and the success of the treatment is based on all data accumulated. At the end of stage 2, if $\leq r$ responses have been observed in total, then the treatment is not recommended; if $>r$ responses have been observed in total, then the treatment is recommended.
 
-When designing a Simon's two-stage trial, the key objective is to select appropriate values of $r_1$ (response threshold at the end of stage 1), $r$ (final response threshold), $n_1$ (stage 1 sample size), and $n$ (total sample size; $n_1 + n_2$). The response rate considered "unacceptable" (at which point a treatment would not be recommended) and the response rate considered "desired" must be specified, and the values of $r_1$, $r$, $n_1$, and $n$ must be selected such that the desired error rate constraints are satisfied.
+When designing a Simon's two-stage trial, the key objective is to select appropriate values of response thresholds indicated by:
+- $r_1$ (response threshold at the end of stage 1)
+- $r$ (final response threshold)
+
+and sample sizes, indicated by:
+- $n_1$ (stage 1 sample size)
+- $n$ (total sample size; $n_1 + n_2$). 
+
 
 ### Design Parameters and Constraints
+
+The response rate considered "unacceptable" (at which point a treatment would not be recommended) and the response rate considered "desired" must be specified, and the values of $r_1$, $r$, $n_1$, and $n$ must be selected such that the desired error rate constraints are satisfied.
 
 The following parameters and constraints must be specified:
 
@@ -243,30 +261,5 @@ power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
 Fleiss, JL. (1981). Statistical Methods for Rates and Proportions.
 
 [Schlesselman JJ. (1987) Re: Smallest detectable relative risk with multiple controls per case. Am J Epidemiol 125(2), 348.](https://pubmed.ncbi.nlm.nih.gov/3812441/)
-
-## Group Sequential Designs
-
-Functions to calculate sample size for group sequential designs.
-
-```{r}
-# gsdesign.binomial() 
-# gsdesign.normal() 
-# gsdesign.survival()
-```
-
-## Pick-the-Winner Rule
-
-```{r}
-# pselect()
-```
-
-## Rank Tests for Animal Studies
-
-```{r}
-# power.ladesign() 
-```
-
-
-
 
 
