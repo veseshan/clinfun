@@ -1,6 +1,8 @@
-pandoc: 2.7.3
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
-articles: {}
-last_built: 2022-12-06T17:45Z
+articles:
+  clinical-trial-functions: clinical-trial-functions.html
+  compare-trial-functions: compare-trial-functions.html
+last_built: 2022-12-06T20:56Z
 
