@@ -239,7 +239,7 @@ Zucali et al. chose the first option listed, the design that enrolls the smalles
 
 ## Fisher's Exact Test
 
-Below is a table summarizing the functions based on Fisher's exact test.
+{clinfun} offers several functions to determine sample sizes, effect sizes, etc based on Fisher's exact tests. Below is a table summarizing the functions based on Fisher's exact test.
 
 |Function       | Details                                             |
 |---------------|-----------------------------------------------------|
@@ -256,7 +256,7 @@ Below is a table summarizing the functions based on Fisher's exact test.
 fe.ssize(p1 = 0.2, p2 = 0.3, power = 0.8)
 ```
 
-*CAUTION:* As we can see below, when we use `power.prop.test()`, we obtain an incorrect results due to normal approximation.
+*CAUTION:* As we can see below, when we use base R `power.prop.test()`, we obtain an incorrect results due to normal approximation.
 
 ```{r}
 power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
