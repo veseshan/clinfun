@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp</span>, tim<span class="op">=</span><span class="cn">NULL</span>, cgrps<span class="op">=</span><span class="cn">NULL</span>, nperm<span class="op">=</span><span class="fl">5000</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp</span>, tim<span class="op">=</span><span class="cn">NULL</span>, cgrps<span class="op">=</span><span class="cn">NULL</span>, nperm<span class="op">=</span><span class="fl">5000</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -58,21 +58,28 @@
 <dd><p>Matrix of measurements where the rows are the subjects and
     columns the timepoints. At least one value should not be missing in
     each row. For example they can be tumor sizes measured over time.</p></dd>
-<dt>grp</dt>
+ 
+  <dt>grp</dt>
 <dd><p>Group indicator for each subject. There must be at least
     two different groups. This can represent each subject's treatment.</p></dd>
-<dt>tim</dt>
+
+  <dt>tim</dt>
 <dd><p>Times at which the measurements in <code>meas</code> are taken.
     If missing, the times are set to 1 through <code>ncol(meas)</code>.</p></dd>
-<dt>cgrps</dt>
+ 
+  <dt>cgrps</dt>
 <dd><p>The two groups that are being compared. If missing the
     first two groups will be compared.</p></dd>
-<dt>nperm</dt>
+
+  <dt>nperm</dt>
 <dd><p>Number of permutations for the reference distribution.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>returns a list with objects ostat, pstat and p.value which are the
+    
+
+<p>returns a list with objects ostat, pstat and p.value which are the
   observed test statistic for the two groups being compared, values of
   the statistics when the group labels are permuted</p>
     </div>
@@ -93,17 +100,17 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="va">grp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">100</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">grp0</span> <span class="op">&lt;-</span> <span class="va">LETTERS</span><span class="op">[</span><span class="va">grp</span><span class="op">]</span></span>
-<span class="r-in">  <span class="va">maxfup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">100</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">meas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in">  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">    <span class="va">meas</span><span class="op">[</span><span class="va">i</span>, <span class="fl">1</span><span class="op">:</span><span class="va">maxfup</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">3</span><span class="op">+</span><span class="fl">0.04</span><span class="op">*</span><span class="va">grp</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">maxfup</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="op">}</span></span>
-<span class="r-in">  <span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for 2 - 1  =  10719.35 ; p-value =  0.0239952 </span>
-<span class="r-in">  <span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp0</span>, cgrps<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>,<span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for B - C  =  5496.035 ; p-value =  0.2439512 </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="va">grp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">100</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">grp0</span> <span class="op">&lt;-</span> <span class="va">LETTERS</span><span class="op">[</span><span class="va">grp</span><span class="op">]</span></span></span>
+<span class="r-in"><span>  <span class="va">maxfup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">20</span>, <span class="fl">100</span>, replace<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">meas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">100</span>, <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>    <span class="va">meas</span><span class="op">[</span><span class="va">i</span>, <span class="fl">1</span><span class="op">:</span><span class="va">maxfup</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">3</span><span class="op">+</span><span class="fl">0.04</span><span class="op">*</span><span class="va">grp</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">maxfup</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">}</span></span></span>
+<span class="r-in"><span>  <span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for 2 - 1  =  -4026.922 ; p-value =  0.4677065 </span>
+<span class="r-in"><span>  <span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp0</span>, cgrps<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>,<span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for B - C  =  -16044.4 ; p-value =  0.03679264 </span>
 </code></pre></div>
     </div>
   </div>
@@ -118,7 +125,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

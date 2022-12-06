@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -49,84 +49,109 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">toxbdry</span><span class="op">(</span><span class="va">pLo</span>, <span class="va">pHi</span>, <span class="va">n</span>, cP0<span class="op">=</span><span class="fl">0.1</span>, cP1<span class="op">=</span><span class="fl">0.9</span>, ngrid<span class="op">=</span><span class="fl">6</span>, niter<span class="op">=</span><span class="fl">10</span>, delta<span class="op">=</span><span class="fl">0</span>,
-          priority<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>,<span class="st">"alt"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">futilbdry</span><span class="op">(</span><span class="va">rLo</span>, <span class="va">rHi</span>, <span class="va">n</span>, size<span class="op">=</span><span class="fl">0.1</span>, power<span class="op">=</span><span class="fl">0.9</span>, ngrid<span class="op">=</span><span class="fl">3</span>, niter<span class="op">=</span><span class="fl">10</span>, delta<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span>
-<span class="fu">bdrycross.prob</span><span class="op">(</span><span class="va">n</span>, <span class="va">r</span>, <span class="va">ptox</span><span class="op">)</span>
-<span class="co"># S3 method for toxbdry</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for futilbdry</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">toxbdry</span><span class="op">(</span><span class="va">pLo</span>, <span class="va">pHi</span>, <span class="va">n</span>, cP0<span class="op">=</span><span class="fl">0.1</span>, cP1<span class="op">=</span><span class="fl">0.9</span>, ngrid<span class="op">=</span><span class="fl">6</span>, niter<span class="op">=</span><span class="fl">10</span>, delta<span class="op">=</span><span class="fl">0</span>,</span>
+<span>          priority<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>,<span class="st">"alt"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">futilbdry</span><span class="op">(</span><span class="va">rLo</span>, <span class="va">rHi</span>, <span class="va">n</span>, size<span class="op">=</span><span class="fl">0.1</span>, power<span class="op">=</span><span class="fl">0.9</span>, ngrid<span class="op">=</span><span class="fl">3</span>, niter<span class="op">=</span><span class="fl">10</span>, delta<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu">bdrycross.prob</span><span class="op">(</span><span class="va">n</span>, <span class="va">r</span>, <span class="va">ptox</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for toxbdry</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for futilbdry</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pLo</dt>
 <dd><p>the toxicity rate that is acceptable.</p></dd>
-<dt>rLo</dt>
+
+  <dt>rLo</dt>
 <dd><p>baseline (null) response rate.</p></dd>
-<dt>pHi</dt>
+
+  <dt>pHi</dt>
 <dd><p>the toxicity rate that is too high and hence unacceptable.</p></dd>
-<dt>rHi</dt>
+
+  <dt>rHi</dt>
 <dd><p>desirable response rate. Stop when it is too unlikely.</p></dd>
-<dt>n</dt>
+
+  <dt>n</dt>
 <dd><p>vector of times (sample size) when toxicty/response is monitored.</p></dd>
-<dt>r</dt>
+
+  <dt>r</dt>
 <dd><p>vector of maximum acceptable toxicities (non-responders for
     futility) corresponding to n.</p></dd>
-<dt>ptox</dt>
+
+  <dt>ptox</dt>
 <dd><p>the toxicity rates for which the operating characteristics
     are calculated. For futility this is the non-response rate.</p></dd>
-<dt>cP0</dt>
+
+  <dt>cP0</dt>
 <dd><p>boundary crossing probability under pLo i.e. type I error
     or the probability of declaring a treatment with toxicity rate pLo
     unacceptable.</p></dd>
-<dt>cP1</dt>
+
+  <dt>cP1</dt>
 <dd><p>boundary crossing probability under pHi i.e. power or the
     probability of declaring a treatment with toxicity rate pHi
     unacceptable.</p></dd>
-<dt>size</dt>
+
+  <dt>size</dt>
 <dd><p>probability of calling drug effective if response rate is rLo.</p></dd>
-<dt>power</dt>
+
+  <dt>power</dt>
 <dd><p>probability of calling drug effective if response rate is rHi.</p></dd>
-<dt>ngrid</dt>
+
+  <dt>ngrid</dt>
 <dd><p>the number of toxicity rates from pLo to pHi for which
     the operating characteristics are computed.</p></dd>
-<dt>niter</dt>
+
+  <dt>niter</dt>
 <dd><p>the number of iterations run to obtain the boundary.</p></dd>
-<dt>delta</dt>
+
+  <dt>delta</dt>
 <dd><p>power determining the shape of the boundary. Should be
     between 0 (default) and 0.5.</p></dd>
-<dt>priority</dt>
+
+  <dt>priority</dt>
 <dd><p>the error threshold to prioritize when the max sample 
     size is too small to have both error thresholds satisfied. Default
     is the null i.e. error under pLo.</p></dd>
-<dt>x</dt>
+
+  <dt>x</dt>
 <dd><p>object returned by the function toxbdry.</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional arguments to print.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>the function returns a list with:</p>
+    
+
+<p>the function returns a list with:</p>
 <dl><dt>looks</dt>
 <dd><p>when toxicty is monitored - same as input n.</p></dd>
-<dt>lo.bdry</dt>
+
+  <dt>lo.bdry</dt>
 <dd><p>lower boundary is a vector of maximum acceptable number
     of toxicities corresponding the number of subjects in n.  The
     boundary crossing probability for this is slightly above cP0.</p></dd>
-<dt>hi.bdry</dt>
+
+  <dt>hi.bdry</dt>
 <dd><p>upper boundary is a vector of maximum acceptable number
     of toxicities corresponding the number of subjects in n.  The
     boundary crossing probability for this is slightly below cP0.</p></dd>
-<dt>bdry.oc</dt>
+
+  <dt>bdry.oc</dt>
 <dd><p>the operating characteristics i.e the toxicity
     rate, the probability of crossing, stopping (i.e. cross before the
     last observation) and the expected sample size for both the low (lo)
     and high (hi) boundaries.</p></dd>
-<dt>bdry.alpha</dt>
+
+  <dt>bdry.alpha</dt>
 <dd><p>the alpha levels for testing at each look for the
     two boundaries.</p></dd>
+
+
 </dl><p>stopping for toxicity is done when the number of toxicities exceeda
   the boundary i.e. the boundary gives the maximum acceptable number.</p>
     </div>
@@ -152,7 +177,7 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.35</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">40</span>,<span class="fl">60</span>,<span class="fl">75</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.35</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">40</span>,<span class="fl">60</span>,<span class="fl">75</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Toxicity boundary based on repeated significance testing </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Boundary shape parameter delta = 0 </span>
@@ -173,7 +198,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.29     0.672    0.548   54.7     0.619    0.548   54.7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.32     0.838    0.727   47.0     0.797    0.727   47.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.35     0.935    0.859   39.9     0.911    0.859   39.9</span>
-<span class="r-in">  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">40</span>,<span class="fl">60</span>,<span class="fl">75</span><span class="op">)</span>, cP0<span class="op">=</span><span class="fl">0.15</span>, cP1<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">40</span>,<span class="fl">60</span>,<span class="fl">75</span><span class="op">)</span>, cP0<span class="op">=</span><span class="fl">0.15</span>, cP1<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Max sample size 75 may be small for the specified stopping probabilities</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Toxicity boundary based on repeated significance testing </span>
@@ -195,8 +220,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.26     0.522    0.469   56.5     0.487    0.427   61.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.28     0.659    0.598   51.2     0.632    0.562   56.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.30     0.777    0.715   45.9     0.758    0.688   51.0</span>
-<span class="r-in">  <span class="co"># continuous monitoring</span></span>
-<span class="r-in">  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="co"># continuous monitoring</span></span></span>
+<span class="r-in"><span>  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Toxicity boundary based on repeated significance testing </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Boundary shape parameter delta = 0 </span>
@@ -217,8 +242,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.22     0.644    0.631   18.8     0.638    0.624   19.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.26     0.799    0.786   15.5     0.795    0.781   15.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [6,] 0.30     0.901    0.891   12.6     0.898    0.888   12.7</span>
-<span class="r-in">  <span class="co"># prioritize cP1 error threshold</span></span>
-<span class="r-in">  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">25</span>, priority<span class="op">=</span><span class="st">"alt"</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="co"># prioritize cP1 error threshold</span></span></span>
+<span class="r-in"><span>  <span class="fu">toxbdry</span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.3</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">25</span>, priority<span class="op">=</span><span class="st">"alt"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Max sample size 25 may be small for the specified stopping probabilities</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Toxicity boundary based on repeated significance testing </span>
@@ -254,7 +279,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

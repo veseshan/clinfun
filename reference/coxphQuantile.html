@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -47,26 +47,32 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">coxphQuantile</span><span class="op">(</span><span class="va">phfit</span>, <span class="va">xrange</span>, p<span class="op">=</span><span class="fl">0.5</span>, whichx<span class="op">=</span><span class="fl">1</span>, otherx<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">coxphQuantile</span><span class="op">(</span><span class="va">phfit</span>, <span class="va">xrange</span>, p<span class="op">=</span><span class="fl">0.5</span>, whichx<span class="op">=</span><span class="fl">1</span>, otherx<span class="op">=</span><span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>phfit</dt>
 <dd><p>output from a proportional hazards fit.</p></dd>
-<dt>xrange</dt>
+
+  <dt>xrange</dt>
 <dd><p>the range of covariate values for which the quantiles of
     survival times are computed.</p></dd>
-<dt>p</dt>
+
+  <dt>p</dt>
 <dd><p>the probability level for the quantile (default is median).</p></dd>
-<dt>whichx</dt>
+
+  <dt>whichx</dt>
 <dd><p>if there are more than one covariates in the Cox model,
     the one chosen for the quantile plot.</p></dd>
-<dt>otherx</dt>
+
+  <dt>otherx</dt>
 <dd><p>the values for other covariates in the Cox model.  If
     missing uses their average values.</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional parameters to be passed on to the lines command.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -84,19 +90,19 @@ A comparison of the proportional hazards and linear regression models.
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span>   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span>   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘pbc’ not found</span>
-<span class="r-in"><span class="va">pbcfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">==</span><span class="fl">2</span><span class="op">)</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">copper</span><span class="op">)</span>, <span class="va">pbc</span>,</span>
-<span class="r-in">                      subset<span class="op">=</span><span class="op">(</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> </span>
+<span class="r-in"><span><span class="va">pbcfit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/survival/man/coxph.html" class="external-link">coxph</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/survival/man/Surv.html" class="external-link">Surv</a></span><span class="op">(</span><span class="va">time</span>, <span class="va">status</span><span class="op">==</span><span class="fl">2</span><span class="op">)</span> <span class="op">~</span> <span class="va">trt</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">copper</span><span class="op">)</span>, <span class="va">pbc</span>,</span></span>
+<span class="r-in"><span>                      subset<span class="op">=</span><span class="op">(</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span><span class="op">)</span> </span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in coxph(Surv(time, status == 2) ~ trt + log(copper), pbc, subset = (trt &gt;     0 &amp; copper &gt; 0)):</span> could not find function "coxph"</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">[</span><span class="va">pbc</span><span class="op">$</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span>, <span class="va">pbc</span><span class="op">$</span><span class="va">time</span><span class="op">[</span><span class="va">pbc</span><span class="op">$</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span></span>
-<span class="r-in">  <span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">]</span>, pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"o"</span>,<span class="st">"x"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">+</span><span class="va">pbc</span><span class="op">$</span><span class="va">status</span><span class="op">[</span><span class="va">pbc</span><span class="op">$</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">]</span><span class="op">]</span>, </span>
-<span class="r-in">  xlab<span class="op">=</span><span class="st">"log Copper"</span>, ylab<span class="op">=</span><span class="st">"Survival time"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">[</span><span class="va">pbc</span><span class="op">$</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span>, <span class="va">pbc</span><span class="op">$</span><span class="va">time</span><span class="op">[</span><span class="va">pbc</span><span class="op">$</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span></span></span>
+<span class="r-in"><span>  <span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">]</span>, pch<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"o"</span>,<span class="st">"x"</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">+</span><span class="va">pbc</span><span class="op">$</span><span class="va">status</span><span class="op">[</span><span class="va">pbc</span><span class="op">$</span><span class="va">trt</span><span class="op">&gt;</span><span class="fl">0</span> <span class="op">&amp;</span> <span class="va">pbc</span><span class="op">$</span><span class="va">copper</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">]</span><span class="op">]</span>, </span></span>
+<span class="r-in"><span>  xlab<span class="op">=</span><span class="st">"log Copper"</span>, ylab<span class="op">=</span><span class="st">"Survival time"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in plot(log(pbc$copper[pbc$trt &gt; 0 &amp; pbc$copper &gt; 0]), pbc$time[pbc$trt &gt;     0 &amp; pbc$copper &gt; 0], pch = c("o", "x")[1 + pbc$status[pbc$trt &gt;     0 &amp; pbc$copper &gt; 0]], xlab = "log Copper", ylab = "Survival time"):</span> object 'pbc' not found</span>
-<span class="r-in"><span class="fu">coxphQuantile</span><span class="op">(</span><span class="va">pbcfit</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.5</span>,<span class="fl">6</span><span class="op">)</span>, whichx<span class="op">=</span><span class="fl">2</span>, otherx<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">coxphQuantile</span><span class="op">(</span><span class="va">pbcfit</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.5</span>,<span class="fl">6</span><span class="op">)</span>, whichx<span class="op">=</span><span class="fl">2</span>, otherx<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in coxphQuantile(pbcfit, c(2.5, 6), whichx = 2, otherx = 1):</span> object 'pbcfit' not found</span>
-<span class="r-in"><span class="fu">coxphQuantile</span><span class="op">(</span><span class="va">pbcfit</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.5</span>,<span class="fl">6</span><span class="op">)</span>, p<span class="op">=</span><span class="fl">0.75</span>, whichx<span class="op">=</span><span class="fl">2</span>, otherx<span class="op">=</span><span class="fl">2</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">coxphQuantile</span><span class="op">(</span><span class="va">pbcfit</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.5</span>,<span class="fl">6</span><span class="op">)</span>, p<span class="op">=</span><span class="fl">0.75</span>, whichx<span class="op">=</span><span class="fl">2</span>, otherx<span class="op">=</span><span class="fl">2</span>, col<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in coxphQuantile(pbcfit, c(2.5, 6), p = 0.75, whichx = 2, otherx = 2,     col = 2):</span> object 'pbcfit' not found</span>
 </code></pre></div>
     </div>
@@ -112,7 +118,7 @@ A comparison of the proportional hazards and linear regression models.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

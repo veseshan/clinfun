@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -47,15 +47,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gsdesign.binomial</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">pC</span>, <span class="va">pE</span>, r <span class="op">=</span> <span class="fl">1</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,
-  delta.eb<span class="op">=</span><span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>, alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>,
-  <span class="st">"one.sided"</span><span class="op">)</span>, pooled.variance <span class="op">=</span> <span class="cn">FALSE</span>, CPS <span class="op">=</span> <span class="cn">TRUE</span>, tol<span class="op">=</span><span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span> 
-<span class="fu">gsdesign.normal</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">delta</span>, sd <span class="op">=</span> <span class="fl">1</span>, r <span class="op">=</span> <span class="fl">1</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>,
-  power <span class="op">=</span> <span class="fl">0.8</span>, delta.eb <span class="op">=</span> <span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>, alternative <span class="op">=</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol<span class="op">=</span><span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">gsdesign.survival</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">haz.ratio</span>, r <span class="op">=</span> <span class="fl">1</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, 
-  power <span class="op">=</span> <span class="fl">0.8</span>, delta.eb <span class="op">=</span> <span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>, alternative <span class="op">=</span> 
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol<span class="op">=</span><span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gsdesign.binomial</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">pC</span>, <span class="va">pE</span>, r <span class="op">=</span> <span class="fl">1</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, power <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>  delta.eb<span class="op">=</span><span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>, alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>,</span>
+<span>  <span class="st">"one.sided"</span><span class="op">)</span>, pooled.variance <span class="op">=</span> <span class="cn">FALSE</span>, CPS <span class="op">=</span> <span class="cn">TRUE</span>, tol<span class="op">=</span><span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span> </span>
+<span><span class="fu">gsdesign.normal</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">delta</span>, sd <span class="op">=</span> <span class="fl">1</span>, r <span class="op">=</span> <span class="fl">1</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  power <span class="op">=</span> <span class="fl">0.8</span>, delta.eb <span class="op">=</span> <span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>, alternative <span class="op">=</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol<span class="op">=</span><span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">gsdesign.survival</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">haz.ratio</span>, r <span class="op">=</span> <span class="fl">1</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, </span>
+<span>  power <span class="op">=</span> <span class="fl">0.8</span>, delta.eb <span class="op">=</span> <span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>, alternative <span class="op">=</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol<span class="op">=</span><span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -65,56 +65,78 @@
     or number of events to the total sample size or number of events.
     This should be an increasing vector of numbers from 0 to 1 with the
     last one being 1.  If just 1 is given a fixed sample design is derived.</p></dd>
-<dt>pC</dt>
+
+  <dt>pC</dt>
 <dd><p>prob of success of the standard therapy (for binomial data)</p></dd>
-<dt>pE</dt>
+
+  <dt>pE</dt>
 <dd><p>prob of success of the experimental therapy (for binomial data)</p></dd>
-<dt>delta</dt>
+
+  <dt>delta</dt>
 <dd><p>true difference in means (for normal data)</p></dd>
-<dt>sd</dt>
+
+  <dt>sd</dt>
 <dd><p>standard deviation (for normal data)</p></dd>
-<dt>haz.ratio</dt>
+
+  <dt>haz.ratio</dt>
 <dd><p>hazard ratio (for survival comparison)</p></dd>
-<dt>r</dt>
+
+  <dt>r</dt>
 <dd><p>treatment allocation of r (default=1) experimental per 1 control.</p></dd>
-<dt>sig.level</dt>
+
+  <dt>sig.level</dt>
 <dd><p>significance level (type I error probability)</p></dd>
-<dt>power</dt>
+
+  <dt>power</dt>
 <dd><p>power of test (1 minus type II error probability)</p></dd>
-<dt>delta.eb</dt>
+
+  <dt>delta.eb</dt>
 <dd><p>power for efficacy boundary in the Pocock (=0) to
     O'Brien-Fleming (=0.5) family (default is 0.5)</p></dd>
-<dt>delta.fb</dt>
+
+  <dt>delta.fb</dt>
 <dd><p>power for futility boundary in the Pocock (=0) to
     O'Brien-Fleming (=0.5) family (default is NULL i.e. no futility
     boundary is requested.)</p></dd>
-<dt>alternative</dt>
+
+  <dt>alternative</dt>
 <dd><p>one- or two-sided test.</p></dd>
-<dt>pooled.variance</dt>
+
+  <dt>pooled.variance</dt>
 <dd><p>whether the test statistic is standardized by
     pooled (2*pbar*(1-pbar)) or unpooled variance (pC*(1-pC) + pE*(1-pE)).
     Default is unpooled variance.</p></dd>
-<dt>CPS</dt>
+
+  <dt>CPS</dt>
 <dd><p>whether continuity correction is used for sample size
     calculation as in Casagrande, Pike &amp; Smith. Default is to use it.</p></dd>
-<dt>tol</dt>
+
+  <dt>tol</dt>
 <dd><p>tolerance level for multivariate normal probability
     computation.</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>additional options passed on the pmvnorm function.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a list with ifrac, sig.level, power, alternative, delta.eb, delta.fb and:</p>
+    
+
+<p>a list with ifrac, sig.level, power, alternative, delta.eb, delta.fb and:</p>
 <dl><dt>efbdry</dt>
 <dd><p>the critical value to use at the different looks.</p></dd>
-<dt>futbdry</dt>
+
+  <dt>futbdry</dt>
 <dd><p>the critical value to use at the different looks.</p></dd>
-<dt>sample.size</dt>
+
+  <dt>sample.size</dt>
 <dd><p>the sample size per arm for binomial/normal data.</p></dd>
-<dt>num.events</dt>
+
+  <dt>num.events</dt>
 <dd><p>the total number of failures which should be
     converted to number of subjects using censoring proportion.</p></dd>
+  
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -140,7 +162,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

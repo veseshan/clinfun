@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">pselect</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, min.diff<span class="op">=</span><span class="cn">NULL</span>, min.resp<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pselect</span><span class="op">(</span><span class="va">n</span>, <span class="va">p</span>, min.diff<span class="op">=</span><span class="cn">NULL</span>, min.resp<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -58,37 +58,46 @@
 <dd><p>sample size for each treatment arm.  This is either a single
     integer or a vector of two integers for the special case of
     comparing two treatments with unequal sample sizes</p></dd>
-<dt>p</dt>
+  
+  <dt>p</dt>
 <dd><p>vector of response rates for the treatments.</p></dd>
-<dt>min.diff</dt>
+
+  <dt>min.diff</dt>
 <dd><p>this is the number of responses or the rate by which
     the best treatment should be superior to the others to be chosen.
     This must be a positive integer or a rate between 0 and 1.  If
     missing it defaults to 1 for the equal sample size case but quits
     with a warning for the unequal sample size case.</p></dd>
-<dt>min.resp</dt>
+
+  <dt>min.resp</dt>
 <dd><p>the minimum number of responses in each treatment arm
     for it to be considered further. If missing defaults to 0.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>the function returns a list with:</p>
+    
+
+<p>the function returns a list with:</p>
 <dl><dt>prob.none.worthy</dt>
 <dd><p>is the probability that no treatment has the
     minimum number of responses specified in min.resp. this element is
     present only if min.resp is greater than 0 for at least one arm.</p></dd>
-<dt>prob.inconclusive</dt>
+
+  <dt>prob.inconclusive</dt>
 <dd><p>this is the probability that the best treatment
     has the requisite min.resp responses but exceeds the second best by
     less than min.diff responses (rate) provided the second best also
     has at least min.resp responses.</p></dd>
-<dt>prob.selection</dt>
+
+  <dt>prob.selection</dt>
 <dd><p>this is a matrix which for each treatment gives
     the response probability and the probability of selecting it
     i.e. the number of responses in the chosen arm is at least min.resp
     and either none of the remaining arms exceed the min.resp threshold
     or the chosen (best) arm is better than the second best by at least
     min.diff responses (rate).</p></dd>
+
 </dl></div>
     <div id="references">
     <h2>References</h2>
@@ -98,8 +107,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="co"># selection when no diffrence i.e. type I error</span></span>
-<span class="r-in">  <span class="fu">pselect</span><span class="op">(</span><span class="fl">18</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="co"># selection when no diffrence i.e. type I error</span></span></span>
+<span class="r-in"><span>  <span class="fu">pselect</span><span class="op">(</span><span class="fl">18</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prob.inconclusive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2236879</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -109,8 +118,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 2          18       0.2      0.2587707</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 3          18       0.2      0.2587707</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">  <span class="co"># selection probability</span></span>
-<span class="r-in">  <span class="fu">pselect</span><span class="op">(</span><span class="fl">18</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="co"># selection probability</span></span></span>
+<span class="r-in"><span>  <span class="fu">pselect</span><span class="op">(</span><span class="fl">18</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prob.inconclusive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.09676346</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -120,7 +129,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 2          18       0.2     0.05136236</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 3          18       0.4     0.80051182</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">  <span class="fu">pselect</span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span>, min.diff<span class="op">=</span><span class="fl">2</span>, min.resp<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="fu">pselect</span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.2</span>, <span class="fl">0.4</span><span class="op">)</span>, min.diff<span class="op">=</span><span class="fl">2</span>, min.resp<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prob.none.worthy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.961946e-06</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -133,8 +142,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 2          26       0.2     0.01536975</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 3          26       0.4     0.79860522</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">  <span class="co"># unequal sample size case</span></span>
-<span class="r-in">  <span class="fu">pselect</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">27</span>,<span class="fl">54</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.65</span><span class="op">)</span>, min.diff<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="co"># unequal sample size case</span></span></span>
+<span class="r-in"><span>  <span class="fu">pselect</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">27</span>,<span class="fl">54</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.65</span><span class="op">)</span>, min.diff<span class="op">=</span><span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prob.inconclusive</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1405518</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -143,8 +152,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 1          27      0.50     0.04570331</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> trt 2          54      0.65     0.81374489</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">  <span class="co"># unequal sample size case</span></span>
-<span class="r-in">  <span class="fu">pselect</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">27</span>,<span class="fl">54</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.65</span><span class="op">)</span>, min.diff<span class="op">=</span><span class="fl">0.05</span>, min.resp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>,<span class="fl">27</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="co"># unequal sample size case</span></span></span>
+<span class="r-in"><span>  <span class="fu">pselect</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">27</span>,<span class="fl">54</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.65</span><span class="op">)</span>, min.diff<span class="op">=</span><span class="fl">0.05</span>, min.resp<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">14</span>,<span class="fl">27</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $prob.none.worthy</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.00405262</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -170,7 +179,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

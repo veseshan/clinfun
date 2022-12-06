@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -49,9 +49,9 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">roc.area.test</span><span class="op">(</span><span class="va">markers</span>, <span class="va">status</span><span class="op">)</span>
-  <span class="co"># S3 method for roc.area.test</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">roc.area.test</span><span class="op">(</span><span class="va">markers</span>, <span class="va">status</span><span class="op">)</span></span>
+<span>  <span class="co"># S3 method for roc.area.test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -59,27 +59,37 @@
     <dl><dt>markers</dt>
 <dd><p>The marker values for each subject.  If there are more
     than one markers then this should be a matrix.</p></dd>
-<dt>status</dt>
+
+  <dt>status</dt>
 <dd><p>binary disease status indicator</p></dd>
-<dt>x</dt>
+
+  <dt>x</dt>
 <dd><p>object of class roc.area.test output from this function.</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>optional arguments to the print function.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>a list with the following elements</p>
 <dl><dt>area</dt>
 <dd><p>estimated area.</p></dd>
-<dt>var</dt>
+
+  <dt>var</dt>
 <dd><p>estimated variance (matrix).</p></dd>
-<dt>stat</dt>
+
+  <dt>stat</dt>
 <dd><p>test statistic for equality of AUCs. Is not returned when
     only one diagnostic marker is present.</p></dd>
-<dt>p.value</dt>
+
+  <dt>p.value</dt>
 <dd><p>the p-value for the test of equality (2-sided).</p></dd>
-<dt>df</dt>
+
+  <dt>df</dt>
 <dd><p>the degrees of freedom of the chi-square.</p></dd>
+
+
 </dl><p>The "print" method formats and returns the output.</p>
     </div>
     <div id="details">
@@ -98,20 +108,20 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="va">g</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="va">g</span></span>
-<span class="r-in"><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="va">g</span></span>
-<span class="r-in"><span class="fu">roc.area.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>, <span class="va">g</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="va">g</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="va">g</span></span></span>
+<span class="r-in"><span><span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="va">g</span></span></span>
+<span class="r-in"><span><span class="fu">roc.area.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>, <span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   2 markers with AUC 0.7368 0.7368 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   test statistic = 0 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   p-value = 1 from standard normal reference </span>
-<span class="r-in"><span class="fu">roc.area.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">z</span><span class="op">)</span>, <span class="va">g</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">roc.area.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">z</span><span class="op">)</span>, <span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   3 markers with AUC 0.7368 0.7368 0.7496 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   test statistic = 0.03830606 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   p-value = 0.9810292 from chi-square (df = 2) reference </span>
-<span class="r-in"><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span><span class="va">g</span></span>
-<span class="r-in"><span class="fu">roc.area.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y1</span><span class="op">)</span>, <span class="va">g</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">+</span> <span class="fl">0.75</span><span class="op">*</span><span class="va">g</span></span></span>
+<span class="r-in"><span><span class="fu">roc.area.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y1</span><span class="op">)</span>, <span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   2 markers with AUC 0.7368 0.8628 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   test statistic = 2.212703 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   p-value = 0.02691816 from standard normal reference </span>
@@ -129,7 +139,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

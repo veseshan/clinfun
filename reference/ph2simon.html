@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -49,44 +49,57 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">ph2simon</span><span class="op">(</span><span class="va">pu</span>, <span class="va">pa</span>, <span class="va">ep1</span>, <span class="va">ep2</span>, nmax<span class="op">=</span><span class="fl">100</span><span class="op">)</span>
-<span class="co"># S3 method for ph2simon</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for ph2simon</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ph2simon</span><span class="op">(</span><span class="va">pu</span>, <span class="va">pa</span>, <span class="va">ep1</span>, <span class="va">ep2</span>, nmax<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for ph2simon</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for ph2simon</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>pu</dt>
 <dd><p>unacceptable response rate</p></dd>
-<dt>pa</dt>
+
+  <dt>pa</dt>
 <dd><p>response rate that is desirable</p></dd>
-<dt>ep1</dt>
+
+  <dt>ep1</dt>
 <dd><p>threshold for the probability of declaring drug desirable
     under p0</p></dd>
-<dt>ep2</dt>
+
+  <dt>ep2</dt>
 <dd><p>threshold for the probability of rejecting the drug under
     p1</p></dd>
-<dt>nmax</dt>
+
+  <dt>nmax</dt>
 <dd><p>maximum total sample size (default 100; can be at most
     500)</p></dd>
-<dt>x</dt>
+
+  <dt>x</dt>
 <dd><p>object returned by ph2simon</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>arguments to be passed onto plot and print commands called
     within</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>ph2simon returns a list with pu, pa, alpha, beta and nmax as above
+    
+
+<p>ph2simon returns a list with pu, pa, alpha, beta and nmax as above
   and:</p>
 <dl><dt>out</dt>
 <dd><p>matrix of best 2 stage designs for each value of total
     sample size n.  the 6 columns are: r1, n1, r, n, EN(p0), PET(p0)</p></dd>
+
+
 </dl><p>Trial is stopped early if &lt;= r1 responses are seen in the first stage
-  and treatment is considered desirable only when &gt;r responses seen.
-  The "print" method formats and returns the minimax and optimal
+  and treatment is considered desirable only when &gt;r responses seen.</p>
+
+
+<p>The "print" method formats and returns the minimax and optimal
   designs.  The "plot" plots the expected sample size agains the maximum
   sample size as in Jung et al., 2001</p>
     </div>
@@ -105,7 +118,7 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu">ph2simon</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu">ph2simon</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.4</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Simon 2-stage Phase II design </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -117,7 +130,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Optimal  3 17 10 37  26.02  0.5489</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Minimax  3 19 10 36  28.26  0.4551</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">  <span class="fu">ph2simon</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.35</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="fu">ph2simon</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.35</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Simon 2-stage Phase II design </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -131,7 +144,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>  Optimal sample size too close to nmax. </span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>   Try increasing nmax (current value = 100)</span>
-<span class="r-in">  <span class="fu">ph2simon</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.35</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, nmax<span class="op">=</span><span class="fl">150</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="fu">ph2simon</span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.35</span>, <span class="fl">0.05</span>, <span class="fl">0.05</span>, nmax<span class="op">=</span><span class="fl">150</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  Simon 2-stage Phase II design </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -157,7 +170,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

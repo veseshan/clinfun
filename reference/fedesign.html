@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -49,54 +49,72 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fe.ssize</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, r<span class="op">=</span><span class="fl">1</span>, npm<span class="op">=</span><span class="fl">5</span>, mmax<span class="op">=</span><span class="fl">1000</span><span class="op">)</span>
-<span class="fu">CPS.ssize</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, r<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu">fe.mdor</span><span class="op">(</span><span class="va">ncase</span>, <span class="va">ncontrol</span>, <span class="va">pcontrol</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span>
-<span class="fu">mdrr</span><span class="op">(</span><span class="va">n</span>, <span class="va">cprob</span>, <span class="va">presp</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, niter<span class="op">=</span><span class="fl">15</span><span class="op">)</span>
-<span class="fu">fe.power</span><span class="op">(</span><span class="va">d</span>, <span class="va">n1</span>, <span class="va">n2</span>, <span class="va">p1</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span>
-<span class="fu">or2pcase</span><span class="op">(</span><span class="va">pcontrol</span>, <span class="va">OR</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fe.ssize</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, r<span class="op">=</span><span class="fl">1</span>, npm<span class="op">=</span><span class="fl">5</span>, mmax<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span>
+<span><span class="fu">CPS.ssize</span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, r<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu">fe.mdor</span><span class="op">(</span><span class="va">ncase</span>, <span class="va">ncontrol</span>, <span class="va">pcontrol</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span><span class="op">)</span></span>
+<span><span class="fu">mdrr</span><span class="op">(</span><span class="va">n</span>, <span class="va">cprob</span>, <span class="va">presp</span>, alpha<span class="op">=</span><span class="fl">0.05</span>, power<span class="op">=</span><span class="fl">0.8</span>, niter<span class="op">=</span><span class="fl">15</span><span class="op">)</span></span>
+<span><span class="fu">fe.power</span><span class="op">(</span><span class="va">d</span>, <span class="va">n1</span>, <span class="va">n2</span>, <span class="va">p1</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="fu">or2pcase</span><span class="op">(</span><span class="va">pcontrol</span>, <span class="va">OR</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>p1</dt>
 <dd><p>response rate of standard treatment</p></dd>
-<dt>p2</dt>
+
+  <dt>p2</dt>
 <dd><p>response rate of experimental treatment</p></dd>
-<dt>d</dt>
+
+  <dt>d</dt>
 <dd><p>difference = p2-p1</p></dd>
-<dt>pcontrol</dt>
+
+  <dt>pcontrol</dt>
 <dd><p>control group probability</p></dd>
-<dt>n1</dt>
+
+  <dt>n1</dt>
 <dd><p>sample size for the standard treatment group</p></dd>
-<dt>n2</dt>
+
+  <dt>n2</dt>
 <dd><p>sample size for the standard treatment group</p></dd>
-<dt>ncontrol</dt>
+
+  <dt>ncontrol</dt>
 <dd><p>control group sample size</p></dd>
-<dt>ncase</dt>
+
+  <dt>ncase</dt>
 <dd><p>case group sample size</p></dd>
-<dt>alpha</dt>
+
+  <dt>alpha</dt>
 <dd><p>size of the test (default 5%)</p></dd>
-<dt>power</dt>
+
+  <dt>power</dt>
 <dd><p>power of the test (default 80%)</p></dd>
-<dt>r</dt>
+
+  <dt>r</dt>
 <dd><p>treatments are randomized in 1:r ratio (default r=1)</p></dd>
-<dt>npm</dt>
+
+  <dt>npm</dt>
 <dd><p>the sample size program searches for sample sizes in a
     range (+/- npm) to get the exact power</p></dd>
-<dt>mmax</dt>
+
+  <dt>mmax</dt>
 <dd><p>the maximum group size for which exact power is
     calculated</p></dd>
-<dt>n</dt>
+
+  <dt>n</dt>
 <dd><p>total number of subjects</p></dd>
-<dt>cprob</dt>
+
+  <dt>cprob</dt>
 <dd><p>proportion of patients who are marger positive</p></dd>
-<dt>presp</dt>
+
+  <dt>presp</dt>
 <dd><p>probability of response in all subjects</p></dd>
-<dt>niter</dt>
+
+  <dt>niter</dt>
 <dd><p>number of iterations in binary search</p></dd>
-<dt>OR</dt>
+
+  <dt>OR</dt>
 <dd><p>odds-ratio</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -138,7 +156,7 @@ probability of disease in controls (pcontrol) and odds-ratio (OR).</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -49,43 +49,55 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">roc.perm.test</span><span class="op">(</span><span class="va">marker</span>, <span class="va">status</span>, marker2<span class="op">=</span><span class="cn">NULL</span>, group<span class="op">=</span><span class="cn">NULL</span>,
-              nperm<span class="op">=</span><span class="fl">2500</span>, mp<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
-<span class="co"># S3 method for roc.perm.test</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
-<span class="co"># S3 method for roc.perm.test</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">roc.perm.test</span><span class="op">(</span><span class="va">marker</span>, <span class="va">status</span>, marker2<span class="op">=</span><span class="cn">NULL</span>, group<span class="op">=</span><span class="cn">NULL</span>,</span>
+<span>              nperm<span class="op">=</span><span class="fl">2500</span>, mp<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for roc.perm.test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="co"># S3 method for roc.perm.test</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>marker</dt>
 <dd><p>marker values for each subject.</p></dd>
-<dt>status</dt>
+
+  <dt>status</dt>
 <dd><p>binary disease status indicator.</p></dd>
-<dt>marker2</dt>
+
+  <dt>marker2</dt>
 <dd><p>second diagnostic marker for the same subjects (paired).</p></dd>
-<dt>group</dt>
+
+  <dt>group</dt>
 <dd><p>indicator of which diagnostic test was used (unpaired).</p></dd>
-<dt>nperm</dt>
+
+  <dt>nperm</dt>
 <dd><p>number of permutations for the reference distribution.</p></dd>
-<dt>mp</dt>
+
+  <dt>mp</dt>
 <dd><p>mixing proportion for the unpaired case when proportion of
     diseased subjects can differ.</p></dd>
-<dt>x</dt>
+ 
+  <dt>x</dt>
 <dd><p>object of class roc.perm.test output from this function.</p></dd>
-<dt>...</dt>
+
+  <dt>...</dt>
 <dd><p>optional arguments to print and plot functions.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>an object of class roc.perm.test with the following elements</p>
 <dl><dt>ostat</dt>
 <dd><p>test statistic from the observed data.</p></dd>
-<dt>pstat</dt>
+
+  <dt>pstat</dt>
 <dd><p>test statistic from permuted data.</p></dd>
-<dt>p.value</dt>
+
+  <dt>p.value</dt>
 <dd><p>the p-value for the test of equality (2-sided).</p></dd>
+
+
 </dl><p>The "print" method formats and returns the statistic and p-value.
   The "plot" method plots the density from the permutation reference
   distribution and marks the location of the observed statistic.</p>
@@ -111,14 +123,14 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1.2</span><span class="op">*</span><span class="va">d</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1.2</span><span class="op">*</span><span class="va">d</span></span>
-<span class="r-in"><span class="va">oo</span> <span class="op">&lt;-</span> <span class="fu">roc.perm.test</span><span class="op">(</span><span class="va">x</span>, <span class="va">d</span>, marker2<span class="op">=</span><span class="va">y</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1.2</span><span class="op">*</span><span class="va">d</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1.2</span><span class="op">*</span><span class="va">d</span></span></span>
+<span class="r-in"><span><span class="va">oo</span> <span class="op">&lt;-</span> <span class="fu">roc.perm.test</span><span class="op">(</span><span class="va">x</span>, <span class="va">d</span>, marker2<span class="op">=</span><span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="roc.perm.test-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="va">oo</span> <span class="op">&lt;-</span> <span class="fu">roc.perm.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">d</span>,<span class="va">d</span><span class="op">)</span>, group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,each<span class="op">=</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">oo</span> <span class="op">&lt;-</span> <span class="fu">roc.perm.test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">d</span>,<span class="va">d</span><span class="op">)</span>, group<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,each<span class="op">=</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">oo</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="roc.perm.test-2.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>
@@ -134,7 +146,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

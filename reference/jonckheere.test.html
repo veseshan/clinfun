@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -47,22 +47,25 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span>, <span class="va">g</span>, alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"increasing"</span>,
-                 <span class="st">"decreasing"</span><span class="op">)</span>, nperm<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span>, <span class="va">g</span>, alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"increasing"</span>,</span>
+<span>                 <span class="st">"decreasing"</span><span class="op">)</span>, nperm<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x, g</dt>
 <dd><p>data and group vector</p></dd>
-<dt>alternative</dt>
+
+  <dt>alternative</dt>
 <dd><p>means are monotonic (two.sided), increasing, or
     decreasing</p></dd>
-<dt>nperm</dt>
+
+  <dt>nperm</dt>
 <dd><p>number of permutations for the reference distribution.
     The default is null in which case the permutation p-value is not
     computed. Recommend that the user set nperm to be 1000 or higher if
     permutation p-value is desired.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -86,10 +89,10 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">0.3</span><span class="op">*</span><span class="va">g</span>, <span class="va">g</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">1234</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">10</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">0.3</span><span class="op">*</span><span class="va">g</span>, <span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Jonckheere-Terpstra test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -97,8 +100,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> JT = 629, p-value = 0.02734</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: two.sided</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">  <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="co"># tied data</span></span>
-<span class="r-in">  <span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">0.3</span><span class="op">*</span><span class="va">g</span>, <span class="va">g</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span> <span class="co"># tied data</span></span></span>
+<span class="r-in"><span>  <span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">0.3</span><span class="op">*</span><span class="va">g</span>, <span class="va">g</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Sample size &gt; 100 or data with ties </span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  p-value based on normal approximation. Specify nperm for permutation p-value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -108,7 +111,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> JT = 639, p-value = 0.01741</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: two.sided</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">  <span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">0.3</span><span class="op">*</span><span class="va">g</span>, <span class="va">g</span>, nperm<span class="op">=</span><span class="fl">5000</span><span class="op">)</span></span>
+<span class="r-in"><span>  <span class="fu">jonckheere.test</span><span class="op">(</span><span class="va">x</span><span class="op">+</span><span class="fl">0.3</span><span class="op">*</span><span class="va">g</span>, <span class="va">g</span>, nperm<span class="op">=</span><span class="fl">5000</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Jonckheere-Terpstra test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -130,7 +133,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

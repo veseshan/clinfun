@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -47,30 +47,38 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">deltaAUC</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span>, <span class="va">z</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">deltaAUC</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span>, <span class="va">z</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>y</dt>
 <dd><p>binary response variable</p></dd>
-<dt>x</dt>
+
+  <dt>x</dt>
 <dd><p>matrix of set of covariates that is the basis of the existing
     (reduced) model</p></dd>
-<dt>z</dt>
+
+  <dt>z</dt>
 <dd><p>matrix of set of covariates that are added to to get the new
     (full) model</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>It returns a list with the following elements</p>
+    
+
+<p>It returns a list with the following elements</p>
 <dl><dt>par.full</dt>
 <dd><p>the MRC estimate of parameters for the full model</p></dd>
-<dt>par.red</dt>
+
+  <dt>par.red</dt>
 <dd><p>the MRC estimate of parameters for the reduced model</p></dd>
-<dt>results</dt>
+
+  <dt>results</dt>
 <dd><p>matrix od results which gives the full reduced model
     AUCs along with the test statistic and p-value</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -94,8 +102,8 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ipmn</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">deltaAUC</span><span class="op">(</span><span class="va">ipmn</span><span class="op">$</span><span class="va">V1</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">ipmn</span><span class="op">$</span><span class="va">V4</span>, <span class="va">ipmn</span><span class="op">$</span><span class="va">V3</span>, <span class="va">ipmn</span><span class="op">$</span><span class="va">V5</span><span class="op">)</span>, <span class="va">ipmn</span><span class="op">$</span><span class="va">V2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">ipmn</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">deltaAUC</span><span class="op">(</span><span class="va">ipmn</span><span class="op">$</span><span class="va">V1</span>, <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">ipmn</span><span class="op">$</span><span class="va">V4</span>, <span class="va">ipmn</span><span class="op">$</span><span class="va">V3</span>, <span class="va">ipmn</span><span class="op">$</span><span class="va">V5</span><span class="op">)</span>, <span class="va">ipmn</span><span class="op">$</span><span class="va">V2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $par.full</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.0000000 0.1685387 0.7030273 0.4309026</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -104,8 +112,8 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $results</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             AUCfull AUCreduced statistic p-value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Empirical 0.8045688  0.7806801  9.842135   4e-05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Smooth    0.8007295  0.7777246  9.478028   6e-05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Empirical 0.8045688  0.7806801  9.842135 0.00011</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Smooth    0.8007295  0.7777246  9.478028 0.00011</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
@@ -121,7 +129,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

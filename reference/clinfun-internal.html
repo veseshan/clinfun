@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">clinfun</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -47,23 +47,23 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">compareROC.paired</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">d</span>,nperm<span class="op">=</span><span class="fl">2500</span><span class="op">)</span>
-<span class="fu">compareROC.unpaired</span><span class="op">(</span><span class="va">x</span>, <span class="va">dx</span>, <span class="va">y</span>, <span class="va">dy</span>, nperm<span class="op">=</span><span class="fl">2500</span>, mp<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span>
-<span class="fu">exactNull</span><span class="op">(</span><span class="va">gsize</span>, <span class="va">kw</span><span class="op">)</span>
-<span class="fu">getBoundary</span><span class="op">(</span><span class="va">pLo</span>, <span class="va">pHi</span>, <span class="va">n</span>, cP0<span class="op">=</span><span class="fl">0.1</span>, cP1<span class="op">=</span><span class="fl">0.9</span>, ngrid<span class="op">=</span><span class="fl">6</span>, niter<span class="op">=</span><span class="fl">10</span>, delta<span class="op">=</span><span class="fl">0</span>,
-    priorityNull<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> 
-<span class="fu">gsd.bdryconstant</span><span class="op">(</span><span class="va">ifrac</span>, eprob <span class="op">=</span> <span class="fl">0.05</span>, delta <span class="op">=</span> <span class="fl">0.5</span>,
-    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">gsd.drift.efficacy</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">delta.eb</span>, sig.level<span class="op">=</span><span class="fl">0.05</span>, pow <span class="op">=</span> <span class="fl">0.8</span>,
-    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">gsd.drift.both</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">delta.eb</span>, <span class="va">delta.fb</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, pow<span class="op">=</span><span class="fl">0.8</span>,
-    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">gsd.drift</span><span class="op">(</span><span class="va">ifrac</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, pow <span class="op">=</span> <span class="fl">0.8</span>, delta.eb <span class="op">=</span> <span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>,
-    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span>
-<span class="fu">mrcobj</span><span class="op">(</span><span class="va">coefs</span>, <span class="va">xmat</span>, <span class="va">n</span>, <span class="va">nn</span><span class="op">)</span>
-<span class="fu">smmrcobj</span><span class="op">(</span><span class="va">coefs</span>, <span class="va">xmat</span>, <span class="va">n</span>, <span class="va">nn</span>, <span class="va">bw</span><span class="op">)</span>
-<span class="fu">rocauc</span><span class="op">(</span><span class="va">marker</span>, <span class="va">n</span>, <span class="va">nn</span><span class="op">)</span>
-<span class="fu">smrocauc</span><span class="op">(</span><span class="va">marker</span>, <span class="va">n</span>, <span class="va">nn</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">compareROC.paired</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">d</span>,nperm<span class="op">=</span><span class="fl">2500</span><span class="op">)</span></span>
+<span><span class="fu">compareROC.unpaired</span><span class="op">(</span><span class="va">x</span>, <span class="va">dx</span>, <span class="va">y</span>, <span class="va">dy</span>, nperm<span class="op">=</span><span class="fl">2500</span>, mp<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span><span class="fu">exactNull</span><span class="op">(</span><span class="va">gsize</span>, <span class="va">kw</span><span class="op">)</span></span>
+<span><span class="fu">getBoundary</span><span class="op">(</span><span class="va">pLo</span>, <span class="va">pHi</span>, <span class="va">n</span>, cP0<span class="op">=</span><span class="fl">0.1</span>, cP1<span class="op">=</span><span class="fl">0.9</span>, ngrid<span class="op">=</span><span class="fl">6</span>, niter<span class="op">=</span><span class="fl">10</span>, delta<span class="op">=</span><span class="fl">0</span>,</span>
+<span>    priorityNull<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> </span>
+<span><span class="fu">gsd.bdryconstant</span><span class="op">(</span><span class="va">ifrac</span>, eprob <span class="op">=</span> <span class="fl">0.05</span>, delta <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">gsd.drift.efficacy</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">delta.eb</span>, sig.level<span class="op">=</span><span class="fl">0.05</span>, pow <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">gsd.drift.both</span><span class="op">(</span><span class="va">ifrac</span>, <span class="va">delta.eb</span>, <span class="va">delta.fb</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, pow<span class="op">=</span><span class="fl">0.8</span>,</span>
+<span>    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">gsd.drift</span><span class="op">(</span><span class="va">ifrac</span>, sig.level <span class="op">=</span> <span class="fl">0.05</span>, pow <span class="op">=</span> <span class="fl">0.8</span>, delta.eb <span class="op">=</span> <span class="fl">0.5</span>, delta.fb <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two.sided"</span>, <span class="st">"one.sided"</span><span class="op">)</span>, tol <span class="op">=</span> <span class="fl">0.00001</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">mrcobj</span><span class="op">(</span><span class="va">coefs</span>, <span class="va">xmat</span>, <span class="va">n</span>, <span class="va">nn</span><span class="op">)</span></span>
+<span><span class="fu">smmrcobj</span><span class="op">(</span><span class="va">coefs</span>, <span class="va">xmat</span>, <span class="va">n</span>, <span class="va">nn</span>, <span class="va">bw</span><span class="op">)</span></span>
+<span><span class="fu">rocauc</span><span class="op">(</span><span class="va">marker</span>, <span class="va">n</span>, <span class="va">nn</span><span class="op">)</span></span>
+<span><span class="fu">smrocauc</span><span class="op">(</span><span class="va">marker</span>, <span class="va">n</span>, <span class="va">nn</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="details">
@@ -83,7 +83,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
