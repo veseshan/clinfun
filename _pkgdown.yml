@@ -1,0 +1,9 @@
+template:
+  bootstrap: 5
+  bootswatch: cosmo
+  params:
+    ganalytics: G-ZFP6P2RCRE
+
+development:
+  mode: auto
+  version_label: default
