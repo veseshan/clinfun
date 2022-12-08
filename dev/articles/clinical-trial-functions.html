@@ -79,12 +79,11 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>This vignette will walk through functions in clinfun that are
-available to help with designing phase II clinical trials. We will use
-data examples from (citations) to demonstrate examples in the context of
-real studies.</p>
-<p>Before going through the vignette, please install and load
-{clinfun}:</p>
+<p>This vignette walks through functions in {clinfun} that facilitate
+the design of clinical trials. Examples using published clinical trials
+are included to illustrate the use of these functions in a real-world
+context.</p>
+<p>To begin, install and load {clinfun}:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">clinfun</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -96,15 +95,15 @@ treatment is promising enough to warrant more extensive development.
 While phase I research assesses safety and clinical pharmacology, phase
 II research begins assessing the efficacy of a treatment in a
 well-defined population, while continuing to monitor the safety of the
-treatment. {clinfun} can help determine necessary sample sizes and
-number of responses needed for treatments to be considered desirable in
-stage 2 designs.</p>
+treatment. {clinfun} enables users to construct two common phase II
+trial designs, Simon’s two-stage and single-stage, which are described
+in more detail below.</p>
 <div class="section level3">
 <h3 id="simons-two-stage">Simon’s Two-Stage<a class="anchor" aria-label="anchor" href="#simons-two-stage"></a>
 </h3>
-<p>Simon’s two-stage design is one type of phase II design that aims to
-assess the efficacy of the treatment while minimizing the number of
-patients exposed to an ineffective treatment.</p>
+<p>The goal of Simon’s two-stage design is to assess the efficacy of a
+treatment while minimizing the number of patients exposed to an
+ineffective treatment.</p>
 <p>The trial begins by enrolling <span class="math inline">\(n_1\)</span> patients in stage 1. If <span class="math inline">\(\leq r_1\)</span> responses are observed, then
 early termination occurs, at which point the treatment is not
 recommended. Otherwise, <span class="math inline">\(n_2\)</span>
@@ -113,81 +112,50 @@ based on all data accumulated. At the end of stage 2, if <span class="math inlin
 total, then the treatment is not recommended; if <span class="math inline">\(&gt;r\)</span> responses have been observed in
 total, then the treatment is recommended.</p>
 <p>When designing a Simon’s two-stage trial, the key objective is to
-determine appropriate values of response thresholds indicated by:</p>
+determine appropriate response threshold and sample size values,
+indicated by:</p>
 <ul>
-<li>
-<strong><span class="math inline">\(r_1\)</span></strong> (response
-threshold at the end of stage 1)</li>
-<li>
-<strong><span class="math inline">\(r\)</span></strong> (final
-response threshold)</li>
-</ul>
-<p>and sample sizes, indicated by:</p>
-<ul>
-<li>
-<strong><span class="math inline">\(n_1\)</span></strong> (stage 1
-sample size)</li>
-<li>
-<strong><span class="math inline">\(n\)</span></strong> (total
-sample size; <strong><span class="math inline">\(n_1 +
-n_2\)</span></strong>).</li>
+<li><p><span class="math inline">\(r_1\)</span>: Response threshold at
+the end of stage 1</p></li>
+<li><p><span class="math inline">\(r\)</span>: Final response
+threshold</p></li>
+<li><p><span class="math inline">\(n_1\)</span>: Stage 1 sample
+size</p></li>
+<li><p><span class="math inline">\(n\)</span>: Total sample size (<span class="math inline">\(n_1 + n_2\)</span>)</p></li>
 </ul>
 <div class="section level4">
 <h4 id="design-parameters-and-constraints">Design Parameters and Constraints<a class="anchor" aria-label="anchor" href="#design-parameters-and-constraints"></a>
 </h4>
-<p>The values of the response thresholds depend on what response rate is
-considered “unacceptable” (<span class="math inline">\(p_0:\)</span>; at
-which point a treatment would not be recommended), what response rate is
-considered “desired” (<span class="math inline">\(p_1:\)</span>) as well
-as the desired error rate constraints (<span class="math inline">\(\alpha:\)</span>, <span class="math inline">\(\beta:\)</span>) needed to test the following
-hypotheses:</p>
+<p>In order to determine final design components, the following
+parameters and constraints must be specified:</p>
 <ul>
-<li>
-<span class="math inline">\(H_0:\)</span> The true treatment
-response rate is less than or equal to some unacceptable level (<span class="math inline">\(p \leq p_0\)</span>)</li>
-<li>
-<span class="math inline">\(H_1:\)</span> The true treatment
-response rate is greater than or equal to some desirable level (<span class="math inline">\(p \geq p_1\)</span>)</li>
-</ul>
-<p>{clinfun} will need these parameters to determine final design
-thresholds, therefore the following parameters and constraints must be
-specified:</p>
-<ul>
-<li><p><code>pu</code>- <span class="math inline">\(p_0:\)</span>
+<li><p><span class="math inline">\(p_0\)</span> (<code>pu</code>):
 Treatment response rate considered unacceptable</p></li>
-<li><p><code>pa</code>- <span class="math inline">\(p_1:\)</span>
+<li><p><span class="math inline">\(p_1\)</span> (<code>pa</code>):
 Treatment response rate considered desirable</p></li>
-<li><p><code>eps1</code>- <span class="math inline">\(\alpha:\)</span>
+<li><p><span class="math inline">\(\alpha\)</span> (<code>ep1</code>):
 Type I error threshold</p></li>
-<li><p><code>eps2</code> - <span class="math inline">\(\beta:\)</span>
+<li><p><span class="math inline">\(\beta\)</span> (<code>ep2</code>):
 Type II error threshold</p></li>
 </ul>
-<p>When these parameters are supplied, the <code><a href="../reference/ph2simon.html">ph2simon()</a></code>
-function can return the required response thresholds:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/ph2simon.html">ph2simon</a></span><span class="op">(</span>pu <span class="op">=</span> <span class="fl">0.2</span>, pa <span class="op">=</span> <span class="fl">0.5</span>, ep1 <span class="op">=</span> <span class="fl">0.1</span>, ep2 <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  Simon 2-stage Phase II design </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Unacceptable response rate:  0.2 </span></span>
-<span><span class="co">#&gt; Desirable response rate:  0.5 </span></span>
-<span><span class="co">#&gt; Error rates: alpha =  0.1 ; beta =  0.1 </span></span>
-<span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;         r1 n1 r  n EN(p0) PET(p0)</span></span>
-<span><span class="co">#&gt; Optimal  2 10 5 17  12.26  0.6778</span></span>
-<span><span class="co">#&gt; Minimax  2 10 5 17  12.26  0.6778</span></span></code></pre></div>
-<p>The results above indicate that under these constraints, the
-treatment is considered desirable if 3 or more responses are seen
-(<code>&gt; r1</code>). The trial should be stopped early if 2 or fewer
-responses are seen (<code>≤ r1</code>).</p>
+<p>The final design components depend on the response rates considered
+“unacceptable” (<span class="math inline">\(p_0\)</span>) and
+“desirable” (<span class="math inline">\(p_1\)</span>) and must satisfy
+the desired error rate constraints (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>) for testing the following
+hypotheses:</p>
+<ul>
+<li><p><span class="math inline">\(H_0\)</span>: The true treatment
+response rate is less than or equal to some unacceptable level (<span class="math inline">\(p \leq p_0\)</span>)</p></li>
+<li><p><span class="math inline">\(H_1\)</span>: The true treatment
+response rate is greater than or equal to some desirable level (<span class="math inline">\(p \geq p_1\)</span>)</p></li>
+</ul>
 </div>
 <div class="section level4">
 <h4 id="optimal-vs--minimax-vs--admissible-designs">Optimal vs. Minimax vs. Admissible Designs<a class="anchor" aria-label="anchor" href="#optimal-vs--minimax-vs--admissible-designs"></a>
 </h4>
-<p>In the results above, you will notice two rows of results:
-<code>Optimal</code> and <code>Minmax</code>. These give you threshold
-values under two possible designs that differ in treatment of expected
-sample size.</p>
+<p>Once the design parameters and constraints are provided, {clinfun}
+determines the final design components based on three different
+approaches: optimal, minimax, and admissible.</p>
 <p>If early termination occurs, the sample size for the trial is <span class="math inline">\(n_1\)</span>. If early termination does not occur,
 the sample size for the trial is <span class="math inline">\(n\)</span>
 (the maximum sample size for the trial).</p>
@@ -227,32 +195,32 @@ by Response Evaluation Criteria in Solid Tumors (RECIST) version
 1.1.</p>
 <p>The trial employed a Simon’s two-stage design. An overall response
 rate of 5% was considered unacceptable, and an overall response rate of
-20% was considered desired. The type I error threshold used was 10%. The
-target power used was 90%, equivalent to a 10% type II error
+20% was considered desirable. The type I error threshold used was 10%.
+The target power used was 90%, equivalent to a 10% type II error
 threshold.</p>
 <p>Summarizing the design parameters and constraints from above, we
 have:</p>
 <ul>
-<li><p><span class="math inline">\(p_0:\)</span> 5% overall response
-rate</p></li>
-<li><p><span class="math inline">\(p_1:\)</span> 20% overall response
-rate</p></li>
-<li><p><span class="math inline">\(\alpha:\)</span> 10% type I error
-threshold</p></li>
-<li><p><span class="math inline">\(\beta:\)</span> 10% type II error
-threshold</p></li>
+<li><p><span class="math inline">\(p_0\)</span> (<code>pu</code>): 5%
+overall response rate</p></li>
+<li><p><span class="math inline">\(p_1\)</span> (<code>pa</code>): 20%
+overall response rate</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> (<code>ep1</code>):
+10% type I error threshold</p></li>
+<li><p><span class="math inline">\(\beta\)</span> (<code>ep2</code>):
+10% type II error threshold</p></li>
 </ul>
 <p>Thus, the hypotheses used for testing are:</p>
 <ul>
-<li><p><span class="math inline">\(H_0:\)</span> The true overall
+<li><p><span class="math inline">\(H_0\)</span>: The true overall
 response rate is less than or equal to 5% (<span class="math inline">\(p
 \leq 0.05\)</span>)</p></li>
-<li><p><span class="math inline">\(H_1:\)</span> The true overall
+<li><p><span class="math inline">\(H_1\)</span>: The true overall
 response rate is greater than or equal to 20% (<span class="math inline">\(p \geq 0.2%\)</span>)</p></li>
 </ul>
 <p>Now, using <code><a href="../reference/ph2simon.html">ph2simon()</a></code>, specify these parameters and
 print the resulting object.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify the parameters and constraints</span></span>
 <span><span class="va">trial</span> <span class="op">=</span> <span class="fu"><a href="../reference/ph2simon.html">ph2simon</a></span><span class="op">(</span><span class="fl">0.05</span>, <span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span></span>
@@ -269,24 +237,24 @@ print the resulting object.</p>
 <span><span class="co">#&gt; Optimal  0 12 3 37  23.49  0.5404</span></span>
 <span><span class="co">#&gt; Minimax  0 18 3 32  26.44  0.3972</span></span></code></pre></div>
 <p>This output provides the key components (<span class="math inline">\(r_1\)</span>, <span class="math inline">\(r\)</span>, <span class="math inline">\(n_1\)</span>, and <span class="math inline">\(n\)</span>) as well as <span class="math inline">\(EN(p_0)\)</span> and <span class="math inline">\(PET(p_0)\)</span> for the selected optimal and
-minimax designs.</p>
+minimax designs (shown in the first and second rows, respectively).</p>
 <p>As expected, the optimal design has a smaller expected sample size
 (<span class="math inline">\(EN(p_0)\)</span>; about 23 vs. 26), whereas
 the minimax design has a smaller maximum sample size (<span class="math inline">\(n\)</span>; 32 vs. 37).</p>
 <p>We can also visualize these results. Using the base
 <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>, plot the trial object.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span></span></code></pre></div>
-<p><img src="clinical-trial-functions_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<p>This output provides a visual representation of expected sample size
-(<span class="math inline">\(EN(p_0)\)</span>) and maximum number of
-patients (<span class="math inline">\(n\)</span>) under various
+<p><img src="clinical-trial-functions_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p>This output provides a visual representation of the maximum number of
+patients (<span class="math inline">\(n\)</span>) and expected sample
+size (<span class="math inline">\(EN(p_0)\)</span>) under various
 scenarios. O represents the optimal design, and M represents the minimax
 design.</p>
 <p>The admissible design can be obtained by applying the
 <code><a href="../reference/twostage.admissible.html">twostage.admissible()</a></code> function to the trial object.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Obtain admissible design</span></span>
 <span><span class="fu"><a href="../reference/twostage.admissible.html">twostage.admissible</a></span><span class="op">(</span><span class="va">trial</span><span class="op">)</span></span>
 <span><span class="co">#&gt;            r1 n1 r  n   EN(p0)   PET(p0)   qLo   qHi</span></span>
@@ -294,8 +262,8 @@ design.</p>
 <span><span class="co">#&gt; Admissible  0 15 3 33 24.66076 0.4632912 0.323 0.640</span></span>
 <span><span class="co">#&gt; Admissible  0 13 3 35 23.70647 0.5133421 0.097 0.323</span></span>
 <span><span class="co">#&gt; Optimal     0 12 3 37 23.49100 0.5403601 0.000 0.097</span></span></code></pre></div>
-<p>This outpoint includes the admissible design as well as the optimal
-and minimax designs. In addition to the design components seen earlier,
+<p>This output includes the admissible design as well as the optimal and
+minimax designs. In addition to the design components seen earlier,
 columns <code>qLo</code> and <code>qHi</code> give the range of
 probability values for which the particular design is admissible.</p>
 <p>For this particular trial, Tchekmedyian et al. opted for the minimax
@@ -349,35 +317,33 @@ appropriate values of <span class="math inline">\(n\)</span> (sample
 size) and <span class="math inline">\(r\)</span> (response threshold at
 the end of the study). The response rate considered “unacceptable” (at
 which point a treatment would not be recommended) and the response rate
-considered “desired” must be specified, and the values of <span class="math inline">\(r\)</span> and <span class="math inline">\(n\)</span> must be selected such that the desired
+considered “desirable” must be specified, and the values of <span class="math inline">\(r\)</span> and <span class="math inline">\(n\)</span> must be selected such that the desired
 error rate constraints are satisfied.</p>
 <div class="section level4">
 <h4 id="design-parameters-and-constraints-1">Design Parameters and Constraints<a class="anchor" aria-label="anchor" href="#design-parameters-and-constraints-1"></a>
 </h4>
-<p>The values of t <span class="math inline">\(n\)</span> (sample size)
-and <span class="math inline">\(r\)</span> (response threshold at the
-end of the study) depend on what response rate is considered
-“unacceptable” (<span class="math inline">\(p_0:\)</span>; at which
-point a treatment would not be recommended), what response rate is
-considered “desired” (<span class="math inline">\(p_1:\)</span>) as well
-as the desired error rate constraints (<span class="math inline">\(\alpha:\)</span>, <span class="math inline">\(\beta:\)</span>) needed to test the following
+<p>In order to determine final design components, the following
+parameters and constraints must be specified:</p>
+<ul>
+<li><p><span class="math inline">\(p_0\)</span> (<code>pu</code>):
+Treatment response rate considered unacceptable</p></li>
+<li><p><span class="math inline">\(p_1\)</span> (<code>pa</code>):
+Treatment response rate considered desirable</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> (<code>ep1</code>):
+Type I error threshold</p></li>
+<li><p><span class="math inline">\(\beta\)</span> (<code>ep2</code>):
+Type II error threshold</p></li>
+</ul>
+<p>The final design components depend on the response rates considered
+“unacceptable” (<span class="math inline">\(p_0\)</span>) and
+“desirable” (<span class="math inline">\(p_1\)</span>) and must satisfy
+the desired error rate constraints (<span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span>) for testing the following
 hypotheses:</p>
 <ul>
-<li><p><span class="math inline">\(H_0: p \leq p_0\)</span></p></li>
-<li><p><span class="math inline">\(H_1: p \geq p_1\)</span></p></li>
-</ul>
-<p>{clinfun} will need these parameters to determine final design
-thresholds, therefore the following parameters and constraints must be
-specified:</p>
-<ul>
-<li><p><code>pu</code> - <span class="math inline">\(p_0:\)</span>
-Treatment response rate considered unacceptable</p></li>
-<li><p><code>pa</code> - <span class="math inline">\(p_1:\)</span>
-Treatment response rate considered desirable</p></li>
-<li><p><code>eps1</code>- <span class="math inline">\(\alpha:\)</span>
-Type I error threshold</p></li>
-<li><p><code>eps2</code> - <span class="math inline">\(\beta:\)</span>
-Type II error threshold</p></li>
+<li><p><span class="math inline">\(H_0\)</span>: The true treatment
+response rate is less than or equal to some unacceptable level (<span class="math inline">\(p \leq p_0\)</span>)</p></li>
+<li><p><span class="math inline">\(H_1\)</span>: The true treatment
+response rate is greater than or equal to some desirable level (<span class="math inline">\(p \geq p_1\)</span>)</p></li>
 </ul>
 </div>
 <div class="section level4">
@@ -394,31 +360,32 @@ response, complete response, or stable disease, as defined by Response
 Evaluation Criteria in Solid Tumors (RECIST) version 1.1.</p>
 <p>The trial employed a single-stage design. A disease control rate of
 40% was considered unacceptable, and a disease control rate of 60% was
-considered desired. The type I error threshold used was 10%. The target
-power used was 90%, equivalent to a 10% type II error threshold.</p>
+considered desirable. The type I error threshold used was 10%. The
+target power used was 90%, equivalent to a 10% type II error
+threshold.</p>
 <p>Summarizing the design parameters and constraints from above, we
 have:</p>
 <ul>
-<li><p><span class="math inline">\(p_0:\)</span> 40% disease control
-rate</p></li>
-<li><p><span class="math inline">\(p_1:\)</span> 60% disease control
-rate</p></li>
-<li><p><span class="math inline">\(\alpha:\)</span> 10% type I error
-threshold</p></li>
-<li><p><span class="math inline">\(\beta:\)</span> 10% type II error
-threshold</p></li>
+<li><p><span class="math inline">\(p_0\)</span> (<code>pu</code>): 40%
+disease control rate</p></li>
+<li><p><span class="math inline">\(p_1\)</span> (<code>pa</code>): 60%
+disease control rate</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> (<code>ep1</code>):
+10% type I error threshold</p></li>
+<li><p><span class="math inline">\(\beta\)</span> (<code>ep2</code>):
+10% type II error threshold</p></li>
 </ul>
 <p>Thus, the hypotheses used for testing are:</p>
 <ul>
-<li><p><span class="math inline">\(H_0:\)</span> The true disease
+<li><p><span class="math inline">\(H_0\)</span>: The true disease
 control rate is less than or equal to 40% (<span class="math inline">\(p
 \leq 0.4\)</span>)</p></li>
-<li><p><span class="math inline">\(H_1:\)</span> The true disease
+<li><p><span class="math inline">\(H_1\)</span>: The true disease
 control rate is greater than or equal to 60% (<span class="math inline">\(p \geq 0.6%\)</span>)</p></li>
 </ul>
 <p>Using <code><a href="../reference/ph2single.html">ph2single()</a></code>, specify the parameters and print the
 resulting object.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Specify the parameters and constraints &amp; print</span></span>
 <span><span class="fu"><a href="../reference/ph2single.html">ph2single</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.1</span>, <span class="fl">0.1</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    n  r Type I error Type II error</span></span>
@@ -456,13 +423,13 @@ Cisplatin-Based Chemotherapy. J Clin Oncol. 36(4):342-349.</a></p>
 <div class="section level3">
 <h3 id="toxicity-monitoring">Toxicity Monitoring<a class="anchor" aria-label="anchor" href="#toxicity-monitoring"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># toxbdry()</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="futility-monitoring">Futility Monitoring<a class="anchor" aria-label="anchor" href="#futility-monitoring"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># futilbdry()</span></span></code></pre></div>
 </div>
 </div>
@@ -472,9 +439,9 @@ Cisplatin-Based Chemotherapy. J Clin Oncol. 36(4):342-349.</a></p>
 <div class="section level3">
 <h3 id="fishers-exact-test">Fisher’s Exact Test<a class="anchor" aria-label="anchor" href="#fishers-exact-test"></a>
 </h3>
-<p>{clinfun} offers several functions to determine sample sizes, effect
-sizes, etc based on Fisher’s exact tests. Below is a table summarizing
-the functions based on Fisher’s exact test.</p>
+<p>{clinfun} offers a set of functions to determine sample sizes, effect
+sizes, and power based on Fisher’s exact tests. Below is a table
+summarizing the functions based on Fisher’s exact test.</p>
 <table class="table">
 <colgroup>
 <col width="22%">
@@ -522,15 +489,15 @@ probability of disease in controls (pcontrol) and odds ratio (OR).</td>
 <div class="section level4">
 <h4 id="example-1">Example<a class="anchor" aria-label="anchor" href="#example-1"></a>
 </h4>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fedesign.html">fe.ssize</a></span><span class="op">(</span>p1 <span class="op">=</span> <span class="fl">0.2</span>, p2 <span class="op">=</span> <span class="fl">0.3</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="co">#&gt;              Group 1 Group 2 Exact Power</span></span>
 <span><span class="co">#&gt; CPS              313     313   0.8018729</span></span>
 <span><span class="co">#&gt; Fisher Exact     311     311   0.8004486</span></span></code></pre></div>
 <p><em>CAUTION:</em> As we can see below, when we use base R
-<code><a href="https://rdrr.io/r/stats/power.prop.test.html" class="external-link">power.prop.test()</a></code>, we obtain an incorrect results due to
+<code><a href="https://rdrr.io/r/stats/power.prop.test.html" class="external-link">power.prop.test()</a></code>, we obtain an incorrect result due to
 normal approximation.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/power.prop.test.html" class="external-link">power.prop.test</a></span><span class="op">(</span>p1 <span class="op">=</span> <span class="fl">0.2</span>, p2 <span class="op">=</span> <span class="fl">0.3</span>, power <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;      Two-sample comparison of proportions power calculation </span></span>
