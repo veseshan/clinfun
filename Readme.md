@@ -5,6 +5,9 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/veseshan/clinfun/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/veseshan/clinfun/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/clinfun)](https://CRAN.R-project.org/package=clinfun)
 <!-- badges: end -->
 
 Utilities to make your clinical collaborations easier if not fun. It
