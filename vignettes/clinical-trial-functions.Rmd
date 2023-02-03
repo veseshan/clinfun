@@ -209,20 +209,6 @@ Zucali et al. chose the first option listed, the design that enrolls the smalles
 
 [Zucali PA, De Pas T, Palmieri G, et al. (2018). Phase II Study of Everolimus in Patients With Thymoma and Thymic Carcinoma Previously Treated With Cisplatin-Based Chemotherapy. J Clin Oncol. 36(4):342-349.](https://pubmed.ncbi.nlm.nih.gov/29240542/)
 
-# Stopping Rules
-
-## Toxicity Monitoring
-
-```{r}
-# toxbdry()
-```
-
-## Futility Monitoring
-
-```{r}
-# futilbdry()
-```
-
 # Calculating Sample Size, Effect Size, and Power
 
 ## Fisher's Exact Test
