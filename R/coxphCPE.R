@@ -3,7 +3,7 @@
 ##
 
 coxphCPE <- function(phfit) {
-  if (isa(phfit, "coxph")) stop("phfit shoud be coxph class object")
+  if (inherits(phfit, "coxph")) stop("phfit shoud be coxph class object")
   n <- phfit$n
   betahat <- phfit$coefficients
   p <- length(phfit$coefficients)
