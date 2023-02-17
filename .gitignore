@@ -6,3 +6,5 @@ src/symbols.rds
 clinfun.Rproj
 docs
 inst/doc
+.DS_Store
+

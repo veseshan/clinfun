@@ -300,7 +300,7 @@ gsdesign.survival <- function(ifrac, haz.ratio, r=1, sig.level = 0.05, power = 0
 }
 
 print.gsdesign <- function(x, ...) {
-  if (class(x) != "gsdesign") stop("input shoud be a gsdesign class object")
+  if (!inherits(x, "gsdesign")) stop("input shoud be a gsdesign class object")
   cat("\n Group sequential design for comparing", x$outcome, "data with ")
   switch(match(x$outcome, c("binary", "normal", "survival")),
          cat("rates  pC =", x$pC,", pE =", x$pE, "\n"),
