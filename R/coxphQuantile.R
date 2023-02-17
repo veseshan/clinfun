@@ -1,6 +1,6 @@
 coxphQuantile <- function(phfit, xrange, p=0.5, whichx=1, otherx=NULL, ...) {
     requireNamespace("survival")
-    if (class(phfit) != "coxph") stop("phfit shoud be coxph class object")
+    if (!inherits(phfit, "coxph")) stop("phfit shoud be coxph class object")
     cvtmean <- phfit$means
     loghr <- phfit$coef
     S0 <- survival::survfit(phfit)

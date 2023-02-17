@@ -1,5 +1,5 @@
 coxphERR <- function(phfit, ngamma=NULL) {
-  if (class(phfit) != "coxph") stop("phfit shoud be coxph class object")
+  if (!inherits(phfit, "coxph")) stop("phfit shoud be coxph class object")
   if (is.null(phfit$x)) stop("coxph should have been called with x=TRUE option")
   ss <- phfit$n
   covec <- phfit$x-matrix(rep(apply(phfit$x,2,mean),ss), nrow=ss, byrow=T)
