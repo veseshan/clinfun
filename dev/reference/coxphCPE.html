@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">clinfun</a>
 
-    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9001</small>
+    <small class="nav-text text-default me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.1.9100</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,13 +52,17 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">coxphCPE</span><span class="op">(</span><span class="va">phfit</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">coxphCPE</span><span class="op">(</span><span class="va">phfit</span>, out.ties<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>phfit</dt>
 <dd><p>output from a proportional hazards fit.</p></dd>
+
+  <dt>out.ties</dt>
+<dd><p>binary flag to decide if pairs with tied risk scores
+    should be used.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -72,6 +76,9 @@
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>Gonen M and Heller G. (2005) Concordance probability and discriminatory
   power in proportional hazards regression. <em>Biometrika</em> 92, 965-970.</p>
+<p>Heller G and Mo Q. (2016). Estimating the concordance probability in a
+  survival analysis with a discrete number of risk groups.
+  <em>Lifetime Data Analysis</em>, 22(2):263-79.</p>
     </div>
 
     <div class="section level2">
