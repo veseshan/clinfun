@@ -1,9 +1,18 @@
 template:
   bootstrap: 5
-  bootswatch: cosmo
-  params:
-    ganalytics: G-ZFP6P2RCRE
+  bootswatch: simplex
+  bslib:
+    primary: "#37B24D"
+    base_font: {google: "Atkinson Hyperlegible"}
+    heading_font: {google: "Atkinson Hyperlegible"}
+    text-muted: "#FFFFFF"
 
 development:
   mode: auto
   version_label: default
+  
+navbar:
+  bg: primary
+  structure:
+    left:  [reference, articles, news]
+    right: [search, github]
