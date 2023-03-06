@@ -6,10 +6,12 @@
   Calculates the Concordance Probability Estimate for a Cox model.
 }
 \usage{
-  coxphCPE(phfit)
+  coxphCPE(phfit, out.ties=FALSE)
 }
 \arguments{
   \item{phfit}{output from a proportional hazards fit.}
+  \item{out.ties}{binary flag to decide if pairs with tied risk scores
+    should be used.}
 }
 \value{
   coxphCPE returns a vector with CPE, smooth.CPE & se.CPE which are the
@@ -25,4 +27,8 @@
 \references{
   Gonen M and Heller G. (2005) Concordance probability and discriminatory
   power in proportional hazards regression. \emph{Biometrika} 92, 965-970.
+
+  Heller G and Mo Q. (2016). Estimating the concordance probability in a
+  survival analysis with a discrete number of risk groups.
+  \emph{Lifetime Data Analysis}, 22(2):263-79.
 }

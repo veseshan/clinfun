@@ -8,6 +8,7 @@
 
 /* .Fortran calls */
 extern void F77_NAME(cpesub)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
+extern void F77_NAME(cpesubt)(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void F77_NAME(daucmats)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void F77_NAME(djonck)(void *, void *, void *, void *);
 extern void F77_NAME(f2bdry)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
@@ -28,6 +29,7 @@ extern void F77_NAME(uclrst)(void *, void *, void *, void *, void *, void *, voi
 
 static const R_FortranMethodDef FortranEntries[] = {
     {"cpesub",   (DL_FUNC) &F77_NAME(cpesub),   10},
+    {"cpesubt",  (DL_FUNC) &F77_NAME(cpesubt),   9},
     {"daucmats", (DL_FUNC) &F77_NAME(daucmats), 10},
     {"djonck",   (DL_FUNC) &F77_NAME(djonck),    4},
     {"f2bdry",   (DL_FUNC) &F77_NAME(f2bdry),   13},

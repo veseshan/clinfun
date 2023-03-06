@@ -3,6 +3,14 @@
 * Added new vignette highlighting clinical trial functions
 * Added github actions for R CMD checks
 
+# clinfun 1.1.1 (03/06/2023)
+
+* changed class check to use inherits instead of comparing strings
+
+### New Functionality
+
+* Added out.ties option to coxphCPE for discrete risk score case
+
 # clinfun 1.1.0 (02/22/2022)
 
 ### New Functionality
