@@ -9,7 +9,7 @@ c     we will start with data sorted (in decreasing order) by xbeta
      1     ursum(n), ussq
 
       integer i, j, k
-      double precision xbji, exbji, eij, uij, xjik, npairs
+      double precision xbji, exbji, eij, uij, xjik
 
 c     number of pairs with beta'Xi > beta'Xj
       nPI = 0

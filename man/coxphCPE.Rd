@@ -14,7 +14,7 @@
     should be used.}
 }
 \value{
-  coxphCPE returns a vector with CPE, smooth.CPE & se.CPE which are the
+  coxphCPE returns a vector with CPE, smooth.CPE and se.CPE which are the
   estimate, the smoothed estimate and its standard error respectively.
 }  
 \examples{
