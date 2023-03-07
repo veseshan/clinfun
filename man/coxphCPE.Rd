@@ -1,9 +1,12 @@
 \name{coxphCPE}
-\title{Gonen \& Heller Concordance Probability Estimate}
+\title{Concordance Probability Estimate for Cox model}
 \alias{coxphCPE}
 \keyword{survival}
 \description{
-  Calculates the Concordance Probability Estimate for a Cox model.
+  Calculates the Concordance Probability Estimate for a Cox proportional 
+  hazards model. Both the Gonen and Heller (2005) version for continuous 
+  risk score and Heller and Mo (2016) for discrete risk score can be
+  calculated.
 }
 \usage{
   coxphCPE(phfit, out.ties=FALSE)
@@ -16,7 +19,7 @@
 \value{
   coxphCPE returns a vector with CPE, smooth.CPE and se.CPE which are the
   estimate, the smoothed estimate and its standard error respectively.
-}  
+}
 \examples{
 \dontrun{ library(survival)
   data(pbc)
@@ -30,5 +33,5 @@
 
   Heller G and Mo Q. (2016). Estimating the concordance probability in a
   survival analysis with a discrete number of risk groups.
-  \emph{Lifetime Data Analysis}, 22(2):263-79.
+  \emph{Lifetime Data Analysis}, 22,263-79.
 }
