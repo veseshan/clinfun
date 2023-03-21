@@ -8,7 +8,7 @@
 
 ### New Functionality
 
-* Added out.ties option to coxphCPE for discrete risk score case
+* Added out.ties option to `coxphCPE()` for discrete risk score case
 
 # clinfun 1.1.0 (02/22/2022)
 
