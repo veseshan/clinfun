@@ -27,7 +27,6 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/clinical-trial-functions.html">Functions For Clinical Trial Design</a>
-    <a class="dropdown-item" href="../articles/compare-trial-functions.html">compare-trial-functions</a>
   </div>
 </li>
 <li class="nav-item">
@@ -114,9 +113,9 @@
 <span class="r-in"><span>    <span class="va">meas</span><span class="op">[</span><span class="va">i</span>, <span class="fl">1</span><span class="op">:</span><span class="va">maxfup</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="op">(</span><span class="fl">3</span><span class="op">+</span><span class="fl">0.04</span><span class="op">*</span><span class="va">grp</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">maxfup</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">}</span></span></span>
 <span class="r-in"><span>  <span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for 2 - 1  =  1651.164 ; p-value =  0.755249 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for 2 - 1  =  -8220.066 ; p-value =  0.01919616 </span>
 <span class="r-in"><span>  <span class="fu">aucVardiTest</span><span class="op">(</span><span class="va">meas</span>, <span class="va">grp0</span>, cgrps<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>,<span class="st">"B"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for B - C  =  -5748.057 ; p-value =  0.2339532 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic for B - C  =  -9392.654 ; p-value =  0.02479504 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
