@@ -1,11 +1,10 @@
-# clinfun (development version)
+# clinfun 1.1.1 (03/07/2023)
 
-* Added new vignette highlighting clinical trial functions
-* Added github actions for R CMD checks
+* changed class check to use `inherits()` instead of comparing strings
 
-# clinfun 1.1.1 (03/06/2023)
+### New Documentation
 
-* changed class check to use inherits instead of comparing strings
+* Added new vignette highlighting clinical trial functions ([on website](https://veseshan.github.io/clinfun/articles/clinical-trial-functions.html)
 
 ### New Functionality
 
