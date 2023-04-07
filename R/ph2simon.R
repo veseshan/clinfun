@@ -1,3 +1,37 @@
+#' Simon's 2-stage Phase II design
+#' 
+#' Calculates Optimal and Minimax 2-stage Phase II designs given by Richard
+#' Simon
+#' 
+#' @aliases ph2simon print.ph2simon plot.ph2simon
+#' @param pu unacceptable response rate
+#' @param pa response rate that is desirable
+#' @param ep1 threshold for the probability of declaring drug desirable under
+#' p0
+#' @param ep2 threshold for the probability of rejecting the drug under p1
+#' @param nmax maximum total sample size (default 100; can be at most 500)
+#' @return ph2simon returns a list with pu, pa, alpha, beta and nmax as above
+#' and: \item{out}{matrix of best 2 stage designs for each value of total
+#' sample size n.  the 6 columns are: r1, n1, r, n, EN(p0), PET(p0)}
+#' 
+#' Trial is stopped early if <= r1 responses are seen in the first stage and
+#' treatment is considered desirable only when >r responses seen.
+#' 
+#' The "print" method formats and returns the minimax and optimal designs.  
+#' 
+#' @seealso \code{\link{twostage.inference}}, \code{\link{oc.twostage.bdry}}
+#' @references Simon R. (1989).  Optimal Two-Stage Designs for Phase II
+#' Clinical Trials. \emph{Controlled Clinical Trials} 10, 1-10.
+#' 
+#' Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage Designs
+#' for Phase II Clinical Trials. \emph{Controlled Clinical Trials} 22, 367-372.
+#' @keywords design design
+#' @examples
+#' 
+#'   ph2simon(0.2, 0.4, 0.1, 0.1)
+#'   ph2simon(0.2, 0.35, 0.05, 0.05)
+#'   ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
+#' 
 ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   if(nmax > 1000) stop("nmax cannot exceed 1000")
   nmax1 <- nmax + 1
@@ -46,6 +80,15 @@ ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   ph2
 }
 
+#' Title
+#'
+#' @param x 
+#' @param ... 
+#'
+#' @return
+#' @export
+#'
+#' @examples
 print.ph2simon <- function(x, ...) {
   xout <- x$out
   nmax <- x$nmax
@@ -62,6 +105,16 @@ print.ph2simon <- function(x, ...) {
   if(xopt[1,4]>nmax-10) warning(paste("  Optimal sample size too close to nmax. \n  Try increasing nmax (current value = ",nmax,")\n",sep=""))
 }
 
+#' Plots `ph2simon` object
+#'
+#' @param x object returned by ph2simon
+#' @param ... arguments to be passed onto plot and print commands called within 
+#'
+#' @return Plots the expected sample size agains the maximum sample size as in
+#' Jung et al., 2001
+#' @export
+#'
+#' @examples
 plot.ph2simon <- function(x, ...) {
   xout <- x$out
   n <- nrow(xout)
