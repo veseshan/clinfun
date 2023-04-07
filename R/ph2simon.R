@@ -3,23 +3,22 @@
 #' Calculates Optimal and Minimax 2-stage Phase II designs given by Richard
 #' Simon
 #' 
-#' @aliases ph2simon print.ph2simon plot.ph2simon
 #' @param pu unacceptable response rate
 #' @param pa response rate that is desirable
 #' @param ep1 threshold for the probability of declaring drug desirable under
 #' p0
 #' @param ep2 threshold for the probability of rejecting the drug under p1
 #' @param nmax maximum total sample size (default 100; can be at most 500)
-#' @return ph2simon returns a list with pu, pa, alpha, beta and nmax as above
+#' @return `ph2simon()` returns a list with pu, pa, alpha, beta and nmax as above
 #' and: \item{out}{matrix of best 2 stage designs for each value of total
 #' sample size n.  the 6 columns are: r1, n1, r, n, EN(p0), PET(p0)}
 #' 
 #' Trial is stopped early if <= r1 responses are seen in the first stage and
 #' treatment is considered desirable only when >r responses seen.
 #' 
-#' The "print" method formats and returns the minimax and optimal designs.  
 #' 
-#' @seealso \code{\link{twostage.inference}}, \code{\link{oc.twostage.bdry}}
+#' @seealso [twostage.inference] [oc.twostage.bdry]
+#' @family ph2simon
 #' @references Simon R. (1989).  Optimal Two-Stage Designs for Phase II
 #' Clinical Trials. \emph{Controlled Clinical Trials} 10, 1-10.
 #' 
@@ -28,9 +27,9 @@
 #' @keywords design design
 #' @examples
 #' 
-#'   ph2simon(0.2, 0.4, 0.1, 0.1)
-#'   ph2simon(0.2, 0.35, 0.05, 0.05)
-#'   ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
+#' ph2simon(0.2, 0.4, 0.1, 0.1)
+#' ph2simon(0.2, 0.35, 0.05, 0.05)
+#' ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
 #' 
 ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   if(nmax > 1000) stop("nmax cannot exceed 1000")
@@ -80,15 +79,8 @@ ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   ph2
 }
 
-#' Title
-#'
-#' @param x 
-#' @param ... 
-#'
-#' @return
+#' @rdname ph2simon
 #' @export
-#'
-#' @examples
 print.ph2simon <- function(x, ...) {
   xout <- x$out
   nmax <- x$nmax
@@ -110,11 +102,16 @@ print.ph2simon <- function(x, ...) {
 #' @param x object returned by ph2simon
 #' @param ... arguments to be passed onto plot and print commands called within 
 #'
-#' @return Plots the expected sample size agains the maximum sample size as in
+#' @return `plot.ph2simon()` returns a plot with the expected sample size against the maximum sample size as in
 #' Jung et al., 2001
+#' @family ph2simon
+#' @rdname ph2simon
 #' @export
 #'
 #' @examples
+#' ex <- ph2simon(0.2, 0.4, 0.1, 0.1)
+#' plot(ex)
+#' 
 plot.ph2simon <- function(x, ...) {
   xout <- x$out
   n <- nrow(xout)

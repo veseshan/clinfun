@@ -7,6 +7,10 @@
 \title{Simon's 2-stage Phase II design}
 \usage{
 ph2simon(pu, pa, ep1, ep2, nmax = 100)
+
+\method{print}{ph2simon}(x, ...)
+
+\method{plot}{ph2simon}(x, ...)
 }
 \arguments{
 \item{pu}{unacceptable response rate}
@@ -32,8 +36,7 @@ sample size n.  the 6 columns are: r1, n1, r, n, EN(p0), PET(p0)}
 Trial is stopped early if <= r1 responses are seen in the first stage and
 treatment is considered desirable only when >r responses seen.
 
-The "print" method formats and returns the minimax and optimal designs.  The
-"plot" plots the expected sample size agains the maximum sample size as in
+Plots the expected sample size against the maximum sample size as in
 Jung et al., 2001
 }
 \description{
@@ -42,9 +45,12 @@ Simon
 }
 \examples{
 
-  ph2simon(0.2, 0.4, 0.1, 0.1)
-  ph2simon(0.2, 0.35, 0.05, 0.05)
-  ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
+ph2simon(0.2, 0.4, 0.1, 0.1)
+ph2simon(0.2, 0.35, 0.05, 0.05)
+ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
+
+ex <- ph2simon(0.2, 0.4, 0.1, 0.1)
+plot(ex)
 
 }
 \references{
@@ -55,6 +61,7 @@ Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage Designs
 for Phase II Clinical Trials. \emph{Controlled Clinical Trials} 22, 367-372.
 }
 \seealso{
-\code{\link{twostage.inference}}, \code{\link{oc.twostage.bdry}}
+\link{twostage.inference} \link{oc.twostage.bdry}
 }
+\concept{ph2simon}
 \keyword{design}
