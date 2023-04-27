@@ -19,3 +19,4 @@ Maintainer: Venkatraman E. Seshan <seshanv@mskcc.org>
 License: GPL (>= 2)
 NeedsCompilation: yes
 VignetteBuilder: knitr
+RoxygenNote: 7.2.3

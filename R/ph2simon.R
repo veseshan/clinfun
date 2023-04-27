@@ -1,3 +1,53 @@
+##' Simon's two-stage Phase II design
+##'
+##' Calculates the sample size and decision rules for Optimal and Minimax
+##' two-stage Phase II designs given by Richard Simon. The trial proceeds to
+##' the second stage only if a minimal number of responses is observed at the
+##' end of the first stage.
+##'
+##'
+##' @aliases ph2simon print.ph2simon plot.ph2simon
+##' @param pu unacceptable response rate; baseline response rate that needs to
+##' be exceeded for treatment to be deemed promising
+##' @param pa response rate that is desirable; should be larger than pu
+##' @param ep1 threshold for the probability of declaring drug promising under
+##' pu (target type 1 error rate); between 0 and 1
+##' @param ep2 threshold for the probability of declaring the drug not
+##' promising under pa (target type 2 error rate); between 0 and 1
+##' @param nmax maximum total sample size (default 100; can be at most 1000)
+##' @param x object returned by ph2simon
+##' @param ... arguments to be passed onto plot and print commands called
+##' within
+##' @return ph2simon returns a list with pu, pa, alpha, beta and nmax (as defined above)
+##' and: \item{out}{matrix of best two-stage designs for each value of total
+##' sample size n. The 6 columns in the matrix are: \tabular{rl}{ r1 \tab
+##' number of responses needed to exceeded in first stage \cr n1 \tab number of
+##' subjects treated in first stage \cr r \tab number of responses needed to
+##' exceeded at the end of trial \cr n \tab total number of subjects to be
+##' treated in the trial \cr EN(pu) \tab expected number pf patients in the
+##' trial under pu \cr PET(pu) \tab probability of stopping after the first
+##' stage under pu } }
+##'
+##' Trial is stopped early if <= r1 responses are seen in the first stage and
+##' treatment is considered desirable only when >r responses seen.
+##'
+##' The "print" method formats and returns the minimax and optimal designs.
+##' The "plot" method plots the expected sample size agains the maximum sample size as
+##' in Jung et al., 2001
+##' @seealso \code{\link{twostage.inference}}, \code{\link{oc.twostage.bdry}}
+##' @references Simon R. (1989).  Optimal Two-Stage Designs for Phase II
+##' Clinical Trials. \emph{Controlled Clinical Trials} 10, 1-10.
+##'
+##' Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage Designs
+##' for Phase II Clinical Trials. \emph{Controlled Clinical Trials} 22,
+##' 367-372.
+##' @keywords design design
+##' @examples
+##'
+##'   ph2simon(0.2, 0.4, 0.1, 0.1)
+##'   ph2simon(0.2, 0.35, 0.05, 0.05)
+##'   ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
+##'
 ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   if(nmax > 1000) stop("nmax cannot exceed 1000")
   nmax1 <- nmax + 1
