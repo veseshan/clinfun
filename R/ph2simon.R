@@ -16,8 +16,7 @@
 ##' promising under pa (target type 2 error rate); between 0 and 1
 ##' @param nmax maximum total sample size (default 100; can be at most 1000)
 ##' @param x object returned by ph2simon
-##' @param ... arguments to be passed onto plot and print commands called
-##' within
+##' @param ... arguments to be passed onto plot and print commands
 ##' @return ph2simon returns a list with pu, pa, alpha, beta and nmax (as defined above)
 ##' and: \item{out}{matrix of best two-stage designs for each value of total
 ##' sample size n. The 6 columns in the matrix are: \tabular{rl}{ r1 \tab
@@ -31,9 +30,6 @@
 ##' Trial is stopped early if <= r1 responses are seen in the first stage and
 ##' treatment is considered desirable only when >r responses seen.
 ##'
-##' The "print" method formats and returns the minimax and optimal designs.
-##' The "plot" method plots the expected sample size agains the maximum sample size as
-##' in Jung et al., 2001
 ##' @seealso \code{\link{twostage.inference}}, \code{\link{oc.twostage.bdry}}
 ##' @references Simon R. (1989).  Optimal Two-Stage Designs for Phase II
 ##' Clinical Trials. \emph{Controlled Clinical Trials} 10, 1-10.
@@ -96,6 +92,7 @@ ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   ph2
 }
 
+#' @describeIn ph2simon formats and returns the minimax and optimal designs
 print.ph2simon <- function(x, ...) {
   xout <- x$out
   nmax <- x$nmax
@@ -112,6 +109,7 @@ print.ph2simon <- function(x, ...) {
   if(xopt[1,4]>nmax-10) warning(paste("  Optimal sample size too close to nmax. \n  Try increasing nmax (current value = ",nmax,")\n",sep=""))
 }
 
+#' @describeIn ph2simon plots the expected sample size against the maximum sample size ass in Jung et al., 2001
 plot.ph2simon <- function(x, ...) {
   xout <- x$out
   n <- nrow(xout)

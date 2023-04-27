@@ -7,6 +7,10 @@
 \title{Simon's two-stage Phase II design}
 \usage{
 ph2simon(pu, pa, ep1, ep2, nmax = 100)
+
+\method{print}{ph2simon}(x, ...)
+
+\method{plot}{ph2simon}(x, ...)
 }
 \arguments{
 \item{pu}{unacceptable response rate; baseline response rate that needs to
@@ -20,15 +24,14 @@ pu (target type 1 error rate); between 0 and 1}
 \item{ep2}{threshold for the probability of declaring the drug not
 promising under pa (target type 2 error rate); between 0 and 1}
 
-\item{nmax}{maximum total sample size (default 100; can be at most 500)}
+\item{nmax}{maximum total sample size (default 100; can be at most 1000)}
 
 \item{x}{object returned by ph2simon}
 
-\item{...}{arguments to be passed onto plot and print commands called
-within}
+\item{...}{arguments to be passed onto plot and print commands}
 }
 \value{
-ph2simon returns a list with pu, pa, alpha, beta and nmax as above
+ph2simon returns a list with pu, pa, alpha, beta and nmax (as defined above)
 and: \item{out}{matrix of best two-stage designs for each value of total
 sample size n. The 6 columns in the matrix are: \tabular{rl}{ r1 \tab
 number of responses needed to exceeded in first stage \cr n1 \tab number of
@@ -40,10 +43,6 @@ stage under pu } }
 
 Trial is stopped early if <= r1 responses are seen in the first stage and
 treatment is considered desirable only when >r responses seen.
-
-The "print" method formats and returns the minimax and optimal designs.
-The "plot" plots the expected sample size agains the maximum sample size as
-in Jung et al., 2001
 }
 \description{
 Calculates the sample size and decision rules for Optimal and Minimax
@@ -51,6 +50,13 @@ two-stage Phase II designs given by Richard Simon. The trial proceeds to
 the second stage only if a minimal number of responses is observed at the
 end of the first stage.
 }
+\section{Methods (by generic)}{
+\itemize{
+\item \code{print(ph2simon)}: formats and returns the minimax and optimal designs
+
+\item \code{plot(ph2simon)}: plots the expected sample size against the maximum sample size ass in Jung et al., 2001
+
+}}
 \examples{
 
   ph2simon(0.2, 0.4, 0.1, 0.1)
