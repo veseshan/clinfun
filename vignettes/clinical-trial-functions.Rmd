@@ -136,6 +136,30 @@ For this particular trial, Tchekmedyian et al. opted for the minimax design. Thu
 
 Ultimately, Tchekmedyian et al. observed four responses among the 18 patients enrolled in stage 1 and thus proceeded to stage 2, in which an additional 14 patients were enrolled. One response was observed among the stage 2 patients. Thus, at the end of the trial, 5 responses had been observed in total, and lenvatinib was recommended for further development in patients with progressive, recurrent or metastatic adenoid cystic carcinoma.
 
+### Cases Where the Admissible Design Is a Logical Choice
+
+As described above, the optimal design minimizes the expected sample size, the minimax design minimizes the maximum sample size, and the admissible design represents a compromise between the two. Sometimes, the admissible design has only a slightly higher expected sample size than the optimal design and only a slightly higher maximum sample size than the minimax design. In these cases, the admissible design is a logical choice because it achieves the benefits of the both designs with only negligible impacts on the two metrics.
+
+To illustrate this, we can consider a hypothetical example where we specific the following design parameters and constraints:
+
+- $p_0$ (`pu`): 25% overall response rate
+
+- $p_1$ (`pa`): 45% overall response rate
+
+- $\alpha$ (`ep1`): 5% type I error threshold
+
+- $\beta$ (`ep2`): 10% type II error threshold
+
+```{r}
+# Specify the parameters and constraints
+trial = ph2simon(0.25, 0.45, 0.05, 0.1)
+
+# Obtain admissible design
+twostage.admissible(trial)
+```
+
+As we can see, the admissible design has an expected sample size that is nearly the same as the optimal design's (34 vs. 33) and a maximum sample size that is nearly the same as the minimax design's (50 vs. 49). It is logical to accept one more patient on whichever metric is of primary interest to obtain a design that performs well across both metrics.
+
 ### References
 
 [Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. Controlled Clinical Trials 10, 1-10.](https://pubmed.ncbi.nlm.nih.gov/2702835/)
