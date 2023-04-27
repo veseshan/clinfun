@@ -214,17 +214,17 @@ Zucali et al. chose the first option listed, the design that enrolls the smalles
 
 Stopping rules in clinical trials are a useful tool for risk management and can help ensure the protection of participants. Patient outcomes are monitored as the trial progresses, and the trial is terminated if certain conditions are met (eg, if an unacceptable rate of toxicity is observed). Stopping rules define the specific conditions under which the trial should be terminated.
 
-The most common types of stopping rules include:
+General types of stopping rules include:
 
 - **Stopping for toxicity:** The trial is stopped if some unacceptable level of toxicity is observed. Terminating the trial minimizes the number of patients exposed to a treatment that is likely too toxic relative to its potential benefits.
 
 - **Stopping for futility:** The trial is stopped if some unacceptable level of efficacy is observed. Terminating the trial minimizes the number of patients exposed to a potentially ineffective treatment.
 
-- **Stopping for efficacy:** The trial is stopped if some striking level of efficacy is observed. Terminating the trial expedites the development of a treatment for which there is already compelling evidence that its benefits outweigh its risks.
+A trial may contain one or multiple types of stopping rules. The choice of stopping rules is highly dependent on factors such as disease area, the clinical outcomes of interest, stage of development, and characteristics of the treatment itself.
 
-A trial can implement multiple types of stopping rules. The choice of stopping rules is highly dependent on factors such as disease area, the clinical outcomes of interest, stage of development, and characteristics of the treatment itself.
+There are various statistical methods available to construct stopping rules.
 
-This section describes the specific types of stopping boundaries that can be constructed using {clinfun}.
+This section describes the specific types of stopping rules that can be constructed using {clinfun}.
 
 ## Stopping for Toxicity (For Phase II and Phase III Designs)
 
