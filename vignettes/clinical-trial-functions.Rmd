@@ -2,7 +2,7 @@
 title: "Functions For Clinical Trial Design"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{clinical-trial-functions}
+  %\VignetteIndexEntry{Functions For Clinical Trial Design}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

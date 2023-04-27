@@ -10,7 +10,7 @@ template:
 development:
   mode: auto
   version_label: default
-  
+
 navbar:
   bg: primary
   structure:
