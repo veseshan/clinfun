@@ -1,3 +1,5 @@
+# clinfun (development version)
+
 # clinfun 1.1.1 (03/07/2023)
 
 * changed class check to use `inherits()` instead of comparing strings
