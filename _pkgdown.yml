@@ -20,33 +20,55 @@ navbar:
 reference:
   - title: Trial Design Functions
   - contents:
-    - ph2simon() print(<ph2simon>) plot(<ph2simon>)
-    - ph2single()
-    - twostage.admissible()
-    - twostage.inference()
-    - toxbdry() futilbdry() bdrycross.prob() print(<toxbdry>) print(<futilbdry>)
-    - gsdesign.binomial() gsdesign.normal() gsdesign.survival()
-    - oc.twostage.bdry()
-    - fe.ssize() CPS.ssize() fe.mdor() mdrr() fe.power() or2pcase()
-    - power.ladesign() print(<ladesign>)
-    - pselect()
+    - ph2simon
+    - print.ph2simon
+    - plot.ph2simon
+    - ph2single
+    - twostage.admissible
+    - twostage.inference
+    - toxbdry
+    - print.toxbdry
+    - futilbdry
+    - print.futilbdry
+    - bdrycross.prob
+    - gsdesign.binomial
+    - gsdesign.normal
+    - gsdesign.survival
+    - oc.twostage.bdry
+    - fe.ssize
+    - CPS.ssize
+    - fe.mdor
+    - mdrr
+    - fe.power
+    - or2pcase
+    - power.ladesign
+    - print.ladesign
+    - pselect
   - title: Analysis Functions
   - subtitle: ROC Curves
   - contents:
-    - roc.area.test() print(<roc.area.test>)
-    - roc.curve() print(<roc.curve>) plot(<roc.curve>) lines(<roc.curve>)
-    - roc.perm.test() print(<roc.perm.test>) plot(<roc.perm.test>)
-    - ROCanalysis rocanalysis
-    - deltaAUC()
+    - roc.area.test
+    - print.roc.area.test
+    - roc.curve
+    - print.roc.curve
+    - plot.roc.curve
+    - lines.roc.curve
+    - roc.perm.test
+    - print.roc.perm.test
+    - plot.roc.perm.test
+    - ROCanalysis
+    - rocanalysis
+    - deltaAUC
   - subtitle: Survival Analysis
   - contents:
-    - permlogrank()
-    - calogrank()
-    - coxphCPE()
-    - coxphQuantile()
-    - coxphERR()
-    - jonckheere.test()
+    - permlogrank
+    - calogrank
+    - coxphCPE
+    - coxphQuantile
+    - coxphERR
+    - jonckheere.test
   - subtitle: Miscellaneous
-    - aucVardiTest()
-    - ktau()
+  - contents:
+    - aucVardiTest
+    - ktau
 
