@@ -88,38 +88,19 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span>   <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/therneau/survival" class="external-link">survival</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">pbc</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>data set ‘pbc’ not found</span>
 <span class="r-in"><span>  <span class="va">pbc1</span> <span class="op">&lt;-</span> <span class="va">pbc</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'pbc' not found</span>
 <span class="r-in"><span>  <span class="va">pbc1</span><span class="op">$</span><span class="va">trt</span><span class="op">[</span><span class="va">pbc1</span><span class="op">$</span><span class="va">trt</span> <span class="op">==</span> <span class="op">-</span><span class="fl">9</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in pbc1$trt[pbc1$trt == -9] &lt;- NA:</span> object 'pbc1' not found</span>
 <span class="r-in"><span>  <span class="va">pbc1</span><span class="op">$</span><span class="va">copper</span><span class="op">[</span><span class="va">pbc1</span><span class="op">$</span><span class="va">copper</span> <span class="op">==</span> <span class="op">-</span><span class="fl">9</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in pbc1$copper[pbc1$copper == -9] &lt;- NA:</span> object 'pbc1' not found</span>
 <span class="r-in"><span>  <span class="fu">calogrank</span><span class="op">(</span><span class="va">pbc1</span><span class="op">$</span><span class="va">time</span>, <span class="va">pbc1</span><span class="op">$</span><span class="va">status</span>, <span class="va">pbc1</span><span class="op">$</span><span class="va">trt</span>, <span class="va">pbc1</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"copper"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Invalid status value, converted to NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> calogrank(ftime = pbc1$time, fstatus = pbc1$status, grp = pbc1$trt, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     cvt = pbc1[, c("copper")])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> n=143, 167 observations deleted due to missingness.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        N Observed Expected Exptd-adj (O-E)^2/V (O-aE)^2/aV</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> grp=1 74       64     64.8      9.91     0.023        28.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> grp=2 69       60     59.2      9.09     0.023        24.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Unconditional chisq= 0.02  on 1 degrees of freedom, p= 0.88 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Adjusted chisq= 0.15  on 1 degrees of freedom, p= 0.697 </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: survival</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in calogrank(pbc1$time, pbc1$status, pbc1$trt, pbc1[, c("copper")]):</span> object 'pbc1' not found</span>
 <span class="r-in"><span>  <span class="fu">calogrank</span><span class="op">(</span><span class="va">pbc1</span><span class="op">$</span><span class="va">time</span>, <span class="va">pbc1</span><span class="op">$</span><span class="va">status</span>, <span class="va">pbc1</span><span class="op">$</span><span class="va">trt</span>,</span></span>
 <span class="r-in"><span>                                  <span class="va">pbc1</span><span class="op">[</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"protime"</span>, <span class="st">"copper"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Invalid status value, converted to NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> calogrank(ftime = pbc1$time, fstatus = pbc1$status, grp = pbc1$trt, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     cvt = pbc1[, c("protime", "copper")])</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> n=143, 167 observations deleted due to missingness.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        N Observed Expected Exptd-adj (O-E)^2/V (O-aE)^2/aV</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> grp=1 74       64     64.8      9.93     0.023        46.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> grp=2 69       60     59.2      9.07     0.023        41.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  Unconditional chisq= 0.02  on 1 degrees of freedom, p= 0.88 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       Adjusted chisq= 0.56  on 1 degrees of freedom, p= 0.453 </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in calogrank(pbc1$time, pbc1$status, pbc1$trt, pbc1[, c("protime",     "copper")]):</span> object 'pbc1' not found</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
