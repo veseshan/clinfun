@@ -10,8 +10,8 @@
 \usage{
   roc.curve(marker, status, method=c("empirical"))
   \method{print}{roc.curve}(x, \dots)
-  \method{plot}{roc.curve}(x, \dots)
-  \method{lines}{roc.curve}(x, \dots)
+  \method{plot}{roc.curve}(x, PRC=FALSE, \dots)
+  \method{lines}{roc.curve}(x, PRC=FALSE, \dots)
 }
 \arguments{
   \item{marker}{the marker values for each subject.}
@@ -19,13 +19,16 @@
   \item{method}{the method for estimating the ROC curve.  Currently only
     the empirical curve is implemented.}
   \item{x}{object of class roc.area.test output from this function.}
+  \item{PRC}{flag to tell whether ROC or Precision-Recall curve plotted.}
   \item{...}{optional arguments to the print, plot and lines functions.}
 }
 \value{a list with the following elements
-  \item{tpr}{true positive rates for all thresholds.}
-  \item{fpr}{true positive rates for all thresholds.}
   \item{marker}{the diagnostic marker being studied.}
   \item{status}{binary disease }
+  \item{tpr}{true positive rates for all thresholds.}
+  \item{fpr}{true positive rates for all thresholds.}
+  \item{ppv}{positive predictive values for all thresholds.}
+  \item{npv}{negative predictive values for all thresholds.}
 
   The "print" method returns the nonparametric AUC and its s.e.
 

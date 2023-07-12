@@ -63,16 +63,33 @@ bdrycross.prob(n, r, ptox)
   \item{bdry.alpha}{the alpha levels for testing at each look for the
     two boundaries.}
 
-  stopping for toxicity is done when the number of toxicities exceeda
+  stopping for toxicity is done when the number of toxicities exceeds
   the boundary i.e. the boundary gives the maximum acceptable number.
 }
 \details{
-  Default value of boundary shape corresponds to the Pocock boundary
-  where the same significance level is used for all looks. For a more
-  conservative stopping rule use delta greater than 0 where 0.5
-  corresponds to the O'Brien-Fleming boundary which is extremely
-  conservative in the early looks. Value between 0.1 and 0.2 is a
-  reasonable compromise.
+  The shape parameter delta is used to determine the stopping boundary
+  with 0 corresponding to the Pocock boundary where the same
+  significance level is used for all looks and 0.5 corresponding to the
+  O'Brien-Fleming boundary which has smaller probability of stopping at
+  early looks.
+
+  Default value of delta for toxicity monitoring is 0; value between 0.1
+  and 0.2 is a reasonable choice to make it less likely to stop early.
+  Default values of delta for futility stopping is 0.5.
+
+  For toxicity monitoring two sets of probabilities - pstop and pcross -
+  are given which correspond to probability of stopping early and
+  probability of declaring the treatment too toxic with the full
+  complement of study subjects accrued and treated.
+
+  For futility monitoring instead two sets of probabilities - pstop and
+  peffective - are given corresponding to the probability of stopping
+  early for futility and probability of finishing the trial and
+  declaring it a success. Note that peffective is the complement of
+  pcross in toxicity monitoring.
+
+  The futility boundary can have a -1 in earlier looks which means that
+  even zero responses is not sufficient for stopping at that look.
 
   The exact calculations in this function are done along the lines of
   the method in Chapter 12 of Jennison and Turnbull (2000). Ivanova,

@@ -1,14 +1,25 @@
-# clinfun 1.1.1 (03/07/2023)
+# clinfun 1.1.3 (07/11/2023)
 
-* changed class check to use `inherits()` instead of comparing strings
+* fixed the bug in ph2simon/twostage.admissible when minimax is also optimal
+* ph2simon and toxbdry help have been made more clear
 
-### New Documentation
+# clinfun 1.1.2 (06/19/2023)
 
-* Added new vignette highlighting clinical trial functions ([on website](https://veseshan.github.io/clinfun/articles/clinical-trial-functions.html)
+* changed all dfloat in fortran to dble
+* print method for ph2simon now lists admissible designs
 
 ### New Functionality
 
-* Added out.ties option to `coxphCPE()` for discrete risk score case
+* plot and lines method for roc.curve includes the option for precision-recall curve
+* roc.curve returns PPV and NPV which are needed for precision-recall curve
+
+# clinfun 1.1.1 (03/06/2023)
+
+* changed class check to use inherits instead of comparing strings
+
+### New Functionality
+
+* Added out.ties option to coxphCPE for discrete risk score case
 
 # clinfun 1.1.0 (02/22/2022)
 

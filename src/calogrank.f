@@ -27,7 +27,7 @@ c     bb is the bandwidth for the kernel
       double precision rn,kernel,kwtii,kwtij
       external kernel
 
-      rn = dfloat(n)
+      rn = dble(n)
 
 c     calculate the a0 and a1 vector for all time points
 c     the vij calculations depend only on these
