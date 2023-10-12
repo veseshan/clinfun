@@ -15,7 +15,7 @@ c     uu is a vector of n uniform(0,1) random numbers
          j = ns2(i+1) - ns2(i)
          do 50 while(j .gt. 1) 
             l = l+1
-            k = int(uu(l)*dfloat(j))
+            k = int(uu(l)*dble(j))
             tmp = ii(l)
             ii(l) = ii(l+k)
             ii(l+k) = tmp

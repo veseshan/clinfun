@@ -12,9 +12,9 @@ c     storage for x, loc used to store ith marker and order
       double precision, allocatable :: x(:)
       allocate(x(n), loc(n))
 
-      rn = dfloat(nn-1)*dfloat(nd)
-      rd = dfloat(nn)*dfloat(nd-1)
-      rnd = dfloat(nn)*dfloat(nd)
+      rn = dble(nn-1)*dble(nd)
+      rd = dble(nn)*dble(nd-1)
+      rnd = dble(nn)*dble(nd)
 
       do 100 k = 1,nv
          do 10 i = 1, n
@@ -31,7 +31,7 @@ c     now the contribution of each observation
          nties0 = 0
 c     normlt is #normal < x  &  disgt is #diseased > x 
          normlt = 0
-         disgt = dfloat(nd)
+         disgt = dble(nd)
          do 30 i = 1, n-1
             if (x(i) .eq. x(i+1)) then
                nties = nties + 1
@@ -40,17 +40,17 @@ c     normlt is #normal < x  &  disgt is #diseased > x
                nties = nties + 1
                if (loc(i) .le. nn) nties0 = nties0 + 1
                nties1 = nties - nties0
-               disgt = disgt - dfloat(nties1)
+               disgt = disgt - dble(nties1)
                do 20 j = (i-nties+1),i
                   j0 = loc(j)
                   if (j0 .le. nn) then
-                     jkarea(j0,k) = disgt + 0.5*dfloat(nties1)
+                     jkarea(j0,k) = disgt + 0.5*dble(nties1)
                      area(k) = area(k) + jkarea(j0,k)
                   else
-                     jkarea(j0,k) = normlt + 0.5*dfloat(nties0)
+                     jkarea(j0,k) = normlt + 0.5*dble(nties0)
                   endif
  20            continue
-               normlt = normlt + dfloat(nties0)
+               normlt = normlt + dble(nties0)
                nties = 0
                nties0 = 0
             endif
@@ -58,14 +58,14 @@ c     normlt is #normal < x  &  disgt is #diseased > x
          nties = nties + 1
          if (loc(n) .le. nn) nties0 = nties0 + 1
          nties1 = nties - nties0
-         disgt = disgt - dfloat(nties1)
+         disgt = disgt - dble(nties1)
          do 40 j = (n-nties+1),n
             j0 = loc(j)
             if (j0 .le. nn) then
-               jkarea(j0,k) = disgt + 0.5*dfloat(nties1)
+               jkarea(j0,k) = disgt + 0.5*dble(nties1)
                area(k) = area(k) + jkarea(j0,k)
             else
-               jkarea(j0,k) = normlt + 0.5*dfloat(nties0)
+               jkarea(j0,k) = normlt + 0.5*dble(nties0)
             endif
  40      continue
 

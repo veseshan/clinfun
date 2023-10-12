@@ -65,9 +65,9 @@ c     Computes unconditional power for Fisher's exact rejection region
             j = k - i
             if ((i.lt.fcl(k+1,1)).or.(i.gt.fcl(k+1,2))) then
                bprob1 = exp(lgamma(n1+1) - lgamma(i+1) - lgamma(n1-i+1)
-     1              + dfloat(i)*lp1 + dfloat(n1-i)*l1p1)
+     1              + dble(i)*lp1 + dble(n1-i)*l1p1)
                bprob2 = exp(lgamma(n2+1) - lgamma(j+1) - lgamma(n2-j+1)
-     1              + dfloat(j)*lp2 + dfloat(n2-j)*l1p2)
+     1              + dble(j)*lp2 + dble(n2-j)*l1p2)
                upow = upow + bprob1*bprob2
             endif
  10      continue
@@ -131,22 +131,22 @@ c     ossiz contains the Fleiss and FE sample size and power
       call fepow(nmx,n1f,n2f,p1,p2,fcl,lgamma,upow)
       ossiz(1,3) = upow
 
-      fen1 = int(ossiz(1,1)-dfloat(npm)) + 1
-      fen2 = int(ossiz(1,2)-r*dfloat(npm)) + 1
+      fen1 = int(ossiz(1,1)-dble(npm)) + 1
+      fen2 = int(ossiz(1,2)-r*dble(npm)) + 1
       do 20 i = -npm,npm
-         n1 = int(ossiz(1,1)+dfloat(i)) + 1
-         n2 = int(ossiz(1,2)+r*dfloat(i)) + 1
+         n1 = int(ossiz(1,1)+dble(i)) + 1
+         n2 = int(ossiz(1,2)+r*dble(i)) + 1
          call ferej(nmx,n1,n2,alpha,fcl,lgamma)
          call fepow(nmx,n1,n2,p1,p2,fcl,lgamma,upow)
          if (upow.lt.power) then
-            fen1 = int(ossiz(1,1)+dfloat(i+1)) + 1
-            fen2 = int(ossiz(1,2)+r*dfloat(i+1)) + 1
+            fen1 = int(ossiz(1,1)+dble(i+1)) + 1
+            fen2 = int(ossiz(1,2)+r*dble(i+1)) + 1
          endif
  20   continue
       call ferej(nmx,fen1,fen2,alpha,fcl,lgamma)
       call fepow(nmx,fen1,fen2,p1,p2,fcl,lgamma,upow)
-      ossiz(2,1) = dfloat(fen1)
-      ossiz(2,2) = dfloat(fen2)
+      ossiz(2,1) = dble(fen1)
+      ossiz(2,2) = dble(fen2)
       ossiz(2,3) = upow
 
       return

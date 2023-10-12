@@ -14,11 +14,11 @@ c------------------------------------------------------------------------------
       integer i,n1,n2,n,r1,r,ind1,ind2,ind21,rr
 
       do 100 n = 2,nmax
-         essn = dfloat(n)
+         essn = dble(n)
          do 90 n1 = 1,n-1
             n2 = n-n1
-            dn1 = dfloat(n1)
-            dn2 = dfloat(n2)
+            dn1 = dble(n1)
+            dn2 = dble(n2)
             ind1 = n1*(n1+3)/2
             ind2 = n2*(n2+3)/2
             do 10 i=1,n+1

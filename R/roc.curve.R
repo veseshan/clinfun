@@ -22,6 +22,10 @@ roc.curve <- function(marker, status, method=c("empirical")) {
   out$status <- status
   out$tpr <- zzz$tpr
   out$fpr <- zzz$fpr
+  # add PPV for precision(ppv)-recall(tpr) curve (and NPV for completeness)
+  prev = n1/n
+  out$ppv = prev*out$tpr/(prev*out$tpr + (1-prev)*out$fpr)
+  out$npv = (1-prev)*(1-out$fpr)/(prev*(1-out$tpr) + (1-prev)*(1-out$fpr))
   class(out) <- "roc.curve"
   out
 }
@@ -31,10 +35,18 @@ print.roc.curve <- function(x, ...) {
   cat("  ROC curve with AUC =", out$area, "and s.e. =", sqrt(out$var), "\n")
 }
 
-plot.roc.curve <- function(x, ...) {
-  plot(x$fpr, x$tpr, xlab="False positive rate", ylab="True positive rate", type="l", ...)
+plot.roc.curve <- function(x, PRC=FALSE, ...) {
+  if (PRC) {
+    plot(x$tpr, x$ppv, xlab="Recall (TPR)", ylab="Precision (PPV)", ylim=c(0,1), type="l", ...)
+  } else {
+    plot(x$fpr, x$tpr, xlab="False positive rate", ylab="True positive rate", type="l", ...)
+  }
 }
 
-lines.roc.curve <- function(x, ...) {
-  lines(x$fpr, x$tpr, ...)
+lines.roc.curve <- function(x, PRC=FALSE, ...) {
+  if (PRC) {
+    lines(x$tpr, x$ppv, ...)
+  } else {
+    lines(x$fpr, x$tpr, ...)
+  }
 }

@@ -21,7 +21,7 @@ c     dmat, wmat (matrices) and valt (scalar) objects that are returned
       external fpnorm, fdnorm
 
       n1 = n - n0
-      n0n1 = dfloat(n0)*dfloat(n1)
+      n0n1 = dble(n0)*dble(n1)
 
       allocate(uidot(n1, p), udotj(n0,p))
       allocate(uij(p), xij(p), w1(p,p), w2(p,p), wsq(p,p))
@@ -117,8 +117,8 @@ c     symmetrize dmat, w1 and w2
 
 c     scale dmat by n0*n1
 c     scale w1 by n1*n0*(n0-1) and w2 by n1*(n1-1)*n0 and calculate W
-      nw1 = dfloat(n)/(dfloat(n1)**2 * dfloat(n0) * dfloat(n0-1))
-      nw2 = dfloat(n)/(dfloat(n0)**2 * dfloat(n1) * dfloat(n1-1))
+      nw1 = dble(n)/(dble(n1)**2 * dble(n0) * dble(n0-1))
+      nw2 = dble(n)/(dble(n0)**2 * dble(n1) * dble(n1-1))
       do 90 k = 1, p
          do 89 l = 1, p
             wmat(k,l) = nw1*w1(k,l) + nw2*w2(k,l)
@@ -139,7 +139,7 @@ c     calculating the variance under the alternative
 
 c     xbeta is scaled by bandwidth for density need scaling for cdf
 c     bwratio is the bandwidth ratio n^1/3 for cdf and n^1/5 for pdf
-      bwratio = dfloat(n)**(-2.0d0/15.0d0)
+      bwratio = dble(n)**(-2.0d0/15.0d0)
       do 102 i = 1,n
          xb(i) = xb(i)*bwratio
  102  continue
@@ -195,7 +195,7 @@ c     storage for x, loc used to store ith marker and order
       allocate(x(n), loc(n))
 
       nd = n - nn
-      rnd = dfloat(nn)*dfloat(nd)
+      rnd = dble(nn)*dble(nd)
 
       do 10 i = 1, n
          x(i) = marker(i)
@@ -210,7 +210,7 @@ c     now the contribution of each observation
       nties = 0
       nties1 = 0
 c     disgt is #diseased with marker value > x 
-      disgt = dfloat(nd)
+      disgt = dble(nd)
       do 20 i = 1, n-1
          if (x(i) .eq. x(i+1)) then
 c     if next marker value is same as current go to the next i
@@ -222,9 +222,9 @@ c     if not update area and reset ties counters to zero
             nties = nties + 1
             if (loc(i) .gt. nn) nties1 = nties1 + 1
             nties0 = nties - nties1
-            disgt = disgt - dfloat(nties1)
+            disgt = disgt - dble(nties1)
 c     increment count by #dis > x and half #dis == x for each normal at x
-            area = area + dfloat(nties0)*(disgt + 0.5*dfloat(nties1))
+            area = area + dble(nties0)*(disgt + 0.5*dble(nties1))
             nties = 0
             nties1 = 0
          endif
@@ -233,9 +233,9 @@ c     update number of obsns with value of marker(n) and update area
       nties = nties + 1
       if (loc(n) .gt. nn) nties1 = nties1 + 1
       nties0 = nties - nties1
-      disgt = disgt - dfloat(nties1)
+      disgt = disgt - dble(nties1)
 c     increment count by #dis > x and half #dis == x for each normal at x
-      area = area + dfloat(nties0)*(disgt + 0.5*dfloat(nties1))
+      area = area + dble(nties0)*(disgt + 0.5*dble(nties1))
 c     calculate the area
       area = area/rnd
 
@@ -257,7 +257,7 @@ c     marker has been scaled by the bandwidth
       external fpnorm
 
       nd = n - nn
-      rnd = dfloat(nn)*dfloat(nd)
+      rnd = dble(nn)*dble(nd)
 
       area = 0.0d0
       do 20 i = 1, nn

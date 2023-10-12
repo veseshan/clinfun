@@ -11,7 +11,7 @@ c     storage for idx used to store indices for blocks of x
       integer, allocatable :: idx(:)
       allocate(idx(n))
 
-      dn = dfloat(n)*dfloat(n-1)/2
+      dn = dble(n)*dble(n-1)/2
 
       dnx = 0.0d0
       nties = 1
@@ -25,7 +25,7 @@ c     n0 is the number of unique x values
             n0 = n0+1
 c     here idx[i] = sum(x == ux[i]) where ux is sort(unique(x))
             idx(n0) = nties
-            ties = dfloat(nties)
+            ties = dble(nties)
             dnx = dnx + ties*(ties-1.0d0)/2.0d0
             nties = 1
          endif
@@ -33,7 +33,7 @@ c     here idx[i] = sum(x == ux[i]) where ux is sort(unique(x))
       n0 = n0+1
       idx(n0) = nties
       if (x(n-1) .eq. x(n)) then 
-         ties = dfloat(nties)
+         ties = dble(nties)
          dnx = dnx + ties*(ties-1.0d0)/2.0d0
       endif
 c     now idx[i] = sum(x <= ux[i]) where ux is sort(unique(x))
@@ -134,7 +134,7 @@ c     need localy[m+1] larger than y[m1] (make it larger than all y's)
 c     initialize number lt, eq, and gt as well as btau
 c     at the start all y[m1+1] to y[m] are assumed larger
       numlt = 0
-      numgt = dfloat(m-m1)
+      numgt = dble(m-m1)
       numeq = 0
 
 c     initialize block count

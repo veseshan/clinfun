@@ -1,49 +1,3 @@
-##' Simon's two-stage Phase II design
-##'
-##' Calculates the sample size and decision rules for Optimal and Minimax
-##' two-stage Phase II designs given by Richard Simon. The trial proceeds to
-##' the second stage only if a minimal number of responses is observed at the
-##' end of the first stage.
-##'
-##'
-##' @aliases ph2simon print.ph2simon plot.ph2simon
-##' @param pu unacceptable response rate; baseline response rate that needs to
-##' be exceeded for treatment to be deemed promising
-##' @param pa response rate that is desirable; should be larger than pu
-##' @param ep1 threshold for the probability of declaring drug promising under
-##' pu (target type 1 error rate); between 0 and 1
-##' @param ep2 threshold for the probability of declaring the drug not
-##' promising under pa (target type 2 error rate); between 0 and 1
-##' @param nmax maximum total sample size (default 100; can be at most 1000)
-##' @param x object returned by ph2simon
-##' @param ... arguments to be passed onto plot and print commands
-##' @return ph2simon returns a list with pu, pa, alpha, beta and nmax (as defined above)
-##' and: \item{out}{matrix of best two-stage designs for each value of total
-##' sample size n. The 6 columns in the matrix are: \tabular{rl}{ r1 \tab
-##' number of responses needed to exceeded in first stage \cr n1 \tab number of
-##' subjects treated in first stage \cr r \tab number of responses needed to
-##' exceeded at the end of trial \cr n \tab total number of subjects to be
-##' treated in the trial \cr EN(pu) \tab expected number pf patients in the
-##' trial under pu \cr PET(pu) \tab probability of stopping after the first
-##' stage under pu } }
-##'
-##' Trial is stopped early if <= r1 responses are seen in the first stage and
-##' treatment is considered desirable only when >r responses seen.
-##'
-##' @seealso \code{\link{twostage.inference}}, \code{\link{oc.twostage.bdry}}
-##' @references Simon R. (1989).  Optimal Two-Stage Designs for Phase II
-##' Clinical Trials. \emph{Controlled Clinical Trials} 10, 1-10.
-##'
-##' Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage Designs
-##' for Phase II Clinical Trials. \emph{Controlled Clinical Trials} 22,
-##' 367-372.
-##' @keywords design design
-##' @examples
-##'
-##'   ph2simon(0.2, 0.4, 0.1, 0.1)
-##'   ph2simon(0.2, 0.35, 0.05, 0.05)
-##'   ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
-##'
 ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   if(nmax > 1000) stop("nmax cannot exceed 1000")
   nmax1 <- nmax + 1
@@ -92,14 +46,14 @@ ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   ph2
 }
 
-#' @describeIn ph2simon formats and returns the minimax and optimal designs
 print.ph2simon <- function(x, ...) {
   xout <- x$out
   nmax <- x$nmax
   n <- nrow(xout)
   nopt <- ((1:n)[xout[,5]==min(xout[,5])])[1]
-  xopt <- xout[c(nopt,1),]
-  dimnames(xopt)[[1]] <- c("Optimal","Minimax")
+  #xopt <- xout[c(nopt,1),]
+  #dimnames(xopt)[[1]] <- c("Optimal","Minimax")
+  xopt <- twostage.admissible(x)
   cat("\n Simon 2-stage Phase II design \n\n")
   cat("Unacceptable response rate: ",x$pu,"\n")
   cat("Desirable response rate: ",x$pa,"\n")
@@ -109,7 +63,6 @@ print.ph2simon <- function(x, ...) {
   if(xopt[1,4]>nmax-10) warning(paste("  Optimal sample size too close to nmax. \n  Try increasing nmax (current value = ",nmax,")\n",sep=""))
 }
 
-#' @describeIn ph2simon plots the expected sample size against the maximum sample size ass in Jung et al., 2001
 plot.ph2simon <- function(x, ...) {
   xout <- x$out
   n <- nrow(xout)
@@ -209,13 +162,20 @@ twostage.admissible  <- function(x) {
     adm[istart+imin] = 1
     istart = istart+imin
   }
-  xout = xout[1:nopt,][adm==1,]
-  # find weight probability at which each rule is admissible
-  dmss = diff(xout[,4])
-  dess = diff(xout[,5])
-  qwt = round(dess/(dess - dmss),3)
-  # admissible designs
-  xout = cbind(xout, c(qwt, 0), c(1, qwt))
+  # this gives an error if minimax design is also optimal
+  # example ph2simon(0.8, 0.95, 0.05, 0.2)
+  if (nopt == 1) { # when minimal is also optimal
+    xout = xout[c(1, nopt),]
+    xout = cbind(xout, c(0, 0), c(1, 1))
+  } else {
+    xout = xout[1:nopt, ][adm == 1, ]
+    # find weight probability at which each rule is admissible
+    dmss = diff(xout[, 4])
+    dess = diff(xout[, 5])
+    qwt = round(dess/(dess - dmss), 3)
+    # admissible designs
+    xout = cbind(xout, c(qwt, 0), c(1, qwt))
+  }
   colnames(xout)[7:8] = c("qLo", "qHi")
   rownames(xout) = c("Minimax", rep("Admissible", nrow(xout)-2), "Optimal")
   xout

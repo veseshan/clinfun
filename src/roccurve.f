@@ -8,8 +8,8 @@ c     Delong, Delong, Clarke-Pearson variance for area under ROC
       integer i, l
       double precision rn, rd, normgt, disgt
 
-      rn = dfloat(nn)
-      rd = dfloat(nd)
+      rn = dble(nn)
+      rd = dble(nd)
 
 c     now the contribution of each unique observation
       l = nu

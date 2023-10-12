@@ -35,22 +35,22 @@ c     calculate the total sample size
 c     initialize rank-sum and mcgsiz (= gsize*oratio) vector
             do 20 i = 1, ng
                rsum(i) = 0.0
-               mcgsiz(i) = dfloat(gsize(i))*oratio(i)
+               mcgsiz(i) = dble(gsize(i))*oratio(i)
  20         continue
 c     generate a new rank-sum vector
             call kwrsum(nn, ng, mcgsiz, oratio, rsum, gsor)
 c     compute Kruskal-Wallis test statistic
             tstat(nr) = 0.0
             do 30 i = 1, ng
-               tstat(nr) = tstat(nr) + rsum(i)**2/dfloat(gsize(i))
+               tstat(nr) = tstat(nr) + rsum(i)**2/dble(gsize(i))
  30         continue
  50      continue
       else
          do 100 nr = 1, nrep
 c     initialize rank-sum and mcgsiz (= gsize*oratio) vector
             do 60 i = 1, ng
-               rsum(i) = dfloat(gsize(i))
-               mcgsiz(i) = dfloat(gsize(i))*oratio(i)
+               rsum(i) = dble(gsize(i))
+               mcgsiz(i) = dble(gsize(i))*oratio(i)
  60         continue
 c     compute Jonckheere-Terpstra statistic for a new rank-sum vector
             tstat(nr) = jtstat(nn, ng, mcgsiz, oratio, rsum, gsor)
@@ -91,7 +91,7 @@ c     decrease nj*or(j) for the jth group
 c     decrease sum(nj*or(j))
          mcgsor = mcgsor - oratio(j)
 c     add to rank sum for jth group
-         rsum(j) = rsum(j) + dfloat(i)
+         rsum(j) = rsum(j) + dble(i)
  20   continue
 
       return
@@ -109,7 +109,7 @@ c     add to rank sum for jth group
       integer i, j
 
 c     initialize J-T statistic as n+(n-1)+...+1
-      jtstat = dfloat(nn*(nn+1))/2
+      jtstat = dble(nn*(nn+1))/2
 c     ith obsn is in group j with prob nj*or(j)/sum(nj*or(j))
 c     sum(nj*or(j)) at the beginning 
       mcgsor = gsor
