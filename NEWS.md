@@ -1,3 +1,8 @@
+# clinfun 1.1.4 (10/12/2023)
+
+* added check for n; since it is for stopping early at least two values should be given
+* addressed the warning in the example for calogrank; status had both death and transplant
+
 # clinfun 1.1.3 (07/11/2023)
 
 * fixed the bug in ph2simon/twostage.admissible when minimax is also optimal

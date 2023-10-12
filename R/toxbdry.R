@@ -113,6 +113,9 @@ bdrycross.prob <- function(n, r, ptox) {
 # P(cross bdry | low non-response rate) = cP0 -> response not promising -> 1-power
 # since size under null needs to be met priority choice should be "alt"
 futilbdry <- function(rLo, rHi, n, size=0.1, power=0.9, ngrid=3, niter=10, delta=0.5) {
+  # stop if length(n) is 1; check that values in n are increasing
+  if (length(n) == 1) stop("n should have at least two values to be able to stop early")
+  if (min(diff(n)) < 1) stop("n should be in increasing order")
   # setup toxbdry parameters
   pLo = 1-rHi
   pHi = 1-rLo
@@ -138,6 +141,9 @@ futilbdry <- function(rLo, rHi, n, size=0.1, power=0.9, ngrid=3, niter=10, delta
 
 # toxicity boundary
 toxbdry <- function(pLo, pHi, n, cP0=0.1, cP1=0.9, ngrid=6, niter=10, delta=0, priority=c("null","alt")) {
+# stop if length(n) is 1; check that values in n are increasing
+  if (length(n) == 1) stop("n should have at least two values to be able to stop early")
+  if (min(diff(n)) < 1) stop("n should be in increasing order")
 # decide whether to prioritize the type I (null) or the type II (alt) error.
   priority <- match.arg(priority)
   priorityNull= priority=="null"
