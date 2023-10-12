@@ -1,8 +1,17 @@
 \name{clinfun-internal}
 \title{Internal clinfun functions}
-\alias{compareROC}
+\alias{compareROC.paired}
+\alias{compareROC.unpaired}
 \alias{exactNull}
+\alias{getBoundary}
+\alias{gsd.bdryconstant}
+\alias{gsd.drift.efficacy}
+\alias{gsd.drift.both}
 \alias{gsd.drift}
+\alias{mrcobj}
+\alias{smmrcobj}
+\alias{rocauc}
+\alias{smrocauc}
 \description{
  Internal functions used by the functions in the package.
 }

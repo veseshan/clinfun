@@ -63,7 +63,7 @@ gsdesign.survival(ifrac, haz.ratio, r = 1, sig.level = 0.05,
   in that the true size is less than the nominal level.
 
   The Casagrande-Pike-Smith type continuity correction is obtained using
-  the formula n*{1 + sqrt{1+4/{abs(pC-pE)*n}}}^2 where n is the
-  uncorrected sample size.
+  the formula \deqn{n*[1 + \sqrt{1+4/(|pC-pE|*n)}]^2} where n is
+  the uncorrected sample size.
 }
 \keyword{design}
