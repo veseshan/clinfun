@@ -49,8 +49,10 @@ gsdesign.survival(ifrac, haz.ratio, r = 1, sig.level = 0.05,
 }
 \value{
   a list with ifrac, sig.level, power, alternative, delta.eb, delta.fb and:
-  \item{efbdry}{the critical value to use at the different looks.}
-  \item{futbdry}{the critical value to use at the different looks.}
+  \item{efbdry}{the critical value to use at the different looks. For
+  two-sided alternative the absolute test statistic should exceed this.}
+  \item{futbdry}{the critical value to use at the different looks. For
+  two-sided alternative the absolute test statistic should be below this.}
   \item{sample.size}{the sample size per arm for binomial/normal data.}
   \item{num.events}{the total number of failures which should be
     converted to number of subjects using censoring proportion.}  
@@ -59,11 +61,24 @@ gsdesign.survival(ifrac, haz.ratio, r = 1, sig.level = 0.05,
   The futility boundary is not returned when delta.fb is not specified
   i.e. stopping for futility is not requested.  The futility boundary is
   non-binding.  That is the significance level is not adjusted to account
-  for early stopping for utility.  This makes the test a bit conservative
+  for early stopping for futility.  This makes the test a bit conservative 
   in that the true size is less than the nominal level.
+
+  If the alternative is two-sided by default the futility boundary will
+  also be two-sided i.e. continuation region is wedge shaped. However,
+  if the goal is to show the superiority of the experimental treatment
+  then futility boundary should be one sided. This can be achieved by
+  deriving the boundaries for one-sided alternative and significance
+  level set at half of the value used for two sided alternative. See the
+  examples section for a representative design for which the trial
+  cannot be stopped at the first look for futility.
 
   The Casagrande-Pike-Smith type continuity correction is obtained using
   the formula \deqn{n*[1 + \sqrt{1+4/(|pC-pE|*n)}]^2} where n is
   the uncorrected sample size.
+}
+\examples{
+  gsdesign.normal(1:4/4, 0.25, sig.level=0.05, alt="t", delta.fb=0.5)
+  gsdesign.normal(1:4/4, 0.25, sig.level=0.025, alt="o", delta.fb=0.5)
 }
 \keyword{design}

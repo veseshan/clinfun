@@ -1,3 +1,7 @@
+# clinfun 1.1.5 (10/19/2023)
+
+* clarified one-sided vs two-sided futility boundary for gsdesign functions
+
 # clinfun 1.1.4 (10/12/2023)
 
 * added check for n; since it is for stopping early at least two values should be given
