@@ -1,3 +1,6 @@
+
+# ph2simon ---------------------------------------------------------------
+
 #' @name ph2simon
 #' @title Simon's two-stage Phase II design
 #' @usage
@@ -21,10 +24,10 @@
 #' @param pu unacceptable response rate; baseline response rate that needs to
 #' be exceeded for treatment to be deemed promising
 #' @param pa response rate that is desirable; should be larger than pu
-#' @param ep1 threshold for the probability of declaring drug desirable under
-#' pu (target type 1 error rate); between 0 and 1
-#' @param ep2 threshold for the probability of rejecting the drug under pa
-#' (target type 2 error rate); between 0 and 1
+#' @param ep1 threshold for the probability of declaring drug promising
+#; under pu (target type 1 error rate); between 0 and 1
+#' @param ep2 threshold for the probability of declaring the drug not
+#' promising under pa (target type 2 error rate); between 0 and 1
 #' @param nmax maximum total sample size (default is 100; can be at most 1000)
 #' @param x object returned by ph2simon
 #' @param ... arguments to be passed onto plot and print commands called
@@ -72,5 +75,33 @@
 #' ph2simon(0.2, 0.35, 0.05, 0.05)
 #' result <- ph2simon(0.2, 0.35, 0.05, 0.05, nmax=150)
 #' plot(result)
+#'
+NULL
+
+
+
+# ph2single ---------------------------------------------------------------
+
+#' @name ph2single
+#' @title Exact single stage Phase II design
+#'
+#' Calculates the sample size and decision rule exact single stage
+#' Phase II design
+#'
+#' @usage ph2single(pu,pa,ep1,ep2,nsoln=5)
+#' @inheritParams ph2simon
+#' @param nsoln number of designs to be returned for given `ep1` and `ep2`
+#' @return  ph2single returns a data frame with the following variables:
+#'    - `n` - the total number of subjects treated (n)
+#'    - `r` - the number of responses (r) needed to be exceeded to consider
+#' treatment promising
+#'    - `Type I error`
+#'    - `Type II error`
+#' @keywords design
+#' @family phase2
+#' @examples
+#' ph2single(0.2, 0.4, 0.1, 0.1)
+#' ph2single(0.2, 0.35, 0.05, 0.05)
+#' ph2single(0.2, 0.35, 0.05, 0.05, nsoln = 10)
 #'
 NULL
