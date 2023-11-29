@@ -1,3 +1,5 @@
+# clinfun (development version)
+
 # clinfun 1.1.5 (10/19/2023)
 
 * clarified one-sided vs two-sided futility boundary for gsdesign functions
