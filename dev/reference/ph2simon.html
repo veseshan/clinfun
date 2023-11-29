@@ -55,8 +55,8 @@ Trial is stopped early if &amp;lt;= r1 responses are seen in the first stage."><
 
     <div class="ref-description section level2">
     <p>Calculates the sample size and decision rules for Optimal and Minimax
-two-stage Phase II designs given by Richard Simon.
-The trial proceeds to the second stage only if a minimal number of
+two-stage Phase II designs given by Richard Simon.</p>
+<p>The trial proceeds to the second stage only if a minimal number of
 responses (&gt; <code>r</code>) is observed at the end of the first stage.
 Trial is stopped early if &lt;= <code>r1</code> responses are seen in the first stage.</p>
     </div>
@@ -75,8 +75,7 @@ Trial is stopped early if &lt;= <code>r1</code> responses are seen in the first 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>pu</dt>
-<dd><p>unacceptable response rate; baseline response rate that needs to
-be exceeded for treatment to be deemed promising</p></dd>
+<dd><p>unacceptable response rate; baseline response rate that needs to be exceeded for treatment to be deemed promising</p></dd>
 
 
 <dt>pa</dt>
@@ -84,13 +83,11 @@ be exceeded for treatment to be deemed promising</p></dd>
 
 
 <dt>ep1</dt>
-<dd><p>threshold for the probability of declaring drug desirable under
-pu (target type 1 error rate); between 0 and 1</p></dd>
+<dd><p>threshold for the probability of declaring drug promising under pu (target type 1 error rate); between 0 and 1</p></dd>
 
 
 <dt>ep2</dt>
-<dd><p>threshold for the probability of rejecting the drug under pa
-(target type 2 error rate); between 0 and 1</p></dd>
+<dd><p>threshold for the probability of declaring the drug not promising under pa (target type 2 error rate); between 0 and 1</p></dd>
 
 
 <dt>nmax</dt>
@@ -133,12 +130,15 @@ maximum sample size as in Jung et al., 2001</p>
 </ul></div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. <em>Controlled Clinical Trials</em>, 10, 1-10.</p>
-<p>Jung SH, Carey M, and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. <em>Controlled Clinical Trials</em>, 22, 367-372.</p>
-    </div>
+    
+<ul><li><p>Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. <em>Controlled Clinical Trials</em>, 10, 1-10.</p></li>
+<li><p>Jung SH, Carey M, and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. <em>Controlled Clinical Trials</em>, 22, 367-372.</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code>twostage.inference</code>, <code>oc.twostage.bdry</code></p></div>
+    <div class="dont-index"><p><code>twostage.inference</code>, <code>oc.twostage.bdry</code></p>
+<p>Other phase2: 
+<code><a href="ph2single.html">ph2single</a>()</code></p></div>
     </div>
 
     <div class="section level2">
