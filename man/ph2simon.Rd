@@ -15,16 +15,13 @@ print(x, ...)
 plot(x, ...)
 }
 \arguments{
-\item{pu}{unacceptable response rate; baseline response rate that needs to
-be exceeded for treatment to be deemed promising}
+\item{pu}{unacceptable response rate; baseline response rate that needs to be exceeded for treatment to be deemed promising}
 
 \item{pa}{response rate that is desirable; should be larger than pu}
 
-\item{ep1}{threshold for the probability of declaring drug desirable under
-pu (target type 1 error rate); between 0 and 1}
+\item{ep1}{threshold for the probability of declaring drug promising under pu (target type 1 error rate); between 0 and 1}
 
-\item{ep2}{threshold for the probability of rejecting the drug under pa
-(target type 2 error rate); between 0 and 1}
+\item{ep2}{threshold for the probability of declaring the drug not promising under pa (target type 2 error rate); between 0 and 1}
 
 \item{nmax}{maximum total sample size (default is 100; can be at most 1000)}
 
@@ -49,8 +46,9 @@ PET(pu) \tab Probability of stopping after the first stage under pu
 \description{
 Calculates the sample size and decision rules for Optimal and Minimax
 two-stage Phase II designs given by Richard Simon.
+
 The trial proceeds to the second stage only if a minimal number of
-responses (> \code{r}) is observed at the end of the first stage.
+responses (> \code{r1}) is observed at the end of the first stage.
 Trial is stopped early if <= \code{r1} responses are seen in the first stage.
 }
 \details{
@@ -78,12 +76,16 @@ plot(result)
 
 }
 \references{
-Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. \emph{Controlled Clinical Trials}, 10, 1-10.
-
-Jung SH, Carey M, and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. \emph{Controlled Clinical Trials}, 22, 367-372.
+\itemize{
+\item Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. \emph{Controlled Clinical Trials}, 10, 1-10.
+\item Jung SH, Carey M, and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. \emph{Controlled Clinical Trials}, 22, 367-372.
+}
 }
 \seealso{
 \code{twostage.inference}, \code{oc.twostage.bdry}
+
+Other phase2: 
+\code{\link{ph2single}()}
 }
 \concept{phase2}
 \keyword{design}
