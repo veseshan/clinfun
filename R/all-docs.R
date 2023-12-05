@@ -52,8 +52,10 @@ shared_ph2_args <- function() {
 #'       n1 \tab Number of subjects treated in first stage \cr
 #'       r \tab Number of total (stage 1 + stage 2) responses to be exceeded at the end of stage 2 for treatment to be deemed promising \cr
 #'       n \tab Total number (stage 1 + stage 2) of subjects to be treated in the trial \cr
-#'       EN(pu) \tab Expected number of patients in the trial under pu \cr
+#'       EN(pu) \tab Expected number of trial patients accrued under pu, calculated as the weighted
+#'        average of number of patients, weighted by the probability of early termination under pu \cr
 #'       PET(pu) \tab Probability of stopping after the first stage under pu
+#'        (i.e. probability of stopping at the end of stage 1 if the true response rate is pu)
 #'     }}
 #'
 #' @details
