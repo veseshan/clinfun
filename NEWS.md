@@ -1,3 +1,7 @@
+# clinfun 1.1.6 (12/06/2023)
+
+* moved twostage.admissible call from print method to ph2simon; added reference
+
 # clinfun 1.1.5 (10/19/2023)
 
 * clarified one-sided vs two-sided futility boundary for gsdesign functions
