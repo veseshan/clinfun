@@ -76,11 +76,17 @@ plot(result)
 
 }
 \references{
-\itemize{
-\item Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. \emph{Controlled Clinical Trials}, 10, 1-10.
-\item Jung SH, Carey M, and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. \emph{Controlled Clinical Trials}, 22, 367-372.
-}
-}
+
+  Simon R. (1989).  Optimal Two-Stage Designs for Phase II Clinical
+  Trials. \emph{Controlled Clinical Trials} 10, 1-10.
+
+  Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage
+  Designs for Phase II Clinical Trials. \emph{Controlled Clinical
+    Trials}  22, 367-372.
+  
+  Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage
+  designs for phase II cancer clinical trials. \emph{Statistics in
+    medicine} 23(4), 561-569.}
 \seealso{
 \code{twostage.inference}, \code{oc.twostage.bdry}
 
