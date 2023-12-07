@@ -29,7 +29,8 @@ shared_ph2_args <- function() {
 #'
 #' @description
 #' Calculates the sample size and decision rules for Optimal and Minimax
-#' two-stage Phase II designs given by Richard Simon.
+#' two-stage Phase II designs given by Richard Simon, as well as any admissible design options (Jung et al, 2004) under
+#' the given set of parameters.
 #'
 #' The trial proceeds to the second stage only if a minimal number of
 #' responses (> `r1`) is observed at the end of the first stage.
@@ -52,9 +53,9 @@ shared_ph2_args <- function() {
 #'       n1 \tab Number of subjects treated in first stage \cr
 #'       r \tab Number of total (stage 1 + stage 2) responses to be exceeded at the end of stage 2 for treatment to be deemed promising \cr
 #'       n \tab Total number (stage 1 + stage 2) of subjects to be treated in the trial \cr
-#'       EN(pu) \tab Expected number of trial patients accrued under pu, calculated as the weighted
+#'       EN(p0) \tab Expected number of trial patients accrued under pu, calculated as the weighted
 #'        average of number of patients, weighted by the probability of early termination under pu \cr
-#'       PET(pu) \tab Probability of stopping after the first stage under pu
+#'       PET(p0) \tab Probability of stopping after the first stage under pu
 #'        (i.e. probability of stopping at the end of stage 1 if the true response rate is pu)
 #'     }}
 #'
@@ -62,8 +63,12 @@ shared_ph2_args <- function() {
 #' Trial is stopped early if <= `r1` responses are seen in the first stage
 #' and treatment is considered desirable only when > `r` responses seen at the end of the second stage.
 #'
-#' The `print` method formats and returns the minimax and optimal
-#' designs.  The `plot` method plots the expected sample size against the
+#' Function will return design characteristics for the Optimal design (minimizes expected sample size under the null hypothesis),
+#' the minimax design (minimizes maximum sample size under the null), and any admissible designs
+#' (minimizes weighted average of expected sample size and maximum sample size).
+#'
+#' The `print` method formats and returns characteristics for admissible designs (including minimax and optimal designs)
+#' The `plot` method plots the expected sample size against the
 #' maximum sample size as in Jung et al., 2001
 
 #' @section Methods (by generic):
@@ -77,6 +82,7 @@ shared_ph2_args <- function() {
 #' @references
 #' - Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical Trials. *Controlled Clinical Trials*, 10, 1-10.
 #' - Jung SH, Carey M, and Kim KM. (2001). Graphical Search for Two-Stage Designs for Phase II Clinical Trials. *Controlled Clinical Trials*, 22, 367-372.
+#' - Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible Two-Stage Designs for Phase II Cancer Clinical Trials. *Statistics in medicine*, 23(4), 561-569.
 #'
 #' @keywords design
 #' @examples
@@ -137,7 +143,7 @@ NULL
 ##' @usage calogrank(ftime, fstatus, grp, cvt, strat=NULL)
 ##'
 ##' @details
-##' calogrank is the covariate adjusted version of k-sample survdiff.  The
+##' calogrank is the covariate adjusted version of k-sample survdiff. The
 ##' function in its current form only does basic error checking.
 ##'
 ##' @param ftime failure times
