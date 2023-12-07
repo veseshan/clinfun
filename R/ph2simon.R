@@ -42,6 +42,7 @@ ph2simon <- function(pu, pa, ep1, ep2, nmax = 100) {
   ph2$beta <- ep2
   ph2$out <- ph2out
   ph2$nmax <- nmax
+  ph2$xopt <- twostage.admissible(ph2)
   class(ph2) <- "ph2simon"
   ph2
 }
@@ -53,7 +54,7 @@ print.ph2simon <- function(x, ...) {
   nopt <- ((1:n)[xout[,5]==min(xout[,5])])[1]
   #xopt <- xout[c(nopt,1),]
   #dimnames(xopt)[[1]] <- c("Optimal","Minimax")
-  xopt <- twostage.admissible(x)
+  xopt <- x$xopt
   cat("\n Simon 2-stage Phase II design \n\n")
   cat("Unacceptable response rate: ",x$pu,"\n")
   cat("Desirable response rate: ",x$pa,"\n")

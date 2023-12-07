@@ -64,6 +64,10 @@ ph2simon(pu, pa, ep1, ep2, nmax=100)
   Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage
   Designs for Phase II Clinical Trials. \emph{Controlled Clinical
     Trials}  22, 367-372.
+  
+  Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage
+  designs for phase II cancer clinical trials. \emph{Statistics in
+    medicine} 23(4), 561-569.
 }
 
 \seealso{
