@@ -22,13 +22,23 @@ jtpdf <- function(gsize) {
   ng <- length(gsize)
   cgsize <- rev(cumsum(rev(gsize)))
   mxsum <- sum(gsize[-ng]*cgsize[-1]) + 1
+  # computing dwilcox in Fortran caused trouble in R v4.6
+  # wilcox_free didn't work as expected (could be user error) 
+  # get the dwilcox values and pass it on
+  mwpdfs = matrix(0, mxsum, ng)
+  for (g in (ng-1):1) {
+    m = gsize[g]
+    n = cgsize[g+1]
+    mn = m*n
+    mwpdfs[1+0:mn, g] = dwilcox(0:mn, m, n)
+  }
+  # call the convolution code
   zz <- .Fortran("jtpdf",
                  as.integer(mxsum),
                  pdf=double(mxsum),
                  as.integer(ng),
                  as.integer(cgsize),
-                 double(mxsum),
-                 double(mxsum))
+                 as.double(mwpdfs))
   zz$pdf
 }
 

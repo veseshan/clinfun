@@ -4,7 +4,8 @@
 \alias{ipmn}
 \keyword{htest}
 \description{
-  Conducts the test 
+  Testing the differences in the area under the ROC curves (AUC) from
+  nested maximum rank correlation models.
 }
 \usage{
   deltaAUC(y, x, z)

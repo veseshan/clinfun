@@ -19,5 +19,5 @@ ph2single(pu,pa,ep1,ep2,nsoln=5)
 }
 \value{
   ph2single returns a data frame with variables: n, r, and the Type I
-  and Type II errors. Treatment desirable if >r respenses seen.
+  and Type II errors. Treatment desirable if >r responses seen.
 }

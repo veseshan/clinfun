@@ -5,7 +5,7 @@
 \keyword{htest}
 \description{
   Computes the nonparametric area under the ROC curve and its variance
-  based on U-statistic theory (DDCP). 
+  based on U-statistic theory (DeLong et al, 1988).
 }
 \usage{
   roc.area.test(markers, status)

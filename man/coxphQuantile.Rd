@@ -3,13 +3,15 @@
 \alias{coxphQuantile}
 \keyword{survival}
 \description{
-  Draws a quantile curve of survival distribution as a function of covariate.
+  Given a specified quantile level p, draws a curve between survival
+  time and specified covariate. The curve represents the p-th quantile
+  of survival as a function of covariate.
 }
 \usage{
   coxphQuantile(phfit, xrange, p=0.5, whichx=1, otherx=NULL, ...)
 }
 \arguments{
-  \item{phfit}{output from a proportional hazards fit.}
+  \item{phfit}{a \code{coxph} object.}
   \item{xrange}{the range of covariate values for which the quantiles of
     survival times are computed.}
   \item{p}{the probability level for the quantile (default is median).}

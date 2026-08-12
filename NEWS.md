@@ -1,6 +1,9 @@
-# clinfun 1.1.6 (12/06/2023)
+# clinfun 1.1.6 (08/11/2026)
 
-* moved twostage.admissible call from print method to ph2simon; added reference
+* Issue in dwilcox call in jtpdf.f due to wilcox_free(); fortran code rewritten
+* Rd files for some functions updated
+* version on GitHub (12/06/2023) -
+moved twostage.admissible call from print method to ph2simon; added reference
 
 # clinfun 1.1.5 (10/19/2023)
 

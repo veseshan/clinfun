@@ -16,7 +16,7 @@ extern void F77_NAME(femdor)(void *, void *, void *, void *, void *, void *, voi
 extern void F77_NAME(fepow)(void *, void *, void *, void *, void *, void *, void *, void *);
 extern void F77_NAME(ferej)(void *, void *, void *, void *, void *, void *);
 extern void F77_NAME(fessiz)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
-extern void F77_NAME(jtpdf)(void *, void *, void *, void *, void *, void *);
+extern void F77_NAME(jtpdf)(void *, void *, void *, void *, void *);
 extern void F77_NAME(ktau)(void *, void *, void *, void *);
 extern void F77_NAME(lehman)(void *, void *, void *, void *, void *, void *, void *, void *, void *);
 extern void F77_NAME(lrtest)(void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *, void *);
@@ -37,7 +37,7 @@ static const R_FortranMethodDef FortranEntries[] = {
     {"fepow",    (DL_FUNC) &F77_NAME(fepow),     8},
     {"ferej",    (DL_FUNC) &F77_NAME(ferej),     6},
     {"fessiz",   (DL_FUNC) &F77_NAME(fessiz),   10},
-    {"jtpdf",    (DL_FUNC) &F77_NAME(jtpdf),     6},
+    {"jtpdf",    (DL_FUNC) &F77_NAME(jtpdf),     5},
     {"ktau",     (DL_FUNC) &F77_NAME(ktau),      4},
     {"lehman",   (DL_FUNC) &F77_NAME(lehman),    9},
     {"lrtest",   (DL_FUNC) &F77_NAME(lrtest),   14},

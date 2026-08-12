@@ -5,7 +5,7 @@
 \alias{plot.roc.curve}
 \alias{lines.roc.curve}
 \description{
-  Computes the empricial ROC curve for a diagnostic tool.
+  Computes the empirical ROC curve for a diagnostic tool.
 }
 \usage{
   roc.curve(marker, status, method=c("empirical"))
@@ -18,7 +18,7 @@
   \item{status}{binary disease status indicator}
   \item{method}{the method for estimating the ROC curve.  Currently only
     the empirical curve is implemented.}
-  \item{x}{object of class roc.area.test output from this function.}
+  \item{x}{object of class roc.curve output from this function.}
   \item{PRC}{flag to tell whether ROC or Precision-Recall curve plotted.}
   \item{...}{optional arguments to the print, plot and lines functions.}
 }
