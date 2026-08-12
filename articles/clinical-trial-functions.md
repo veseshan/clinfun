@@ -1,0 +1,522 @@
+# Functions For Clinical Trial Design
+
+## Introduction
+
+This vignette walks through functions in {clinfun} that facilitate the
+design of clinical trials. Examples using published clinical trials are
+included to illustrate the use of these functions in a real-world
+context.
+
+To begin, install and load {clinfun}:
+
+``` r
+
+library(clinfun)
+```
+
+## Phase II Trial Design
+
+The overall purpose of phase II research is to determine whether a
+treatment is promising enough to warrant more extensive development.
+While phase I research assesses safety and clinical pharmacology, phase
+II research begins assessing the efficacy of a treatment in a
+well-defined population, while continuing to monitor the safety of the
+treatment. {clinfun} enables users to construct two common phase II
+trial designs, Simon’s two-stage and single-stage, which are described
+in more detail below.
+
+### Simon’s Two-Stage
+
+The goal of Simon’s two-stage design is to assess the efficacy of a
+treatment while minimizing the number of patients exposed to an
+ineffective treatment.
+
+The trial begins by enrolling $`n_1`$ patients in stage 1. If
+$`\leq r_1`$ responses are observed, then early termination occurs, at
+which point the treatment is not recommended. Otherwise, $`n_2`$
+patients are enrolled in stage 2 and the success of the treatment is
+based on all data accumulated. At the end of stage 2, if $`\leq r`$
+responses have been observed in total, then the treatment is not
+recommended; if $`>r`$ responses have been observed in total, then the
+treatment is recommended.
+
+When designing a Simon’s two-stage trial, the key objective is to
+determine appropriate response threshold and sample size values,
+indicated by:
+
+- $`r_1`$: Response threshold at the end of stage 1
+
+- $`r`$: Final response threshold
+
+- $`n_1`$: Stage 1 sample size
+
+- $`n`$: Total sample size ($`n_1 + n_2`$)
+
+#### Design Parameters and Constraints
+
+In order to determine final design components, the following parameters
+and constraints must be specified:
+
+- $`p_0`$ (`pu`): Treatment response rate considered unacceptable
+
+- $`p_1`$ (`pa`): Treatment response rate considered desirable
+
+- $`\alpha`$ (`ep1`): Type I error threshold
+
+- $`\beta`$ (`ep2`): Type II error threshold
+
+The final design components depend on the response rates considered
+“unacceptable” ($`p_0`$) and “desirable” ($`p_1`$) and must satisfy the
+desired error rate constraints ($`\alpha`$, $`\beta`$) for testing the
+following hypotheses:
+
+- $`H_0`$: The true treatment response rate is less than or equal to
+  some unacceptable level ($`p \leq p_0`$)
+
+- $`H_1`$: The true treatment response rate is greater than or equal to
+  some desirable level ($`p \geq p_1`$)
+
+#### Optimal vs. Minimax vs. Admissible Designs
+
+Once the design parameters and constraints are provided, {clinfun}
+determines the final design components based on three different
+approaches: optimal, minimax, and admissible.
+
+If early termination occurs, the sample size for the trial is $`n_1`$.
+If early termination does not occur, the sample size for the trial is
+$`n`$ (the maximum sample size for the trial).
+
+Thus, the expected sample size under the null hypothesis is given by
+
+``` math
+ EN(p_0) = n_1 + (1 - PET(p_0)) \cdot n_2 
+```
+
+where $`PET(p_0)`$ is the probability of early termination under the
+null hypothesis.
+
+The **optimal design** minimizes the expected sample size ($`EN(p_0)`$),
+whereas the **minimax design** minimizes the maximum sample size
+($`n_1 + n_2`$). The optimal design typically has a smaller stage 1
+sample size but more subjects overall if the trial proceeds to stage 2.
+The optimal design also typically has a higher $`PET(p_0)`$ than the
+minimax design. The minimax design can be preferable in certain
+scenarios: for example, if $`EN(p_0)`$ is relatively close to that of
+the optimal design and the patient accrual rate is slow, or if the
+patient population is heterogeneous and a small stage 1 is not
+desirable.
+
+The **admissible design** can be thought of as a compromise between the
+optimal and minimax designs and is based on a Bayesian
+decision-theoretic criterion.
+
+#### Levatinib Phase II Trial Example
+
+For this example, we will be looking at a phase II trial that assessed
+the efficacy of lenvatinib in patients with progressive, recurrent or
+metastatic adenoid cystic carcinoma (Tchekmedyian et al., 2019).
+Patients received lenvatinib 24 mg/day. Treatment was continued until
+disease progression, death, unacceptable toxicity, withdrawal of
+consent, or a decision based on the treating physician’s discretion.
+Treatment response was specifically defined as overall response:
+achievement of either partial response or complete response, as defined
+by Response Evaluation Criteria in Solid Tumors (RECIST) version 1.1.
+
+The trial employed a Simon’s two-stage design. An overall response rate
+of 5% was considered unacceptable, and an overall response rate of 20%
+was considered desirable. The type I error threshold used was 10%. The
+target power used was 90%, equivalent to a 10% type II error threshold.
+
+Summarizing the design parameters and constraints from above, we have:
+
+- $`p_0`$ (`pu`): 5% overall response rate
+
+- $`p_1`$ (`pa`): 20% overall response rate
+
+- $`\alpha`$ (`ep1`): 10% type I error threshold
+
+- $`\beta`$ (`ep2`): 10% type II error threshold
+
+Thus, the hypotheses used for testing are:
+
+- $`H_0`$: The true overall response rate is less than or equal to 5%
+  ($`p \leq 0.05`$)
+
+- $`H_1`$: The true overall response rate is greater than or equal to
+  20% ($`p \geq 0.2%`$)
+
+Now, using [`ph2simon()`](../reference/ph2simon.md), specify these
+parameters and print the resulting object.
+
+``` r
+
+# Specify the parameters and constraints
+trial = ph2simon(0.05, 0.2, 0.1, 0.1)
+
+# Print
+trial
+#> 
+#>  Simon 2-stage Phase II design 
+#> 
+#> Unacceptable response rate:  0.05 
+#> Desirable response rate:  0.2 
+#> Error rates: alpha =  0.1 ; beta =  0.1 
+#> 
+#>            r1 n1 r  n EN(p0) PET(p0)   qLo   qHi
+#> Minimax     0 18 3 32  26.44  0.3972 0.640 1.000
+#> Admissible  0 15 3 33  24.66  0.4633 0.323 0.640
+#> Admissible  0 13 3 35  23.71  0.5133 0.097 0.323
+#> Optimal     0 12 3 37  23.49  0.5404 0.000 0.097
+```
+
+This output provides the key components ($`r_1`$, $`r`$, $`n_1`$, and
+$`n`$) as well as $`EN(p_0)`$ and $`PET(p_0)`$ for the selected optimal
+and minimax designs (shown in the first and second rows, respectively).
+
+As expected, the optimal design has a smaller expected sample size
+($`EN(p_0)`$; about 23 vs. 26), whereas the minimax design has a smaller
+maximum sample size ($`n`$; 32 vs. 37).
+
+We can also visualize these results. Using the base
+[`plot()`](https://rdrr.io/r/graphics/plot.default.html), plot the trial
+object.
+
+``` r
+
+# Plot
+plot(trial)
+```
+
+![](clinical-trial-functions_files/figure-html/unnamed-chunk-3-1.png)
+
+This output provides a visual representation of the maximum number of
+patients ($`n`$) and expected sample size ($`EN(p_0)`$) under various
+scenarios. O represents the optimal design, and M represents the minimax
+design.
+
+The admissible design can be obtained by applying the
+[`twostage.admissible()`](../reference/twostage.admissible.md) function
+to the trial object.
+
+``` r
+
+# Obtain admissible design
+twostage.admissible(trial)
+#>            r1 n1 r  n   EN(p0)   PET(p0)   qLo   qHi
+#> Minimax     0 18 3 32 26.43900 0.3972143 0.640 1.000
+#> Admissible  0 15 3 33 24.66076 0.4632912 0.323 0.640
+#> Admissible  0 13 3 35 23.70647 0.5133421 0.097 0.323
+#> Optimal     0 12 3 37 23.49100 0.5403601 0.000 0.097
+```
+
+This output includes the admissible design as well as the optimal and
+minimax designs. In addition to the design components seen earlier,
+columns `qLo` and `qHi` give the range of probability values for which
+the particular design is admissible.
+
+For this particular trial, Tchekmedyian et al. opted for the minimax
+design. Thus, 18 patients were enrolled in stage 1 ($`n_1 = 18`$). If no
+responses were observed ($`\leq 0`$ reduces to $`= 0`$ since the number
+of responses cannot be negative), then early termination would occur.
+Otherwise, if at least one response was observed, then 14 patients would
+be enrolled in stage 2 ($`n_2 = n - n_1 = 32 - 18 = 14`$). At the end of
+stage 2, if at least 4 responses had been observed in total, then the
+treatment would be recommended; if 3 or fewer responses had been
+observed in total, then the treatment would not be recommended
+($`r = 3`$).
+
+Ultimately, Tchekmedyian et al. observed four responses among the 18
+patients enrolled in stage 1 and thus proceeded to stage 2, in which an
+additional 14 patients were enrolled. One response was observed among
+the stage 2 patients. Thus, at the end of the trial, 5 responses had
+been observed in total, and lenvatinib was recommended for further
+development in patients with progressive, recurrent or metastatic
+adenoid cystic carcinoma.
+
+#### Cases Where the Admissible Design Is a Logical Choice
+
+As described above, the optimal design minimizes the expected sample
+size, the minimax design minimizes the maximum sample size, and the
+admissible design represents a compromise between the two. Sometimes,
+the admissible design has only a slightly higher expected sample size
+than the optimal design and only a slightly higher maximum sample size
+than the minimax design. In these cases, the admissible design is a
+logical choice because it achieves the benefits of the both designs with
+only negligible impacts on the two metrics.
+
+To illustrate this, we can consider a hypothetical example where we
+specific the following design parameters and constraints:
+
+- $`p_0`$ (`pu`): 25% overall response rate
+
+- $`p_1`$ (`pa`): 45% overall response rate
+
+- $`\alpha`$ (`ep1`): 5% type I error threshold
+
+- $`\beta`$ (`ep2`): 10% type II error threshold
+
+``` r
+
+# Specify the parameters and constraints
+trial = ph2simon(0.25, 0.45, 0.05, 0.1)
+
+# Obtain admissible design
+twostage.admissible(trial)
+#>            r1 n1  r  n   EN(p0)   PET(p0)   qLo   qHi
+#> Minimax     6 26 17 49 37.14596 0.5153932 0.782 1.000
+#> Admissible  7 26 17 50 33.55630 0.6851542 0.129 0.782
+#> Optimal     6 22 19 57 32.52206 0.6993697 0.000 0.129
+```
+
+As we can see, the admissible design has an expected sample size that is
+nearly the same as the optimal design’s (34 vs. 33) and a maximum sample
+size that is nearly the same as the minimax design’s (50 vs. 49). It is
+logical to accept one more patient on whichever metric is of primary
+interest to obtain a design that performs well across both metrics.
+
+#### References
+
+[Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical
+Trials. Controlled Clinical Trials 10,
+1-10.](https://pubmed.ncbi.nlm.nih.gov/2702835/)
+
+[Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage
+Designs for Phase II Clinical Trials. Controlled Clinical Trials 22,
+367-372.](https://pubmed.ncbi.nlm.nih.gov/11514038/)
+
+[Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage
+designs for phase II cancer clinical trials. Statistics in medicine
+23(4), 561-569.](https://pubmed.ncbi.nlm.nih.gov/14755389/)
+
+[Tchekmedyian V, Sherman EJ, Dunn L, et al. (2019) Phase II Study of
+Lenvatinib in Patients With Progressive, Recurrent or Metastatic Adenoid
+Cystic Carcinoma. J Clin Oncol.
+37(18):1529-1537.](https://pubmed.ncbi.nlm.nih.gov/30939095/)
+
+### Single-Stage
+
+A single-stage design may be used instead of a two-stage design when an
+endpoint requires too much time to evaluate or when early stopping is
+less of a priority.
+
+The trial enrolls $`n`$ patients. After all patients have completed the
+study, if $`\leq r`$ responses have been observed in total, then the
+treatment is not recommended; if $`>r`$ responses have been observed in
+total, then the treatment is recommended.
+
+When designing a single-stage trial, the key objective is to select
+appropriate values of $`n`$ (sample size) and $`r`$ (response threshold
+at the end of the study). The response rate considered “unacceptable”
+(at which point a treatment would not be recommended) and the response
+rate considered “desirable” must be specified, and the values of $`r`$
+and $`n`$ must be selected such that the desired error rate constraints
+are satisfied.
+
+#### Design Parameters and Constraints
+
+In order to determine final design components, the following parameters
+and constraints must be specified:
+
+- $`p_0`$ (`pu`): Treatment response rate considered unacceptable
+
+- $`p_1`$ (`pa`): Treatment response rate considered desirable
+
+- $`\alpha`$ (`ep1`): Type I error threshold
+
+- $`\beta`$ (`ep2`): Type II error threshold
+
+The final design components depend on the response rates considered
+“unacceptable” ($`p_0`$) and “desirable” ($`p_1`$) and must satisfy the
+desired error rate constraints ($`\alpha`$, $`\beta`$) for testing the
+following hypotheses:
+
+- $`H_0`$: The true treatment response rate is less than or equal to
+  some unacceptable level ($`p \leq p_0`$)
+
+- $`H_1`$: The true treatment response rate is greater than or equal to
+  some desirable level ($`p \geq p_1`$)
+
+#### Example
+
+For this example, we will be looking at a phase II trial that assessed
+the efficacy of everolimus in patients with thymoma and thymic carcinoma
+previously treated with cisplatin-based chemotherapy (Zucali et al.,
+2018). Patients received everolimus 10 mg/day. Treatment was continued
+until disease progression, death, unacceptable toxicity, or study
+discontinuation for any other reason. Treatment response was
+specifically defined as disease control: achievement of either partial
+response, complete response, or stable disease, as defined by Response
+Evaluation Criteria in Solid Tumors (RECIST) version 1.1.
+
+The trial employed a single-stage design. A disease control rate of 40%
+was considered unacceptable, and a disease control rate of 60% was
+considered desirable. The type I error threshold used was 10%. The
+target power used was 90%, equivalent to a 10% type II error threshold.
+
+Summarizing the design parameters and constraints from above, we have:
+
+- $`p_0`$ (`pu`): 40% disease control rate
+
+- $`p_1`$ (`pa`): 60% disease control rate
+
+- $`\alpha`$ (`ep1`): 10% type I error threshold
+
+- $`\beta`$ (`ep2`): 10% type II error threshold
+
+Thus, the hypotheses used for testing are:
+
+- $`H_0`$: The true disease control rate is less than or equal to 40%
+  ($`p \leq 0.4`$)
+
+- $`H_1`$: The true disease control rate is greater than or equal to 60%
+  ($`p \geq 0.6%`$)
+
+Using [`ph2single()`](../reference/ph2single.md), specify the parameters
+and print the resulting object.
+
+``` r
+
+# Specify the parameters and constraints & print
+ph2single(0.4, 0.6, 0.1, 0.1)
+#>    n  r Type I error Type II error
+#> 1 41 20   0.09651722    0.09651722
+#> 2 43 21   0.09132412    0.09132412
+#> 3 45 22   0.08645205    0.08645205
+#> 4 47 23   0.08187654    0.08187654
+#> 5 49 24   0.07757556    0.07757556
+```
+
+This output provides the key components ($`n`$ and $`r`$) for applicable
+designs as well as the type I and type II error rates corresponding to
+each of these designs.
+
+Zucali et al. chose the first option listed, the design that enrolls the
+smallest number of patients ($`n = 41`$) that still satisfies the error
+rate constraints. The treatment would be recommended if at least 21 of
+the first 41 evaluable patients achieved disease control ($`r = 20`$).
+Ultimately, greater than 21 of these patients achieved disease control,
+and everolimus was recommended for further development in patients with
+thymoma and thymic carcinoma previously treated with cisplatin-based
+chemotherapy.
+
+#### References
+
+[Zucali PA, De Pas T, Palmieri G, et al. (2018). Phase II Study of
+Everolimus in Patients With Thymoma and Thymic Carcinoma Previously
+Treated With Cisplatin-Based Chemotherapy. J Clin Oncol.
+36(4):342-349.](https://pubmed.ncbi.nlm.nih.gov/29240542/)
+
+## Constructing Stopping Rules
+
+Stopping rules in clinical trials are a useful tool for risk management
+and can help ensure the protection of participants. Patient outcomes are
+monitored as the trial progresses, and the trial is terminated if
+certain conditions are met (eg, if the toxicity rate is too high).
+Stopping rules define the specific conditions under which the trial
+should be terminated.
+
+General types of stopping rules include:
+
+- **Stopping for toxicity:** The trial is stopped if the toxicity rate
+  is too high. Terminating the trial minimizes the number of patients
+  exposed to a treatment that is likely too toxic relative to its
+  potential benefits.
+
+- **Stopping for futility:** The trial is stopped if the response rate
+  is too low. Terminating the trial minimizes the number of patients
+  exposed to a potentially ineffective treatment.
+
+A trial may contain one or multiple types of stopping rules. The choice
+of stopping rules is highly dependent on factors such as disease area,
+the clinical outcomes of interest, stage of development, and
+characteristics of the treatment itself.
+
+There are various statistical methods available to construct stopping
+rules.
+
+This section describes the specific types of stopping rules that can be
+constructed using {clinfun}.
+
+### Stopping for Toxicity (For Phase II and Phase III Designs)
+
+[`toxbdry()`](../reference/toxbdry.md) computes a stopping rule for
+toxicity that can be implemented in phase II and III designs. For
+example, a stopping rule generated by this function could be layered on
+top of a design generated by [`ph2simon()`](../reference/ph2simon.md) or
+[`ph2single()`](../reference/ph2single.md).
+
+### Stopping for Futility (For Phase II Single-Stage Designs)
+
+A Simon’s two-stage design effectively has a stopping rule for futility
+built in (evaluated at the end of stage 1). However, there are scenarios
+in which a single-stage design with an added stopping rule for futility
+is chosen instead of a two-stage design. When the response outcome takes
+a long time to assess (eg, complete response rate at 30 months) and
+accrual for a trial is slow, assessing efficacy on a continual basis is
+preferable to waiting for the completion of stage 1.
+
+[`futilbdry()`](../reference/toxbdry.md) computes a stopping rule for
+futility that is specifically intended to be implemented in phase II
+single-stage designs. Thus, a stopping rule generated by this function
+would be layered on top of a design generated by
+[`ph2single()`](../reference/ph2single.md).
+
+## Calculating Sample Size, Effect Size, and Power
+
+### Fisher’s Exact Test
+
+{clinfun} offers a set of functions to determine sample sizes, effect
+sizes, and power based on Fisher’s exact tests. Below is a table
+summarizing the functions based on Fisher’s exact test.
+
+| Function | Details |
+|----|----|
+| [`fe.ssize()`](../reference/fedesign.md) | Returns a 2x3 matrix with Casagrande, Pike, Smith (CPS) and Fisher’s exact sample sizes with power. |
+| [`fe.mdor()`](../reference/fedesign.md) | Returns a 3x2 matrix with Schlesselman, CPS and Fisher’s exact minimum detectable odds ratios and the corresponding power. |
+| [`fe.power()`](../reference/fedesign.md) | Returns a Kx2 matrix with probabilities (p2) and exact power. |
+| [`CPS.ssize()`](../reference/fedesign.md) | Returns CPS sample size, which is a very close to the exact. Use this for small differences p2-p1 (hence large sample sizes) to get the result instantaneously. |
+| [`mdrr()`](../reference/fedesign.md) | Computes the minimum detectable P(resp given marker+) and P(resp given marker-) configurations when total sample size (n), P(response) (presp) and proportion of subjects who are marker positive (cprob) are specified. |
+| [`or2pcase()`](../reference/fedesign.md) | Gives the probability of disease among the cases for a given probability of disease in controls (pcontrol) and odds ratio (OR). |
+
+#### Example
+
+``` r
+
+fe.ssize(p1 = 0.2, p2 = 0.3, power = 0.8)
+#>              Group 1 Group 2 Exact Power
+#> CPS              313     313   0.8018729
+#> Fisher Exact     311     311   0.8004486
+```
+
+*CAUTION:* As we can see below, when we use base R
+[`power.prop.test()`](https://rdrr.io/r/stats/power.prop.test.html), we
+obtain an incorrect result due to normal approximation.
+
+``` r
+
+power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
+#> 
+#>      Two-sample comparison of proportions power calculation 
+#> 
+#>               n = 293.1513
+#>              p1 = 0.2
+#>              p2 = 0.3
+#>       sig.level = 0.05
+#>           power = 0.8
+#>     alternative = two.sided
+#> 
+#> NOTE: n is number in *each* group
+```
+
+#### References
+
+[Casagrande JT, Pike MC, Smith PG. (1978). An improved approximate
+formula for calculating sample sizes for comparing two binomial
+distributions. Biometrics 34,
+483-486.](https://pubmed.ncbi.nlm.nih.gov/719125/)
+
+Fleiss, JL. (1981). Statistical Methods for Rates and Proportions.
+
+[Schlesselman JJ. (1987) Re: Smallest detectable relative risk with
+multiple controls per case. Am J Epidemiol 125(2),
+348.](https://pubmed.ncbi.nlm.nih.gov/3812441/)
