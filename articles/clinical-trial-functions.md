@@ -278,20 +278,20 @@ interest to obtain a design that performs well across both metrics.
 
 [Simon R. (1989). Optimal Two-Stage Designs for Phase II Clinical
 Trials. Controlled Clinical Trials 10,
-1-10.](https://pubmed.ncbi.nlm.nih.gov/2702835/)
+1-10.](https://doi.org/10.1016/0197-2456(89)90015-9)
 
 [Jung SH, Carey M and Kim KM. (2001). Graphical Search for Two-Stage
 Designs for Phase II Clinical Trials. Controlled Clinical Trials 22,
-367-372.](https://pubmed.ncbi.nlm.nih.gov/11514038/)
+367-372.](https://doi.org/10.1016/s0197-2456(01)00142-8)
 
 [Jung SH, Lee T, Kim K, and George, SL. (2004). Admissible two-stage
 designs for phase II cancer clinical trials. Statistics in medicine
-23(4), 561-569.](https://pubmed.ncbi.nlm.nih.gov/14755389/)
+23(4), 561-569.](https://doi.org/10.1002/sim.1600)
 
 [Tchekmedyian V, Sherman EJ, Dunn L, et al. (2019) Phase II Study of
 Lenvatinib in Patients With Progressive, Recurrent or Metastatic Adenoid
 Cystic Carcinoma. J Clin Oncol.
-37(18):1529-1537.](https://pubmed.ncbi.nlm.nih.gov/30939095/)
+37(18):1529-1537.](https://doi.org/10.1200/jco.18.01859)
 
 ### Single-Stage
 
@@ -404,7 +404,7 @@ chemotherapy.
 [Zucali PA, De Pas T, Palmieri G, et al. (2018). Phase II Study of
 Everolimus in Patients With Thymoma and Thymic Carcinoma Previously
 Treated With Cisplatin-Based Chemotherapy. J Clin Oncol.
-36(4):342-349.](https://pubmed.ncbi.nlm.nih.gov/29240542/)
+36(4):342-349.](https://doi.org/10.1200/jco.2017.74.4078)
 
 ## Constructing Stopping Rules
 
@@ -510,13 +510,12 @@ power.prop.test(p1 = 0.2, p2 = 0.3, power = 0.8)
 
 #### References
 
-[Casagrande JT, Pike MC, Smith PG. (1978). An improved approximate
+Casagrande JT, Pike MC, Smith PG. (1978). An improved approximate
 formula for calculating sample sizes for comparing two binomial
-distributions. Biometrics 34,
-483-486.](https://pubmed.ncbi.nlm.nih.gov/719125/)
+distributions. Biometrics 34, 483-486.
 
 Fleiss, JL. (1981). Statistical Methods for Rates and Proportions.
 
 [Schlesselman JJ. (1987) Re: Smallest detectable relative risk with
 multiple controls per case. Am J Epidemiol 125(2),
-348.](https://pubmed.ncbi.nlm.nih.gov/3812441/)
+348.](https://doi.org/10.1093/oxfordjournals.aje.a114536)
