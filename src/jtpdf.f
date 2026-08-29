@@ -14,7 +14,6 @@ c     columns 1 <= g < ng are Mann-Whitney pdf (old pdf0) for g vs {g+1,...,ng}
       double precision pdf(mxsum),pdfs(mxsum,ng)
 
       integer i, j, g, mn0, mn1
-      double precision di, dm, dn, dmw
 
 c     this is the group ng-1 against group ng comparison
 c     if only two groups it reduces to Wilcoxon-Mann-Whitney
@@ -22,10 +21,7 @@ c     if only two groups it reduces to Wilcoxon-Mann-Whitney
       m = cgsize(g) - cgsize(g+1)
       n = cgsize(g+1)
       mn1 = m*n
-      dm = dble(m)
-      dn = dble(n)
       do 10 i = 0, mn1
-         di = dble(i)
          pdf(i+1) = pdfs(i+1,g)
  10   continue
 
